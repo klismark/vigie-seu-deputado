@@ -23,6 +23,6 @@ load('models')
 .then('routes')
 .into(app);
 
-app.listen(process.env.PORT || 1337, function(){
+app.listen(process.env.PORT || 8000, function(){
 	console.log("Servidor OK");
 })
