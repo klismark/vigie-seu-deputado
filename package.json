@@ -1,0 +1,33 @@
+{
+  "name": "vigie-seu-deputado",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klismark/vigie-seu-deputado.git"
+  },
+  "keywords": [
+    "deputado",
+    "contas",
+    "vigie",
+    "cotas"
+  ],
+  "author": "Klismark Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klismark/vigie-seu-deputado/issues"
+  },
+  "homepage": "https://github.com/klismark/vigie-seu-deputado#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "express-load": "^1.1.15",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.8.2"
+  }
+}
