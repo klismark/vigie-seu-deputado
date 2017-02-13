@@ -1,0 +1,23 @@
+{
+  "name": "vigie-seu-deputado",
+  "authors": [
+    "Klismark Barbosa <klismark@hotmail.com>"
+  ],
+  "description": "VigieSeuDeputado é um projeto onde o usuário possa acompanhar todas as informações e gastos disponíveis dos deputados federais.",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "deputados",
+    "vigie"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "dependencies": {
+    "jquery": "^2.2.1"
+  },
+  "devDependencies": {
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}

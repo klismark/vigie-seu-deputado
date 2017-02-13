@@ -1,4 +1,4 @@
-var  express = require('express'),
+var express = require('express'),
 	load = require('express-load'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
@@ -7,9 +7,7 @@ var  express = require('express'),
 	//mongoose = require('mongoose'),
 	app = express();
 //app.use(express.bodyParser());
-
 //global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
-
 
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');

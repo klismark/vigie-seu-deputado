@@ -1,0 +1,51 @@
+$fontLight: 'RobotoLight';
+$fontRegular: 'RobotoRegular';
+
+@font-face{font-family:$fontLight;src:url('../fonts/RobotoLight.eot');src:url('../fonts/RobotoLight.eot') format('embedded-opentype'),
+    url('../fonts/RobotoLight.woff2') format('woff2'),
+    url('../fonts/RobotoLight.woff') format('woff'),
+    url('../fonts/RobotoLight.ttf') format('truetype'),
+    url('../fonts/RobotoLight.svg#RobotoLight') format('svg');
+}
+@font-face{font-family:$fontRegular;src:url('../fonts/RobotoRegular.eot');src:url('../fonts/RobotoRegular.eot') format('embedded-opentype'),
+    url('../fonts/RobotoRegular.woff2') format('woff2'),
+    url('../fonts/RobotoRegular.woff') format('woff'),
+    url('../fonts/RobotoRegular.ttf') format('truetype'),
+    url('../fonts/RobotoRegular.svg#RobotoRegular') format('svg');
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: $fontRegular;
+}
+body,html{
+    background-color: #333;
+    font-size: 16px;
+}
+a{
+    text-decoration: none;
+}
+.bgmain{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/bgMain.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
+@media screen and (min-width: 768px) {
+
+}
+
+/*Com uma largura mínima de 992 pixels. Monitores por exemplo.*/
+@media screen and (min-width: 992px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+}
