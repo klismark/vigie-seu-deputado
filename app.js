@@ -22,7 +22,7 @@ load('models')
 .then('controllers')
 .then('routes')
 .into(app);
-
-app.listen(process.env.PORT || 8000, function(){
+var port = process.env.PORT || 8000
+app.listen(port, function(){
 	console.log("Servidor OK");
 })
