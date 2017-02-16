@@ -1,6 +1,9 @@
 $fontLight: 'RobotoLight';
 $fontRegular: 'RobotoRegular';
 
+$redClose: #e04d4d;
+$blueBtnSearch: #5a8ed6;
+
 @font-face{font-family:$fontLight;src:url('../fonts/RobotoLight.eot');src:url('../fonts/RobotoLight.eot') format('embedded-opentype'),
     url('../fonts/RobotoLight.woff2') format('woff2'),
     url('../fonts/RobotoLight.woff') format('woff'),
@@ -54,18 +57,182 @@ a{
     background-position: center;
     background-repeat: no-repeat;
 }
+/*MENU DE ACESSIBILIDADE*/
 .menu-accessibility{
+    color: #111;
+    background: #fff;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+.btn-open-accessibility{
+    position: fixed;
+    top: 15px;
+    left: 15px;
     color: #fff;
+    background: none;
+    border: none;
+}
+.btn-close-accessibility{
+    display: block;
+    background: $redClose;
+    border: 0;
+    padding: 10px 0;
+    width: 80%;
+    position: absolute;
+    bottom: 10px;
+    left: 10%;
+    color: #fff;
+    font-size: 1.1rem;
+}
+.item-menu-accessibility{
+    font-size: 1.2rem;
+    padding: 10px;
+    text-align: left;
+    display: block;
+}
+
+/*LOGO HOME*/
+.main-home{
+    position: relative;
+    top: 90px;
+}
+.logo-home{
+    width: 200px;
+    height: 127px;
+    display: block;
+    margin: 10px auto;
+    background-image: url("../img/logo_mobile.png");
+}
+
+/*BUSCA HOME*/
+.box-field-search-home{
+    display: block;
+    background: #fff;
+    border-radius: 10px;
+    color: #d0d0d0;
+    padding: 8px;
+    width: 90%;
+    margin: 30px auto;
+    margin-top: 50px;
+}
+.box-field-search-home i{
+    display: block;
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+.box-field-search-home i.fa-microphone{
+    float: right;
+}
+.field-search-home{
+    display: inline-block;
+    width: 75%;
+    height: 32px;
+    font-size: 1.2rem;
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    color: #999;
+    outline: none;
+    padding-left: 5px;
+}
+.btn-search{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    background: $blueBtnSearch;
+    position: relative;
+    top: -15px;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
+    .btn-open-accessibility,.btn-close-accessibility{
+        display: none;
+    }
+    .menu-accessibility{
+        position: relative;
+        top: 20px;
+        color: #fff;
+        background: none;
+        text-align: left;
+    }
+    .item-menu-accessibility{
+        font-size: 0.8rem;
+        display: inline;
+        padding: 5px;
+    }
+    .item-menu-accessibility:hover{
+        background: #fff;
+        color: #111;
+        cursor: pointer;
+    }
+    .menu-accessibility-right{
+        text-align: right;
+        float: right;
+    }
 
+    /*HEADER*/
+    .main-home{
+        top: 120px;
+    }
+    .logo-home{
+        width: 291px;
+        height: 185px;
+        display: block;
+        margin: 10px auto;
+        background-image: url("../img/logo.png");
+    }
+
+    /*BUSCA HOME*/
+    .box-field-search-home{
+        padding: 15px;
+        width: 70%;
+        margin: 50px auto;
+    }
+    .field-search-home{
+        width: 80%;
+        font-size: 1.5rem;
+        padding:10px;
+    }
+    .btn-search{
+        width: 40%;
+        top: -30px;
+        padding: 15px;
+    }
 }
 
 /*Com uma largura mínima de 992 pixels. Monitores por exemplo.*/
 @media screen and (min-width: 992px) {
+    .content{
+        width:90%;
+    }
 
+     /*BUSCA HOME*/
+    .box-field-search-home{
+        padding: 15px;
+        width: 50%;
+        margin: 50px auto;
+    }
+    .field-search-home{
+        width: 80%;
+        font-size: 1.5rem;
+        padding:10px;
+    }
+    .btn-search{
+        width: 25%;
+        top: -30px;
+        padding: 15px;
+    }
 }
 
 @media screen and (min-width: 1200px) {

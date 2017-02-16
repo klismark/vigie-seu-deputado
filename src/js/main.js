@@ -1,0 +1,14 @@
+$("#btn-open-accessibility").click(function(){
+    $(".menu-accessibility").animate({
+        "top":0
+    });
+    $(this).hide();
+    $(this).attr("aria-hidden",true);
+});
+$("#btn-close-accessibility").click(function(){
+    $(".menu-accessibility").animate({
+        "top":"-100%"
+    });
+    $("#btn-open-accessibility").show();
+    $("#btn-open-accessibility").attr("aria-hidden",false);
+});

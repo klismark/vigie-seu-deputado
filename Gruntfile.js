@@ -37,6 +37,11 @@ module.exports = function (grunt) {
                         dest: 'public/css/'
                     },
                     {   expand: true, 
+                        cwd: 'lib_frontend/font-awesome',
+                        src: ['fonts/**'], 
+                        dest: 'public/'
+                    },
+                    {   expand: true, 
                         cwd: 'src/',
                         src: ['fonts/**'], 
                         dest: 'public/'
@@ -64,7 +69,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src/',
                         src: '*.html',
-                        dest: 'public_html/',
+                        dest: 'public/',
                     }],
             }
         },
