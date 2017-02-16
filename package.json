@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/klismark/vigie-seu-deputado.git"
+    "url": "https://github.com/klismark/vigie-seu-deputado.git"
   },
   "keywords": [
     "deputado",
@@ -23,8 +23,7 @@
   },
   "homepage": "https://github.com/klismark/vigie-seu-deputado#readme",
   "engines": {
-    "node": "4.2.3",
-    "npm": "2.14.7"
+    "node": "4.2.3"
   },
   "dependencies": {
     "body-parser": "^1.16.1",

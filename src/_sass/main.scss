@@ -26,6 +26,24 @@ body,html{
 a{
     text-decoration: none;
 }
+.align-right{
+    float: right;
+}
+.align-left{
+    float: left;
+}
+.text-center{
+    text-align: center;
+}
+.content{
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+}
+.content-main{
+    position: relative;
+    z-index: 1;
+}
 .bgmain{
     position: fixed;
     top: 0;
@@ -35,6 +53,9 @@ a{
     background-image: url('../img/bgMain.jpg');
     background-position: center;
     background-repeat: no-repeat;
+}
+.menu-accessibility{
+    color: #fff;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
