@@ -55,6 +55,16 @@ module.exports = function (grunt) {
                         ],
                         dest: 'public/js/',
                         dot: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'lib_frontend/annyang/dist',
+                        src: [
+                            'annyang.min.js',
+                            'annyang.min.map'
+                        ],
+                        dest: 'public/js/',
+                        dot: true
                     }
                 ]
             }
