@@ -119,14 +119,30 @@ a{
     margin: 30px auto;
     margin-top: 50px;
 }
-.box-field-search-home i{
+.box-field-search-home i.fa-search{
     display: block;
     width: 10%;
     float: left;
     text-align: center;
 }
-.box-field-search-home i.fa-microphone{
+.btn-microphone{
+    padding: 5px;
+    border: 1px solid #f9f9f9;
+    background: #c7c7c7;
+    color: #fff;
+    border-radius: 50px;
+    height: 42px;
+    text-align: center;
+    width: 42px;
     float: right;
+    position: relative;
+    top: -5px;
+    outline: none;
+    cursor: pointer;
+}
+.btn-microphone.active{
+    background: #9dd2a4;
+    color: #187f34;
 }
 .field-search-home{
     display: inline-block;

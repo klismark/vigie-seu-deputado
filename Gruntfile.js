@@ -65,6 +65,15 @@ module.exports = function (grunt) {
                         ],
                         dest: 'public/js/',
                         dot: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'views/',
+                        src: [
+                            '**',
+                        ],
+                        dest: 'public/',
+                        dot: true
                     }
                 ]
             }
@@ -77,10 +86,17 @@ module.exports = function (grunt) {
                 },
                 files: [{
                         expand: true,
-                        cwd: 'src/',
-                        src: '*.html',
+                        cwd: 'views/',
+                        src: '*.ejs',
                         dest: 'public/',
                     }],
+            }
+        },
+        rename: {
+            main: {
+                files: [
+                    {src: ['public/index.ejs'], dest: 'public/index.html'},
+                    ]
             }
         },
         imagemin: {
@@ -104,7 +120,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    
 
-    grunt.registerTask('default', ['concat','sass', 'uglify','cssmin','copy','htmlmin', 'imagemin']);
+    grunt.registerTask('default', ['concat','sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
 };
