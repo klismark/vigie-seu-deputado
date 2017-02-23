@@ -32,15 +32,17 @@
     "express": "^4.14.1",
     "express-load": "^1.1.15",
     "method-override": "^2.3.7",
-    "mongoose": "^4.8.2"
+    "mongoose": "^4.8.2",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
+    "grunt": "^0.4.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-htmlmin": "^2.1.0",
     "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-rename": "^0.0.3",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0"
   }
