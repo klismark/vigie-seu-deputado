@@ -41,6 +41,16 @@ module.exports = function (app) {
                             }
                             deputados.push(dept);
                         }
+                        var util = app.controllers.util;
+                        deputados.sort(function(a,b){
+                            
+                           if(util.removeAccents(a.name.toLowerCase()) < util.removeAccents(b.name.toLowerCase())){
+                               return -1;
+                           }else{
+                                return 1;
+                           }
+                        });
+
                         return res.json(deputados);
                     }
                 }

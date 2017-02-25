@@ -38,3 +38,4 @@ jspm_packages
 
 lib_frontend/
 .sass-cache/
+/nbproject/private/

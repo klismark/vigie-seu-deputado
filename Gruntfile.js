@@ -68,6 +68,34 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'lib_frontend/bootstrap/dist/js',
+                        src: [
+                            'bootstrap.min.js',
+                        ],
+                        dest: 'public/js',
+                        dot: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'lib_frontend/bootstrap/dist/css',
+                        src: [
+                            'bootstrap.min.css',
+                            'bootstrap.min.css.map'
+                        ],
+                        dest: 'public/css',
+                        dot: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'lib_frontend/bootstrap/dist/fonts',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'public/fonts',
+                        dot: true
+                    },
+                    {
+                        expand: true,
                         cwd: 'views/',
                         src: [
                             '**',

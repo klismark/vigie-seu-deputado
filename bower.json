@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "font-awesome": "fontawesome#^4.7.0",
-    "annyang": "^2.6.0"
+    "annyang": "^2.6.0",
+    "bootstrap": "^3.3.7"
   }
 }

@@ -48,24 +48,3 @@ $("#btn-microphone").click(function(){
     microActive = !microActive;
 });
 
-/*
-if (annyang) {
-    var srch = function(search){
-        $("#field-search-home").val(search);
-    }
-    var commands = {
-      'procurar por *search':      srch,
-      'buscar por *search':      srch,
-      'procurar *search':      srch,
-      'buscar *search':      srch,
-      'encontrar *search':      srch,
-      '*search':      srch,
-    };
-
-    annyang.debug();
-    annyang.addCommands(commands);
-    annyang.setLanguage('pt-BR');
-    annyang.start();
-}else{
-    $(".icon-microphone").hide();
-}*/

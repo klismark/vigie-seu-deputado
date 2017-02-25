@@ -49,6 +49,7 @@
 
     <!--CSS-->
     <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="css/main.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -66,7 +67,7 @@
             <button class="btn-close-accessibility" id="btn-close-accessibility"><i class="fa fa-times-circle" aria-hidden="true"></i> Fechar</button>
             <button aria-hidden="false" aria-label="Acessibilidade" id="btn-open-accessibility" class="btn-open-accessibility"><i class="fa fa-5x fa-universal-access" aria-hidden="true"></i></button>
         </menu>
-        <main class="main-home">
+        <div class="main-home content-pages" id="home">
             <header class="header-home">
                 <div aria-role="image" class="logo-home" alt="Desenho dos prédios da câmara junto com o nome Vigie seu deputado."></div>
             </header>
@@ -81,20 +82,36 @@
                 </form>
             </section>
             <nav class="menu-main">
-                <a>Todos os deputados</a>
-                <a>Relatórios</a>
-                <a>Dúvidas</a>
-                <a>Sobre o projeto</a>
+                <a id="link-all-deputados" class="item-menu-main" data-toggle="modal" data-target="#dialog">Todos os deputados</a>
+                <a class="item-menu-main">Relatórios</a>
+                <a class="item-menu-main">Dúvidas</a>
+                <a class="item-menu-main">Sobre o projeto</a>
             </nav>
-        </main>
-     </div>
-        <footer class="footer-main">
-            Desenvolvido por: <b>Klismark Barbosa</b>
-        </footer>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="title-dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title-dialog">Todos os deputados</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <footer class="footer-main">
+        Desenvolvido por: <b>Klismark Barbosa</b>
+    </footer>
 
      <div class="bgmain"></div>
      <script src="js/jquery.min.js"></script>
      <script src="js/annyang.min.js"></script>
+     <script src="js/bootstrap.min.js"></script>
      <script src="js/main.min.js"></script>
 </body>
 </html>
