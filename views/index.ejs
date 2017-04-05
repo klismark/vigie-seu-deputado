@@ -82,7 +82,7 @@
                 </form>
             </section>
             <nav class="menu-main">
-                <a id="link-all-deputados" class="item-menu-main" data-toggle="modal" data-target="#dialog">Todos os deputados</a>
+                <a id="link-all-deputados" class="item-menu-main">Todos os deputados</a>
                 <a class="item-menu-main">Relatórios</a>
                 <a class="item-menu-main">Dúvidas</a>
                 <a class="item-menu-main">Sobre o projeto</a>
@@ -90,19 +90,19 @@
         </div>
     </div>
 
-    <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="title-dialog">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="modal-list-deputados" tabindex="-1" role="dialog" aria-labelledby="title-dialog">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="title-dialog">Todos os deputados</h4>
+                    <h2 class="modal-title" id="title-dialog"><i class="fa fa-group" aria-hidden="true"></i> Todos os deputados</h2>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body&hellip;</p>
+                    <div id="content-list-deputados"></div>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </div>
+    </div>
 
     <footer class="footer-main">
         Desenvolvido por: <b>Klismark Barbosa</b>

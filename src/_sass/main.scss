@@ -182,6 +182,11 @@ a{
     display: block;
     font-family: $fontLight;
     margin: 10px 5px;
+    cursor: pointer !important;
+    color: #fff !important;
+}
+.menu-main a:hover{
+    text-decoration: none;
 }
 /*RODAPE*/
 .footer-main{
@@ -195,6 +200,32 @@ a{
     z-index: 2;
 }
 
+
+/*LIST*/
+.photo-item-list{
+    margin-right: 10px;
+}
+.info-item-deputado{
+    display: block;
+    height: 152px;
+}
+.info-item-deputado h3{
+    font-family: $fontRegular;
+}
+.info-item-deputado dt{
+    margin-top: 5px;
+    font-family: $fontRegular;
+    font-weight: bold;
+    color: #333;
+}
+.info-item-deputado dd{
+    font-family: $fontLight;
+    font-weight:100;
+    color: #444;
+}
+.btn-view-details-deputado{
+    margin-top: -20px;
+}
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {

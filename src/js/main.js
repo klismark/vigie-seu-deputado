@@ -48,3 +48,59 @@ $("#btn-microphone").click(function(){
     microActive = !microActive;
 });
 
+
+
+$("#link-all-deputados").click(function(){
+    $('#modal-list-deputados').modal('show');
+    var $box = $("#content-list-deputados");
+    
+    $.ajax({
+        url: "getListDeputados",
+        dataType: 'json',
+        type: 'GET',
+        beforeSend: function () {
+            $box.removeClass("alert-success alert-warning alert-danger");
+            $box.addClass("alert alert-info text-center");
+            $box.html('<i class="fa fa-2x fa-spin fa-pulse fa-spinner"></i><br> carregando...');
+        },
+        success: function (data, textStatus){
+            $box.removeAttr("class");
+            console.log(data);
+            printListDeputados($box,data);
+        },
+        error: function (xhr, er) {
+            $box.removeClass("alert-success alert-warning alert-info");
+            $box.addClass("alert alert-danger text-center");
+            $box.html('<i class="fa fa-2x fa-warning"></i><br>Erro desconhecido, tente novamente.<br><button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>');
+        }
+    });
+});
+
+
+/**
+ * 
+ * @param {type} $box
+ * @param {type} deputados
+ * @returns {undefined}
+ */
+function printListDeputados($box,deputados){
+    var html = '<ul class="list-group">';
+    for(var i = 0,max = deputados.length;i<max;i++){
+        html += '<li class="list-group-item">';
+        html += '<img src="'+deputados[i].photo+'" alt="Foto do(a) parlamentar '+deputados[i].parliamentaryName+'" width="114" height="152" class="photo-item-list pull-left"/>';
+        html += '<div class="info-item-deputado">';
+        html += '<h3 class="list-group-item-heading">'+deputados[i].parliamentaryName+'</h3>';
+        html += '<dl>';
+        html += '<dt><i class="fa fa-flag" aria-hidden="true"></i> Partido:</dt>';
+        html += '<dd> '+deputados[i].party+' - '+deputados[i].uf+'</dd>';
+        html += '<dt><i class="fa fa-phone" aria-hidden="true"></i> Telefone:</dt>';
+        html += '<dd> '+deputados[i].phone+'</dd>';
+        html += '</dl>';
+        html += '<button class="btn-view-details-deputado btn btn-sm btn-primary pull-right"><i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes</button>';
+        html += '</div>';
+        html += '</li>';
+        
+    }
+    html += '</ul>';
+    $box.html(html);
+}

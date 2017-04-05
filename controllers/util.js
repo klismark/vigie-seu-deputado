@@ -1,5 +1,5 @@
 module.exports = function(app){
-    var util = {
+    let util = {
         removeAccents: function (text) {
             var string = text;//.replace('/','');
             var mapAccentsHex = {
