@@ -48,33 +48,30 @@ $("#btn-microphone").click(function(){
     microActive = !microActive;
 });
 
+var partidos = [];
 
-
-$("#link-all-deputados").click(function(){
-    $('#modal-list-deputados').modal('show');
-    var $box = $("#content-list-deputados");
-    
-    $.ajax({
-        url: "getListDeputados",
-        dataType: 'json',
-        type: 'GET',
-        beforeSend: function () {
-            $box.removeClass("alert-success alert-warning alert-danger");
-            $box.addClass("alert alert-info text-center");
-            $box.html('<i class="fa fa-2x fa-spin fa-pulse fa-spinner"></i><br> carregando...');
-        },
-        success: function (data, textStatus){
-            $box.removeAttr("class");
-            console.log(data);
-            printListDeputados($box,data);
-        },
-        error: function (xhr, er) {
-            $box.removeClass("alert-success alert-warning alert-info");
-            $box.addClass("alert alert-danger text-center");
-            $box.html('<i class="fa fa-2x fa-warning"></i><br>Erro desconhecido, tente novamente.<br><button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>');
-        }
-    });
+$(document).ready(function(){
+    getPartidos(printListPartidos);
 });
+$("#link-all-deputados").click(getDeputados);
+
+
+
+
+/**
+ * 
+ * @param {type} $box
+ * @param {type} deputados
+ * @returns {undefined}
+ */
+function printListPartidos(partidos){
+    var html = '<option value="0">Todos</option>';
+    for(var i = 0,max = partidos.length;i<max;i++){
+        html += '<option value="'+partidos[i].acronym+'">'+partidos[i].acronym+'</option>';      
+    }
+    $(".select-party").html(html);
+    $('#modal-loading').modal("hide");
+}
 
 
 /**
@@ -103,4 +100,67 @@ function printListDeputados($box,deputados){
     }
     html += '</ul>';
     $box.html(html);
+    $(".box-filter-all-deputados").show();
+}
+
+/**
+ * 
+ * @param {type} callback
+ * @returns {undefined}
+ */
+function getPartidos(callback){
+    var $box = $("#content-loading");
+    $('#modal-loading').modal({backdrop: 'static', keyboard: false});
+    $box.addClass("alert alert-info");
+    $box.html('<i class="fa fa-2x fa-spin fa-soccer-ball-o"></i><br> carregando...');
+    
+    $.ajax({
+        url: "getPartidos",
+        dataType: 'json',
+        type: 'GET',
+        beforeSend: function () {
+            $box.removeClass("alert-success alert-warning alert-danger");
+            $box.addClass("alert alert-info text-center");
+            $box.html('<i class="fa fa-2x fa-spin fa-pulse fa-spinner"></i><br> carregando...');
+        },
+        success: function (data, textStatus){
+            $box.removeAttr("class");
+            callback(data);
+        },
+        error: function (xhr, er) {
+            $box.removeClass("alert-success alert-warning alert-info");
+            $box.addClass("alert alert-danger text-center");
+            $box.html('<i class="fa fa-2x fa-warning"></i><br>Erro desconhecido, tente novamente.<br><button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>');
+        }
+    });
+}
+
+/**
+ * 
+ * @returns {undefined}
+ */
+function getDeputados(){
+    $('#modal-list-deputados').modal('show');
+    var $box = $("#content-list-deputados");
+    $(".box-filter-all-deputados").hide();
+    $.ajax({
+        url: "getDeputados",
+        dataType: 'json',
+        type: 'GET',
+        beforeSend: function () {
+            $box.removeClass("alert-success alert-warning alert-danger");
+            $box.addClass("alert alert-info text-center");
+            $box.html('<i class="fa fa-2x fa-spin fa-pulse fa-spinner"></i><br> carregando...');
+        },
+        success: function (data, textStatus){
+            $box.removeAttr("class");
+            console.log(data);
+            printListDeputados($box,data);
+        },
+        error: function (xhr, er) {
+            $box.removeClass("alert-success alert-warning alert-info");
+            $box.addClass("alert alert-danger text-center");
+            $box.html('<i class="fa fa-2x fa-warning"></i><br>Erro desconhecido, tente novamente.<br><button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>');
+        }
+    });
 }

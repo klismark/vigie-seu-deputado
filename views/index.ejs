@@ -90,20 +90,84 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-list-deputados" tabindex="-1" role="dialog" aria-labelledby="title-dialog">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="modal-loading" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-body text-center">                    
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h2 class="modal-title" id="title-dialog"><i class="fa fa-group" aria-hidden="true"></i> Todos os deputados</h2>
-                </div>
-                <div class="modal-body">
-                    <div id="content-list-deputados"></div>
+                    <div id="content-loading" ></div>
                 </div>
             </div>
         </div>
     </div>
 
+    
+    <div class="modal fade" id="modal-list-deputados" tabindex="-1" role="dialog" aria-labelledby="title-dialog-deputados">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="title-dialog-deputados"><i class="fa fa-group" aria-hidden="true"></i> Todos os deputados</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="box-filter-all-deputados bg-primary alert">
+                        <form class="form-filter-all-deputados" action="javascript:void(0)">
+                            <h3>Filtro</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="filter-uf">Por Estado</label>
+                                        <select class="form-control select-uf" id="filter-uf">
+                                            <option value="0">Todos</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AM">AM</option>
+                                            <option value="AP">AP</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MG">MG</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MT">MT</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PI">PI</option>
+                                            <option value="PR">PR</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SE">SE</option>
+                                            <option value="SP">SP</option>
+                                            <option value="TO">TO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="filter-party">Por Partido</label>
+                                        <select class="form-control select-party" id="filter-party">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                <button type="submit" class="btn btn-lg btn-default"><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
+                            
+                        </form>
+                    </div>
+                    
+                    <div id="content-list-deputados"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer class="footer-main">
         Desenvolvido por: <b>Klismark Barbosa</b>
     </footer>

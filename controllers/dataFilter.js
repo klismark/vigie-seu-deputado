@@ -1,7 +1,7 @@
 module.exports = function (app) {
     let request = require('request');
     let filterController = {
-        getListDeputados: function (req, res) {
+        getDeputados: function (req, res) {
             request('http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterDeputados', function (error, response, body) {     
                 if(error){
                     return res.sendStatus(230);
@@ -18,7 +18,6 @@ module.exports = function (app) {
                         }
                     });
                 }
-
             });
 
             //Organiza o JSON para a leitura do site.
@@ -51,6 +50,56 @@ module.exports = function (app) {
                         });
 
                         return res.json(deputados);
+                    }
+                }
+                return false;
+            }
+        },
+        getPartidos: function (req, res) {
+            request('http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterPartidosCD', function (error, response, body) {     
+                if(error){
+                    return res.sendStatus(230);
+                }
+                if(response.statusCode == 200){//Se a requisição foi tudo bem
+                    //Faz o parse dos dados XML para JSON
+                    let parseString = require('xml2js').parseString;
+                    parseString(body, function (err, result) {
+                        if(err){
+                            return res.sendStatus(231);//Erro no parse dos dados
+                        }
+                        if(!filterDataListPartidos(result)){
+                            return res.sendStatus(231);//Erro no parse dos dados
+                        }
+                    });
+                }
+            });
+
+            //Organiza o JSON para a leitura do site.
+            function filterDataListPartidos(data){
+                var partidos = [];
+                if(data.hasOwnProperty("partidos")){
+                    if(data.partidos.hasOwnProperty("partido")){
+                        var list = data.partidos.partido;
+                        
+                        for(var i = 0,max = list.length;i<max;i++){
+                            if(list[i].dataExtincao[0].length == 10){
+                                continue;
+                            }
+                            var party = {
+                                acronym: list[i].siglaPartido[0],
+                                name: list[i].nomePartido[0]
+                            }
+                            partidos.push(party);
+                        }
+                        let util = app.controllers.util;
+                        partidos.sort(function(a,b){    
+                           if(util.removeAccents(a.acronym.toLowerCase()) < util.removeAccents(b.acronym.toLowerCase())){
+                               return -1;
+                           }else{
+                                return 1;
+                           }
+                        });
+                        return res.json(partidos);
                     }
                 }
                 return false;
