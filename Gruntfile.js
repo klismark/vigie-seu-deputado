@@ -1,11 +1,11 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        concat: {
+        /*concat: {
             dist: {
                 src: "src/js/*.js",
                 dest: "public/js/main.min.js"
             }
-        },
+        },*/
         sass: {
             dist: {
                 options: {style: 'compressed'},
@@ -15,7 +15,15 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            'public/js/main.min.js': 'public/js/main.min.js'
+            //'public/js/main.min.js': 'public/js/main.min.js'
+            build: {
+                files: [{
+                    expand: true,
+                    src: '**/*.js',
+                    dest: 'public/js',
+                    cwd: 'src/js'
+                }]
+            }
         },
         cssmin: {
           options: {
@@ -53,7 +61,7 @@ module.exports = function (grunt) {
                             'jquery.min.js',
                             'jquery.min.map'
                         ],
-                        dest: 'public/js/',
+                        dest: 'public/js/lib/',
                         dot: true
                     },
                     {
@@ -63,7 +71,7 @@ module.exports = function (grunt) {
                             'annyang.min.js',
                             'annyang.min.map'
                         ],
-                        dest: 'public/js/',
+                        dest: 'public/js/lib/',
                         dot: true
                     },
                     {
@@ -72,7 +80,7 @@ module.exports = function (grunt) {
                         src: [
                             'bootstrap.min.js',
                         ],
-                        dest: 'public/js',
+                        dest: 'public/js/lib/',
                         dot: true
                     },
                     {
@@ -142,7 +150,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
+    //grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -152,5 +160,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     
 
-    grunt.registerTask('default', ['concat','sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
+    grunt.registerTask('default', [/*'concat'*/,'sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
 };
