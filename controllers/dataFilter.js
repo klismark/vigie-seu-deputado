@@ -1,7 +1,7 @@
 module.exports = function (app) {
     let request = require('request');
     let filterController = {
-        getDeputados: function (req, res) {
+        getCongressmen: function (req, res) {
             request('http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterDeputados', function (error, response, body) {     
                 if(error){
                     return res.sendStatus(230);
@@ -13,7 +13,7 @@ module.exports = function (app) {
                         if(err){
                             return res.sendStatus(231);//Erro no parse dos dados
                         }
-                        if(!filterDataListDeputados(result)){
+                        if(!filterDataListCongressmen(result)){
                             return res.sendStatus(231);//Erro no parse dos dados
                         }
                     });
@@ -21,8 +21,8 @@ module.exports = function (app) {
             });
 
             //Organiza o JSON para a leitura do site.
-            function filterDataListDeputados(data){
-                var deputados = [];
+            function filterDataListCongressmen(data){
+                var congressmen = [];
                 if(data.hasOwnProperty("deputados")){
                     if(data.deputados.hasOwnProperty("deputado")){
                         var list = data.deputados.deputado;
@@ -37,10 +37,10 @@ module.exports = function (app) {
                                 uf: list[i].uf[0],
                                 phone: list[i].fone[0]
                             }
-                            deputados.push(dept);
+                            congressmen.push(dept);
                         }
                         let util = app.controllers.util;
-                        deputados.sort(function(a,b){
+                        congressmen.sort(function(a,b){
                             
                            if(util.removeAccents(a.parliamentaryName.toLowerCase()) < util.removeAccents(b.parliamentaryName.toLowerCase())){
                                return -1;
@@ -49,13 +49,13 @@ module.exports = function (app) {
                            }
                         });
 
-                        return res.json(deputados);
+                        return res.json(congressmen);
                     }
                 }
                 return false;
             }
         },
-        getPartidos: function (req, res) {
+        getParties: function (req, res) {
             request('http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterPartidosCD', function (error, response, body) {     
                 if(error){
                     return res.sendStatus(230);
@@ -67,7 +67,7 @@ module.exports = function (app) {
                         if(err){
                             return res.sendStatus(231);//Erro no parse dos dados
                         }
-                        if(!filterDataListPartidos(result)){
+                        if(!filterDataListParties(result)){
                             return res.sendStatus(231);//Erro no parse dos dados
                         }
                     });
@@ -75,8 +75,8 @@ module.exports = function (app) {
             });
 
             //Organiza o JSON para a leitura do site.
-            function filterDataListPartidos(data){
-                var partidos = [];
+            function filterDataListParties(data){
+                var parties = [];
                 if(data.hasOwnProperty("partidos")){
                     if(data.partidos.hasOwnProperty("partido")){
                         var list = data.partidos.partido;
@@ -89,17 +89,17 @@ module.exports = function (app) {
                                 acronym: list[i].siglaPartido[0],
                                 name: list[i].nomePartido[0]
                             }
-                            partidos.push(party);
+                            parties.push(party);
                         }
                         let util = app.controllers.util;
-                        partidos.sort(function(a,b){    
+                        parties.sort(function(a,b){    
                            if(util.removeAccents(a.acronym.toLowerCase()) < util.removeAccents(b.acronym.toLowerCase())){
                                return -1;
                            }else{
                                 return 1;
                            }
                         });
-                        return res.json(partidos);
+                        return res.json(parties);
                     }
                 }
                 return false;

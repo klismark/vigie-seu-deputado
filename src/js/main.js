@@ -23,6 +23,6 @@ define(
         });
         
         //Ação do link "Todos os Deputados
-        $("#link-all-deputados").click(actions.openAllCongressmen);
+        $("#link-all-congressmen").click(actions.openAllCongressmen);
     }
 );

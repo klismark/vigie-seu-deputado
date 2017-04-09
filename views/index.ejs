@@ -83,7 +83,7 @@
                 </form>
             </section>
             <nav class="menu-main">
-                <a id="link-all-deputados" class="item-menu-main">Todos os deputados</a>
+                <a id="link-all-congressmen" class="item-menu-main">Todos os deputados</a>
                 <a class="item-menu-main">Relatórios</a>
                 <a class="item-menu-main">Dúvidas</a>
                 <a class="item-menu-main">Sobre o projeto</a>
@@ -103,16 +103,16 @@
     </div>
 
     
-    <div class="modal fade" id="modal-list-deputados" tabindex="-1" role="dialog" aria-labelledby="title-dialog-deputados">
+    <div class="modal fade" id="modal-list-congressmen" tabindex="-1" role="dialog" aria-labelledby="title-dialog-congressmen">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h2 class="modal-title" id="title-dialog-deputados"><i class="fa fa-group" aria-hidden="true"></i> Todos os deputados</h2>
+                    <h2 class="modal-title" id="title-dialog-congressmen"><i class="fa fa-group" aria-hidden="true"></i> Todos os deputados</h2>
                 </div>
                 <div class="modal-body">
-                    <div class="box-filter-all-deputados bg-primary alert">
-                        <form class="form-filter-all-deputados" action="javascript:void(0)">
+                    <div class="box-filter-all-congressmen bg-info alert">
+                        <form class="form-filter-all-congressmen" action="javascript:void(0)">
                             <h3>Filtro</h3>
                             <div class="row">
                                 <div class="col-md-4">
@@ -157,13 +157,16 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-4 text-right">
+                                    <br>
+                                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
+                                </div>
                             </div>
-                                <button type="submit" class="btn btn-lg btn-default"><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
                             
                         </form>
                     </div>
                     
-                    <div id="content-list-deputados"></div>
+                    <div id="content-list-congressmen"></div>
                 </div>
             </div>
         </div>

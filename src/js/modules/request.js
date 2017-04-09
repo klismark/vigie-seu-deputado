@@ -8,7 +8,7 @@ define(function () {
          */
         getParties: function(onSuccess,onError){
             $.ajax({
-                url: "getPartidos",
+                url: "getParties",
                 dataType: 'json',
                 type: 'GET',
                 success: function (data){               
@@ -18,7 +18,7 @@ define(function () {
                 },
                 error: function (xhr, er) {
                     if(typeof onError === "function"){
-                        onError(data);    
+                        onError(xhr);    
                     }
                 }
             });
@@ -32,7 +32,7 @@ define(function () {
          */
         getAllCongressmen: function(onSuccess,onError){
             $.ajax({
-                url: "getDeputados",
+                url: "getCongressmen",
                 dataType: 'json',
                 type: 'GET',
                 success: function (data){               
@@ -42,7 +42,7 @@ define(function () {
                 },
                 error: function (xhr, er) {
                     if(typeof onError === "function"){
-                        onError(data);    
+                        onError(xhr);    
                     }
                 }
             });

@@ -40,6 +40,10 @@ function () {
         closeLoadingMain: function(){
             $('#modal-loading').modal("hide");
         },
+        /**
+         * 
+         * @returns {undefined}
+         */
         openAllCongressmen: function(){
             var request = require('request');
             var actions = require('actions');
@@ -48,13 +52,13 @@ function () {
                 function(result){//Caso a requisição seja concluída com sucesso
                     actions.closeLoadingMain();  
                     var view = require('view');
-                    var $box = $("#content-list-deputados");
+                    var $box = $("#content-list-congressmen");
                     view.listAllCongressmen($box,result,function(){      
-                        $('#modal-list-deputados').on('shown.bs.modal', function (e) {
+                        $('#modal-list-congressmen').on('shown.bs.modal', function (e) {
                             $("body").addClass("modal-open");
                         });
                         //Abre o modal
-                        $('#modal-list-deputados').modal('show' );                       
+                        $('#modal-list-congressmen').modal('show' );                       
                         
                     });
                 },

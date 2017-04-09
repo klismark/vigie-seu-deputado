@@ -4,7 +4,7 @@ function ( $ ) {
         /**
          * 
          * @param {DOMElement} $box
-         * @param {[deputados]} deputados
+         * @param {[congressman]} congressmen
          * @param {function} callback
          * @returns {undefined}
          */
