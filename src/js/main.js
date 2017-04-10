@@ -1,9 +1,10 @@
 define(
     ["jquery","actions","request","view"],
-    function () {
+    function main() {
         var actions = require('actions');
         var request = require('request');
-        var view = require('view');
+        allCongressmen = [];
+        
         
         //Ações para o menu de acessibilidade
         $("#btn-open-accessibility").click(actions.openAccessibility);
@@ -15,6 +16,7 @@ define(
         //Lista os partidos no(s) select(s) de partidos.
         request.getParties(function(result){
             var view = require('view');
+            allCongressmen = result;
             view.buildComboParties(".select-party",result,function(){
                 var actions = require('actions');
                 //Esconde o modal de carregamento
@@ -24,5 +26,6 @@ define(
         
         //Ação do link "Todos os Deputados
         $("#link-all-congressmen").click(actions.openAllCongressmen);
+        $("#filter-uf-list").change(actions.filterCongressmenByUF);
     }
 );

@@ -9,9 +9,9 @@ function ( $ ) {
          * @returns {undefined}
          */
         listAllCongressmen: function($box,congressmen,callback){
-            var html = '<ul class="list-group">';
+            var html = '<ul class="list-group" id="list-all-congressmen">';
             for(var i = 0,max = congressmen.length;i<max;i++){
-                html += '<li class="list-group-item">';
+                html += '<li class="list-group-item"  data-party="'+congressmen[i].party+'" data-uf="'+congressmen[i].uf+'">';
                 html += '<img src="'+congressmen[i].photo+'" alt="Foto do(a) parlamentar '+congressmen[i].parliamentaryName+'" width="114" height="152" class="photo-item-list pull-left"/>';
                 html += '<div class="info-item-deputado">';
                 html += '<h3 class="list-group-item-heading">'+congressmen[i].parliamentaryName+'</h3>';

@@ -1,4 +1,4 @@
-define(["jquery","bootstrap","request"],
+define(["jquery","bootstrap","request","main"],
 function () {
     return {
         /**
@@ -71,6 +71,16 @@ function () {
                     $('#modal-loading').modal('show');
                 }
             );
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        filterCongressmenByUF: function(){
+            var ufSelected = $("#filter-uf-list option:selected").val();
+            var main = require('main');
+            console.log(main);
+            //$("#list-all-congressmen li[data-uf='"+ufSelected+"']").attr("data-uf",ufSelected);
         }
     };
 });
