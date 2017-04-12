@@ -3,7 +3,6 @@ define(
     function main() {
         var actions = require('actions');
         var request = require('request');
-        allCongressmen = [];
         
         
         //Ações para o menu de acessibilidade
@@ -16,16 +15,17 @@ define(
         //Lista os partidos no(s) select(s) de partidos.
         request.getParties(function(result){
             var view = require('view');
-            allCongressmen = result;
             view.buildComboParties(".select-party",result,function(){
                 var actions = require('actions');
                 //Esconde o modal de carregamento
                 actions.closeLoadingMain();
+                $(".select-party").change(actions.filterCongressmen);
             });
         });
         
         //Ação do link "Todos os Deputados
         $("#link-all-congressmen").click(actions.openAllCongressmen);
-        $("#filter-uf-list").change(actions.filterCongressmenByUF);
+        $("#filter-uf-list").change(actions.filterCongressmen);
+        $("#form-filter-congressmen").submit(actions.filterCongressmen);
     }
 );

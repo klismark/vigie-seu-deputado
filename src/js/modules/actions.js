@@ -54,12 +54,12 @@ function () {
                     var view = require('view');
                     var $box = $("#content-list-congressmen");
                     view.listAllCongressmen($box,result,function(){      
+                        localStorage.setItem("allCongressmen", JSON.stringify(result));
                         $('#modal-list-congressmen').on('shown.bs.modal', function (e) {
                             $("body").addClass("modal-open");
                         });
                         //Abre o modal
-                        $('#modal-list-congressmen').modal('show' );                       
-                        
+                        $('#modal-list-congressmen').modal('show');
                     });
                 },
                 function(xhr){//Caso a requisição seja concluída com erros
@@ -76,11 +76,40 @@ function () {
          * 
          * @returns {undefined}
          */
-        filterCongressmenByUF: function(){
+        filterCongressmen: function(){
             var ufSelected = $("#filter-uf-list option:selected").val();
-            var main = require('main');
-            console.log(main);
-            //$("#list-all-congressmen li[data-uf='"+ufSelected+"']").attr("data-uf",ufSelected);
+            var partySelected = $("#filter-party-list option:selected").val();
+            var allCongressmen = JSON.parse(localStorage.getItem("allCongressmen"));
+            if(ufSelected === "0" && partySelected !== "0"){
+                allCongressmen = allCongressmen.filter(function(item){
+                    if(item.party !== partySelected){
+                        return false;
+                    }
+                    return true;
+                });
+            }else if(ufSelected !== "0" && partySelected === "0"){
+                allCongressmen = allCongressmen.filter(function(item){
+                    if(item.uf !== ufSelected){
+                        return false;
+                    }
+                    return true;
+                });
+            }else{  
+                allCongressmen = allCongressmen.filter(function(item){
+                    if(item.uf !== ufSelected || item.party !== partySelected){
+                        return false;
+                    }
+                    return true;
+                });
+            }  
+            
+            var view = require('view');         
+            var $box = $("#content-list-congressmen");  
+            if(allCongressmen.length === 0){
+                view.showAlertDanger($box,"Nenhum deputado encontrado.")
+                return;
+            }
+            view.listAllCongressmen($box,allCongressmen);         
         }
     };
 });

@@ -48,6 +48,15 @@ function ( $ ) {
             if(typeof callback === "function"){
                 callback();    
             }
+        },
+        /**
+         * 
+         * @param {DOMElement} $box
+         * @param {String} msg
+         * @returns {undefined}
+         */
+        showAlertDanger: function($box,msg){
+            $box.html('<p class="alert alert-danger text-center"><i class="fa fa-2x fa-warning"></i><br>'+msg+'</p>');
         }
     };
 });
