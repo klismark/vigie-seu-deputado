@@ -1,5 +1,14 @@
 module.exports = function(app){
-    let util = {
+    var util = {
+        /**
+        * Remove todos os acentos e "ç" do texto fornecido.
+        * 
+        * @example 
+        *   removeAccents("éíçá"); // eica
+        * 
+        * @param   {String} text Texto a ser retirado os acentos.
+        * @returns {String} Retorna uma stringa sem acentos ou "ç".
+        */
         removeAccents: function (text) {
             var string = text;//.replace('/','');
             var mapAccentsHex = {

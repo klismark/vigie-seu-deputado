@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    let HomeController = {
+    var HomeController = {
         index: function (req, res) {
             res.render('index');
         }
