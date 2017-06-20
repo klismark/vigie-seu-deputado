@@ -4,10 +4,10 @@ var express = require('express'),
 	cookieParser = require('cookie-parser'),
 	//expressSession = require('express-session'),
 	methodOverride = require('method-override'),
-	//mongoose = require('mongoose'),
+	mongoose = require('mongoose'),
 	app = express();
 //app.use(express.bodyParser());
-//global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
+global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
 
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
@@ -23,7 +23,7 @@ load('models')
 .then('routes')
 .into(app);
 
-var port = process.env.PORT || 5000
+var port = process.env.PORT || 5000;
 app.listen(port, function(){
-	console.log("Servidor OK");
-})
+    console.log("Servidor OK");
+});

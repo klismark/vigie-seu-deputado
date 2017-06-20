@@ -46,8 +46,8 @@ module.exports = function(app){
         * @returns {String} Retorna uma stringa sem acentos ou "ç".
         */
         getQuota: function (req, res) {
-            //var urlFile = "http://www.camara.leg.br/cotas/Ano-2017.json.zip";
-            var urlFile = "http://allsimple.com.br/deputados/Ano-2017.json.zip";
+            var urlFile = "http://www.camara.leg.br/cotas/Ano-2017.json.zip";
+            //var urlFile = "http://allsimple.com.br/deputados/Ano-2017.json.zip";
             var AdmZip = require('adm-zip');
             var fs = require('fs');
             var url = require('url');
