@@ -4,7 +4,7 @@ var express = require('express'),
 	cookieParser = require('cookie-parser'),
 	//expressSession = require('express-session'),
 	methodOverride = require('method-override'),
-	mongoose = require('mongoose'),
+	//mongoose = require('mongoose'),
 	app = express();
 //app.use(express.bodyParser());
 global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
