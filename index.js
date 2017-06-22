@@ -7,7 +7,7 @@ var express = require('express'),
 	//mongoose = require('mongoose'),
 	app = express();
 //app.use(express.bodyParser());
-global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
+//global.db = mongoose.connect('mongodb://localhost/vigieseudeputado');
 
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
