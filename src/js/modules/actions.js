@@ -10,7 +10,9 @@ function () {
                 "top":0
             });
             $(this).hide();
-            $(this).attr("aria-hidden",true);
+            $("#btn-open-accessibility").attr("aria-expanded",false);
+            $(".item-menu-accessibility").attr("aria-expanded",true);
+            $("#btn-close-accessibility").attr("aria-expanded",true);
         },
         /**
          * 
@@ -21,7 +23,9 @@ function () {
                 "top":"-100%"
             });
             $("#btn-open-accessibility").show();
-            $("#btn-open-accessibility").attr("aria-hidden",false);
+            $("#btn-open-accessibility").attr("aria-expanded",true);
+            $(".item-menu-accessibility").attr("aria-expanded",false);
+            $("#btn-close-accessibility").attr("aria-expanded",false);
         },
         /**
          * 

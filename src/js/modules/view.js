@@ -57,6 +57,35 @@ function ( $ ) {
          */
         showAlertDanger: function($box,msg){
             $box.html('<p class="alert alert-danger text-center"><i class="fa fa-2x fa-warning"></i><br>'+msg+'</p>');
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        changeStatusWAIARIA: function(){
+            var w = $( window ).width();
+            
+            if(w < 768){//MOBILE
+                $("#menu-accessibility").attr("aria-haspopup",true);
+                $("#btn-open-accessibility").attr("aria-expanded",true);
+                $(".item-menu-accessibility").attr("aria-expanded",false);
+                
+            }else if(w >= 768 && w < 992){//TABLET
+                $("#menu-accessibility").attr("aria-haspopup",false);
+                $("#btn-open-accessibility").attr("aria-expanded",false);
+                $(".item-menu-accessibility").attr("aria-expanded",true);
+                
+            }else if(w >= 992 && w < 1200){//LARGER
+                $("#menu-accessibility").attr("aria-haspopup",false);
+                $("#btn-open-accessibility").attr("aria-expanded",false);
+                $(".item-menu-accessibility").attr("aria-expanded",true);
+                
+            }else if(w >= 1200){//X-LARGER
+                $("#menu-accessibility").attr("aria-haspopup",false);
+                $("#btn-open-accessibility").attr("aria-expanded",false);
+                $(".item-menu-accessibility").attr("aria-expanded",true);
+            }
+            
         }
     };
 });
