@@ -51,23 +51,30 @@ function () {
         openAllCongressmen: function(){
             var request = require('request');
             var actions = require('actions');
+
+            //Abre o modal de carregamento
             actions.openLoadingMain();
+            
+
             request.getAllCongressmen(
-                function(result){//Caso a requisição seja concluída com sucesso
-                    actions.closeLoadingMain();  
+                function(result){//Caso a requisição seja concluída com sucesso                   
                     var view = require('view');
-                    var $box = $("#content-list-congressmen");
+                    var $box = $("#box-all-congressmen");
                     view.listAllCongressmen($box,result,function(){      
-                        localStorage.setItem("allCongressmen", JSON.stringify(result));
                         $('#modal-list-congressmen').on('shown.bs.modal', function (e) {
                             $("body").addClass("modal-open");
                         });
+
+                        //Aplicando ações aos filtros
+                        $("#filter-uf-list").change(actions.filterCongressmen);
+                        $("#form-filter-congressmen").submit(actions.filterCongressmen);
+
                         //Abre o modal
                         $('#modal-list-congressmen').modal('show');
+
                     });
                 },
                 function(xhr){//Caso a requisição seja concluída com erros
-                    actions.closeLoadingMain();  
                     var $box = $("#content-loading");
                     $box.removeClass("alert-success alert-warning alert-info");
                     $box.addClass("alert alert-danger text-center");
@@ -86,21 +93,21 @@ function () {
             var allCongressmen = JSON.parse(localStorage.getItem("allCongressmen"));
             if(ufSelected === "0" && partySelected !== "0"){
                 allCongressmen = allCongressmen.filter(function(item){
-                    if(item.party !== partySelected){
+                    if(item.siglaPartido !== partySelected){
                         return false;
                     }
                     return true;
                 });
             }else if(ufSelected !== "0" && partySelected === "0"){
                 allCongressmen = allCongressmen.filter(function(item){
-                    if(item.uf !== ufSelected){
+                    if(item.siglaUf !== ufSelected){
                         return false;
                     }
                     return true;
                 });
-            }else{  
+            }else if(ufSelected !== "0" && partySelected !== "0"){
                 allCongressmen = allCongressmen.filter(function(item){
-                    if(item.uf !== ufSelected || item.party !== partySelected){
+                    if(item.siglaUf !== ufSelected || item.siglaPartido !== partySelected){
                         return false;
                     }
                     return true;

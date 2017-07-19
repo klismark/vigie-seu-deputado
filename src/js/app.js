@@ -1,9 +1,9 @@
 requirejs.config({
     "baseUrl": "js/modules",
     "paths": {
-        "annyang": "../lib/annyang.min",
         "jquery": "../lib/jquery.min",
         "bootstrap": "../lib/bootstrap.min",
+        "annyang": "../lib/annyang.min",
         "main": "../main"
     }
 });

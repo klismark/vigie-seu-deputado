@@ -1,11 +1,5 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        /*concat: {
-            dist: {
-                src: "src/js/*.js",
-                dest: "public/js/main.min.js"
-            }
-        },*/
         sass: {
             dist: {
                 options: {style: 'compressed'},
@@ -101,15 +95,6 @@ module.exports = function (grunt) {
                         ],
                         dest: 'public/fonts',
                         dot: true
-                    },
-                    {
-                        expand: true,
-                        cwd: 'views/',
-                        src: [
-                            '**',
-                        ],
-                        dest: 'public/',
-                        dot: true
                     }
                 ]
             }
@@ -122,17 +107,10 @@ module.exports = function (grunt) {
                 },
                 files: [{
                         expand: true,
-                        cwd: 'views/',
-                        src: '*.ejs',
-                        dest: 'public/',
+                        cwd: 'src/',
+                        src: '*.html',
+                        dest: 'public/'
                     }],
-            }
-        },
-        rename: {
-            main: {
-                files: [
-                    {src: ['public/index.ejs'], dest: 'public/index.html'},
-                    ]
             }
         },
         imagemin: {
@@ -150,15 +128,13 @@ module.exports = function (grunt) {
         }
     });
 
-    //grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     
 
-    grunt.registerTask('default', [/*'concat'*/,'sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
+    grunt.registerTask('default', [/*'concat'*/,'sass', 'uglify','cssmin','copy','htmlmin','imagemin']);
 };
