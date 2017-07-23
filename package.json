@@ -2,10 +2,7 @@
   "name": "vigie-seu-deputado",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
+  "main": "index.php",
   "repository": {
     "type": "git",
     "url": "https://github.com/klismark/vigie-seu-deputado.git"
