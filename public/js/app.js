@@ -1,0 +1,1 @@
+requirejs.config({baseUrl:"js/modules",paths:{jquery:"../lib/jquery.min",bootstrap:"../lib/bootstrap.min",annyang:"../lib/annyang.min",main:"../main"}}),requirejs(["main"]);

@@ -101,15 +101,6 @@ module.exports = function (grunt) {
                         ],
                         dest: 'public/fonts',
                         dot: true
-                    },
-                    {
-                        expand: true,
-                        cwd: 'views/',
-                        src: [
-                            '**',
-                        ],
-                        dest: 'public/',
-                        dot: true
                     }
                 ]
             }
@@ -122,8 +113,8 @@ module.exports = function (grunt) {
                 },
                 files: [{
                         expand: true,
-                        cwd: 'views/',
-                        src: '*.ejs',
+                        cwd: 'src/',
+                        src: '*.html',
                         dest: 'public/',
                     }],
             }
@@ -160,5 +151,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     
 
-    grunt.registerTask('default', [/*'concat'*/,'sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
+    grunt.registerTask('default', ['sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
 };
