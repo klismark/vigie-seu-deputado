@@ -32,8 +32,8 @@ define(function () {
          */
         getAllCongressmen: function(onSuccess,onError){
             $.ajax({
-                url: "congressmen.html",
-                dataType: 'html',
+                url: "getCongressmen",
+                dataType: 'json',
                 type: 'GET',
                 success: function (data){               
                     if(typeof onSuccess === "function"){

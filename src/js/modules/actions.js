@@ -51,30 +51,24 @@ function () {
         openAllCongressmen: function(){
             var request = require('request');
             var actions = require('actions');
-
-            //Abre o modal de carregamento
             actions.openLoadingMain();
-            
-
             request.getAllCongressmen(
-                function(result){//Caso a requisição seja concluída com sucesso                   
+                function(result){//Caso a requisição seja concluída com sucesso
+                    
+                    actions.closeLoadingMain();  
                     var view = require('view');
-                    var $box = $("#box-all-congressmen");
-                    view.listAllCongressmen($box,result,function(){      
+                    var $box = $("#content-list-congressmen");
+                    view.listAllCongressmen($box,result.congressmen,function(){      
+                        localStorage.setItem("allCongressmen", JSON.stringify(result.congressmen));
                         $('#modal-list-congressmen').on('shown.bs.modal', function (e) {
                             $("body").addClass("modal-open");
                         });
-
-                        //Aplicando ações aos filtros
-                        $("#filter-uf-list").change(actions.filterCongressmen);
-                        $("#form-filter-congressmen").submit(actions.filterCongressmen);
-
                         //Abre o modal
                         $('#modal-list-congressmen').modal('show');
-
                     });
                 },
                 function(xhr){//Caso a requisição seja concluída com erros
+                    actions.closeLoadingMain();  
                     var $box = $("#content-loading");
                     $box.removeClass("alert-success alert-warning alert-info");
                     $box.addClass("alert alert-danger text-center");

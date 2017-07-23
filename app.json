@@ -1,6 +1,7 @@
 {
   "name": "Vigie Seu Deputado",
   "description": "VigieSeuDeputado é um projeto onde o usuário possa acompanhar todas as informações e gastos disponíveis dos deputados federais.",
+  "repository": "https://github.com/klismark/vigie-seu-deputado",
   "keywords": [
     "deputados",
     "cota",

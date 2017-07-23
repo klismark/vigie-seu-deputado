@@ -1,1 +1,0 @@
-define(["jquery","actions","request","view"],function(){var a=require("actions"),b=(require("request"),require("view"));$("#btn-open-accessibility").click(a.openAccessibility),$("#btn-close-accessibility").click(a.closeAccessibility),b.changeStatusWAIARIA()});
