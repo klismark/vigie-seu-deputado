@@ -1,7 +1,7 @@
 define(
     ["jquery","actions","request","view"],
     function main() {
-        var actions = require('actions');
+       /* var actions = require('actions');
         var request = require('request');
         var view = require('view');
         
@@ -28,6 +28,6 @@ define(
         //Ação do link "Todos os Deputados
         $("#link-all-congressmen").click(actions.openAllCongressmen);
         $("#filter-uf-list").change(actions.filterCongressmen);
-        $("#form-filter-congressmen").submit(actions.filterCongressmen);
+        $("#form-filter-congressmen").submit(actions.filterCongressmen);*/
     }
 );

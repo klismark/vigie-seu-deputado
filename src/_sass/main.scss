@@ -16,7 +16,6 @@ $blueBtnSearch: #5a8ed6;
     url('../fonts/RobotoRegular.ttf') format('truetype'),
     url('../fonts/RobotoRegular.svg#RobotoRegular') format('svg');
 }
-
 *{
     padding: 0;
     margin: 0;
@@ -28,6 +27,9 @@ body,html{
 }
 a{
     text-decoration: none;
+}
+.hidden{
+    display: none;
 }
 .align-right{
     float: right;
@@ -47,188 +49,50 @@ a{
     position: relative;
     z-index: 1;
 }
-.bgmain{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../img/bgMain.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-}
-/*MENU DE ACESSIBILIDADE*/
 .menu-accessibility{
-    color: #111;
-    background: #fff;
-    position: fixed;
-    top: -100%;
-    left: 0;
-    height: 100%;
+    display: none;
+}
+
+.header-main{
+    display: block;
+    background-image: url('../img/bgMain.jpg');
+    background-size: cover;
+    background-position: center;
     width: 100%;
-    z-index: 10;
+    height: 768px;
+    text-align: center;
 }
-.btn-open-accessibility{
-    position: fixed;
-    top: 15px;
-    left: 15px;
+.logo-main{
+    margin-top: 10%;
+}
+.text-home{
+    display: block;
     color: #fff;
-    background: none;
-    border: none;
-}
-.btn-close-accessibility{
-    display: block;
-    background: $redClose;
-    border: 0;
-    padding: 10px 0;
-    width: 80%;
-    position: absolute;
-    bottom: 30px;
-    left: 10%;
-    color: #fff;
-    font-size: 1.1rem;
-}
-.item-menu-accessibility{
-    font-size: 1.2rem;
-    padding: 10px;
-    text-align: left;
-    display: block;
-}
-
-/*LOGO HOME*/
-.main-home{
-    position: relative;
-    top: 90px;
-}
-.logo-home{
-    width: 200px;
-    height: 127px;
-    display: block;
-    margin: 10px auto;
-    background-image: url("../img/logo_mobile.png");
-}
-
-/*BUSCA HOME*/
-.box-field-search-home{
-    display: block;
-    background: #fff;
-    border-radius: 10px;
-    color: #d0d0d0;
-    padding: 8px;
     width: 90%;
-    margin: 30px auto;
-    margin-top: 50px;
-}
-.box-field-search-home i.fa-search{
-    display: block;
-    width: 10%;
-    float: left;
-    text-align: center;
-}
-.field-search-home{
-    display: inline-block;
-    width: 75%;
-    height: 32px;
-    font-size: 1.2rem;
-    border: none;
-    background: none;
-    font-size: 1rem;
-    color: #999;
-    outline: none;
-    padding-left: 5px;
-    cursor: pointer;
-}
-.btn-search{
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 1rem;
-    background: $blueBtnSearch;
-    position: relative;
-    top: -15px;
-    outline: none;
-    cursor: pointer;
-}
-/*MENU*/
-.menu-main{
-    color:#fff;
-    text-align: center;
-    margin: 20px auto;
-}
-.menu-main a{
-    display: block;
+    margin: 20% auto;
+    font-size: 1.5rem;
     font-family: $fontLight;
-    margin: 10px 5px;
-    cursor: pointer !important;
-    color: #fff !important;
-}
-.menu-main a:hover{
-    text-decoration: none;
-}
-/*RODAPE*/
-.footer-main{
-    font-size: 0.7rem;
-    font-family: $fontLight;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    color: #fff;
-    width: 100%;
-    z-index: 2;
-}
-
-
-/*LIST*/
-.photo-item-list{
-    margin-right: 10px;
-}
-.info-item-deputado{
-    display: block;
-    height: 152px;
-}
-.info-item-deputado h3{
-    font-family: $fontRegular;
-}
-.info-item-deputado dt{
-    margin-top: 5px;
-    font-family: $fontRegular;
-    font-weight: bold;
-    color: #333;
-}
-.info-item-deputado dd{
-    font-family: $fontLight;
-    font-weight:100;
-    color: #444;
-}
-.btn-view-details-deputado{
-    margin-top: -20px;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
-    .btn-open-accessibility,.btn-close-accessibility{
-        display: none;
-    }
     .menu-accessibility{
+        display: block;
         position: relative;
-        top: 20px;
-        color: #fff;
-        background: none;
+        padding: 10px 0;
+        color: #333;
+        background: #fff;
         text-align: left;
     }
     .item-menu-accessibility{
         font-size: 0.9rem;
         display: inline;
         padding: 5px;
-        color: #fff;
+        color: #333;
     }
     .item-menu-accessibility:hover{
-        background: #fff;
-        color: #111;
+        background: #5a8ed6;
+        color: #fff;
         cursor: pointer;
     }
     .menu-accessibility-right{
@@ -236,77 +100,20 @@ a{
         float: right;
     }
 
-    /*HEADER*/
-    .main-home{
-        top: 120px;
-    }
-    .logo-home{
-        width: 291px;
-        height: 185px;
-        display: block;
-        margin: 10px auto;
-        background-image: url("../img/logo.png");
-    }
-
-    /*BUSCA HOME*/
-    .box-field-search-home{
-        padding: 15px;
-        width: 70%;
-        margin: 50px auto;
-    }
-    .field-search-home{
-        width: 80%;
-        font-size: 1.5rem;
-        padding:10px;
-    }
-    .btn-search{
-        width: 40%;
-        top: -30px;
-        padding: 15px;
-    }
-
-    /*MENU*/
-    .menu-main{
-        margin: 40px auto;
-    }
-    .menu-main a{
-        display: inline-block;
-        font-size: 1.2rem;
-    }
-    
-
-    /*RODAPE*/
-    .footer-main{
-        bottom: 10px;
-    }
+  
 }
 
 /*Com uma largura mínima de 992 pixels. Monitores por exemplo.*/
 @media screen and (min-width: 992px) {
     .content{
-        width:90%;
+        width:94%;
     }
     
     .item-menu-accessibility{
         font-size: 1rem;
     }
 
-     /*BUSCA HOME*/
-    .box-field-search-home{
-        padding: 15px;
-        width: 50%;
-        margin: 50px auto;
-    }
-    .field-search-home{
-        width: 80%;
-        font-size: 1.5rem;
-        padding:10px;
-    }
-    .btn-search{
-        width: 25%;
-        top: -30px;
-        padding: 15px;
-    }
+
 
 }
 
