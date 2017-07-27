@@ -95,6 +95,16 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'src/',
+                        src: [
+                            'robots.txt',
+                            'sitemap.xml'
+                        ],
+                        dest: 'public',
+                        dot: true
+                    },
+                    {
+                        expand: true,
                         cwd: 'lib_frontend/bootstrap/dist/fonts',
                         src: [
                             '**'

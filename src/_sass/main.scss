@@ -22,7 +22,7 @@ $yellowLogo: #EEB603;
     font-family: $fontRegular;
 }
 body,html{
-    background-color: #333;
+    background-color: #fff;
     font-size: 16px;
 }
 a{
@@ -79,6 +79,23 @@ a{
 }
 .link-text{
     color: $yellowLogo;
+}
+.photo-list-congressmen{
+    float: left;
+    margin-right: 5px !important;
+}
+.info-list-congressmen{
+    height: 152px;
+    display: block;
+}
+.info-list-congressmen h3{
+    font-size: 1rem;
+    margin: 0;
+}
+.text-info-list-congressmen{
+    margin-top: 10px;
+    color: $blueLigthLogo;
+    font-size: 0.85rem;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/

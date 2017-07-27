@@ -12,43 +12,47 @@
     <meta name="reply-to" content="klismark@hotmail.com">
 
     <!--Windows-->
-    <!--<meta name="application-name" content="Árvore Governança"/>
+    <meta name="application-name" content="Vigie seu deputado"/>
     <meta name="msapplication-square70x70logo" content="img/logos_metatags/logo_70x70.jpg"/>
     <meta name="msapplication-square150x150logo" content="mg/logos_metatags/logo_150x150.jpg"/>
     <meta name="msapplication-wide310x150logo" content="mg/logos_metatags/logo_310x150.jpg"/>
     <meta name="msapplication-square310x310logo" content="img/logos_metatags/logo_310x310.jpg"/>
-    <meta name="msapplication-TileColor" content="#fff"/>-->
+    <meta name="msapplication-TileColor" content="#333"/>
     
     <!--iOS-->
-   <!--<link rel="apple-touch-icon" href="img/logos_metatags/logo_70x70.jpg">
+    <link rel="apple-touch-icon" href="img/logos_metatags/logo_70x70.jpg">
     <link rel="apple-touch-icon" sizes="76x76" href="img/logos_metatags/logo_76x76.jpg">
     <link rel="apple-touch-icon" sizes="120x120" href="img/logos_metatags/logo_120x120.jpg">
     <link rel="apple-touch-icon" sizes="152x152" href="img/logos_metatags/logo_152x152.jpg">
-    <meta name="format-detection" content="telephone=no">-->
+    <meta name="format-detection" content="telephone=no">
 
     <!--Open Graph-->
-    <!--<meta property="og:title" content="Árvore Governança"/>
-    <meta property="og:site_name" content="Árvore"/>
+    <meta property="og:title" content="Vigie seu deputado"/>
+    <meta property="og:site_name" content="Vigie seu deputado"/>
     <meta property="og:type" content="website" />
     <meta property="og:image" content="img/logos_metatags/logo_310x310.jpg  "/>
-    <meta property="og:url" content="http:/arvoreconsultoria.com.br/"/>
-    <meta property="og:description" content="A Árvore é uma empresa de governança que vive em uma busca incessante por informações, de modo a otimizar tempo e produção."/>
+    <meta property="og:url" content="http://vigieseudeputado.heroku.com/"/>
+    <meta property="og:description" content="VigieSeuDeputado é um projeto onde o usuário possa acompanhar todas as informações e gastos disponíveis dos deputados federais."/>
     <meta property="og:locale" content="pt_BR" />
-    <meta property="fb:admins" content="966242223397117"/>-->
+    <meta property="fb:admins" content="966242223397117"/>
     
     <!--Twitter-->
-    <!--<meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@klismark" />
-    <meta name="twitter:title" content="Árvore Governança" />
-    <meta name="twitter:description" content="A Árvore é uma empresa de governança que vive em uma busca incessante por informações, de modo a otimizar tempo e produção." />
-    <meta name="twitter:image" content="img/logos_metatags/logo_310x310.jpg" />-->
+    <meta name="twitter:title" content="Vigie seu deputado" />
+    <meta name="twitter:description" content="VigieSeuDeputado é um projeto onde o usuário possa acompanhar todas as informações e gastos disponíveis dos deputados federais." />
+    <meta name="twitter:image" content="img/logos_metatags/logo_310x310.jpg" />
     
+    <!--BASE-->
+    <base href="http://vigieseudeputado.heroku.com/public/">
+
     <!--Favicon-->
     <link rel="shortcut icon" href=img/favicon.png type="image/x-icon">
 
     <!--CSS-->
     <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>  
     <link href="css/main.min.css" type="text/css" rel="stylesheet"/>  
 </head>
 <body>
@@ -73,6 +77,63 @@
             Todos os dados são abertos e disponibilizados pelo site <a class="link-text" href="http://www.camara.leg.br/">Câmara dos Deputados</a>. 
         </p>
     </header>
+    <section class="box-list-congressmen content">
+        <h2>Deputados</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
+                    <div class="caption info-list-congressmen">
+                        <h3>ABEL MESQUITA JR.</h3>
+                        <p class="text-info-list-congressmen">
+                            <i class="fa fa-flag"></i> DEM - RR<br>
+                            <i class="fa fa-phone"></i> (00)00000-0000
+                        </p>
+                        <p><a href="#" class="btn btn-small btn-primary" role="button">Ver Detalhes</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
+                    <div class="caption info-list-congressmen">
+                        <h3>ABEL MESQUITA JR.</h3>
+                        <p class="text-info-list-congressmen">
+                            <i class="fa fa-flag"></i> DEM - RR<br>
+                            <i class="fa fa-phone"></i> (00)00000-0000
+                        </p>
+                        <p><a href="#" class="btn btn-small btn-primary" role="button">Ver Detalhes</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
+                    <div class="caption info-list-congressmen">
+                        <h3>ABEL MESQUITA JR.</h3>
+                        <p class="text-info-list-congressmen">
+                            <i class="fa fa-flag"></i> DEM - RR<br>
+                            <i class="fa fa-phone"></i> (00)00000-0000
+                        </p>
+                        <p><a href="#" class="btn btn-small btn-primary" role="button">Ver Detalhes</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="thumbnail">
+                    <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
+                    <div class="caption info-list-congressmen">
+                        <h3>ABEL MESQUITA JR.</h3>
+                        <p class="text-info-list-congressmen">
+                            <i class="fa fa-flag"></i> DEM - RR<br>
+                            <i class="fa fa-phone"></i> (00)00000-0000
+                        </p>
+                        <p><a href="#" class="btn btn-small btn-primary" role="button">Ver Detalhes</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script data-main="js/app" src="js/lib/require.js"></script>
 </body>
 </html>
