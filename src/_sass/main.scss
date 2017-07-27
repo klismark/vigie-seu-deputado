@@ -1,8 +1,8 @@
 $fontLight: 'RobotoLight';
 $fontRegular: 'RobotoRegular';
 
-$redClose: #e04d4d;
-$blueBtnSearch: #5a8ed6;
+$blueLigthLogo: #6C8DD3;
+$yellowLogo: #EEB603;
 
 @font-face{font-family:$fontLight;src:url('../fonts/RobotoLight.eot');src:url('../fonts/RobotoLight.eot') format('embedded-opentype'),
     url('../fonts/RobotoLight.woff2') format('woff2'),
@@ -64,18 +64,31 @@ a{
 }
 .logo-main{
     margin-top: 10%;
+    display: inline-block;
+}
+.tablet.logo-main{
+    display: none;
 }
 .text-home{
     display: block;
     color: #fff;
     width: 90%;
     margin: 20% auto;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: $fontLight;
+}
+.link-text{
+    color: $yellowLogo;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
+    .mobile.logo-main{
+        display: none;
+    }
+    .tablet.logo-main{
+        display: inline-block;
+    }
     .menu-accessibility{
         display: block;
         position: relative;
@@ -91,13 +104,18 @@ a{
         color: #333;
     }
     .item-menu-accessibility:hover{
-        background: #5a8ed6;
+        background: $blueLigthLogo;
         color: #fff;
         cursor: pointer;
     }
     .menu-accessibility-right{
         text-align: right;
         float: right;
+    }
+
+    .text-home{
+        margin: 10% auto;
+        font-size: 1.5rem;
     }
 
   
@@ -108,13 +126,16 @@ a{
     .content{
         width:94%;
     }
-    
+    .logo-main{
+        margin-top: 5%;
+    }
     .item-menu-accessibility{
         font-size: 1rem;
     }
-
-
-
+    .text-home{
+        margin: 5% auto;
+        font-size: 1.7rem;
+    }
 }
 
 @media screen and (min-width: 1200px) {
