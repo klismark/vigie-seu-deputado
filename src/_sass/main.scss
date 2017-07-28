@@ -80,6 +80,10 @@ a{
 .link-text{
     color: $yellowLogo;
 }
+//LISTA DE DEPUTADOS
+.box-list-congressmen{
+    margin-top: 20px;
+}
 .photo-list-congressmen{
     float: left;
     margin-right: 5px !important;
@@ -87,6 +91,7 @@ a{
 .info-list-congressmen{
     height: 152px;
     display: block;
+    position: relative;
 }
 .info-list-congressmen h3{
     font-size: 1rem;
@@ -96,6 +101,10 @@ a{
     margin-top: 10px;
     color: $blueLigthLogo;
     font-size: 0.85rem;
+}
+.btn-view-congressman{
+    position: absolute;
+    bottom: 0;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
