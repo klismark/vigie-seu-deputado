@@ -1,1 +1,1 @@
-define(["jquery","actions","request","view"],function(){});
+define(["jquery","actions","request","view"],function(){var a=require("actions");require("view").changeStatusWAIARIA(),a.listAllCongressmen(),$("#form-filter-congressmen").submit(a.filterCongressmen),$("#text-search").keyup(a.filterCongressmen)});

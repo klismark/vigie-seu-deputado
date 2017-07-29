@@ -6,35 +6,16 @@ define(function () {
          * @param {function} onError
          * @returns {undefined}
          */
-        getParties: function(onSuccess,onError){
+        getAllCongressmen: function(onSuccess,onLoading,onError){
             $.ajax({
-                url: "getParties",
+                url: "congressmen.json",
                 dataType: 'json',
                 type: 'GET',
-                success: function (data){               
-                    if(typeof onSuccess === "function"){
-                        onSuccess(data);    
+                beforeSend:function(){
+                    if(typeof onLoading === "function"){
+                        onLoading();    
                     }
                 },
-                error: function (xhr, er) {
-                    if(typeof onError === "function"){
-                        onError(xhr);    
-                    }
-                }
-            });
-        },
-
-        /**
-         * 
-         * @param {function} onSuccess
-         * @param {function} onError
-         * @returns {undefined}
-         */
-        getAllCongressmen: function(onSuccess,onError){
-            $.ajax({
-                url: "getCongressmen",
-                dataType: 'json',
-                type: 'GET',
                 success: function (data){               
                     if(typeof onSuccess === "function"){
                         onSuccess(data);    

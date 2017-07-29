@@ -106,6 +106,14 @@ a{
     position: absolute;
     bottom: 0;
 }
+.footer-main{
+    display: block;
+    color: #fff;
+    background: #222;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+}
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {

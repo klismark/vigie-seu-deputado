@@ -57,92 +57,54 @@
     <link href="css/main.min.css" type="text/css" rel="stylesheet"/>  
 </head>
 <body>
-    <header class="header-main">
-        <menu id="menu-accessibility" aria-haspopup="false" class="menu-accessibility text-center">
-            <a href="#" role="button" accesskey="1" aria-expanded="false" class="item-menu-accessibility" title="Ativar comando de voz.">1 - Ativar comando de voz</a>
-            <a href="#" role="button" accesskey="2" aria-expanded="false" class="item-menu-accessibility" title="Ir para a busca de deputados.">2 - Ir para conteúdo</a>
+    <header class="header-main" role="banner">
+        <menu id="menu-accessibility" aria-hidden="true" class="menu-accessibility text-center">
+            <a href="#" role="button" accesskey="1" class="item-menu-accessibility" title="Ativar comando de voz.">1 - Ativar comando de voz</a>
+            <a href="#" role="button" accesskey="2" class="item-menu-accessibility" title="Ir para a busca de deputados.">2 - Ir para conteúdo</a>
             <div class="menu-accessibility-right">
-                <a role="button" accesskey="4" aria-expanded="false" class="item-menu-accessibility " aria-label="Aumentar o tamanho da letra." title="Aumentar o tamanho da letra.">A+</a>
-                <a role="button" accesskey="5" aria-expanded="false" class="item-menu-accessibility " aria-label="Diminuir o tamanho da letra." title="Diminuir o tamanho da letra.">A-</a>
-                <a role="button" accesskey="6" aria-expanded="false" class="item-menu-accessibility " aria-label="Habilitar alto contraste." title="Habilitar alto contraste.">Alto Contraste</a>
-                <a role="button" accesskey="7" aria-expanded="false" class="item-menu-accessibility " aria-label="Abrir as opções de acessibilidade." title="Abrir as opções de acessibilidade.">Acessibilidade</a>
+                <a role="button" accesskey="4" class="item-menu-accessibility " aria-label="Aumentar o tamanho da letra." title="Aumentar o tamanho da letra.">A+</a>
+                <a role="button" accesskey="5" class="item-menu-accessibility " aria-label="Diminuir o tamanho da letra." title="Diminuir o tamanho da letra.">A-</a>
+                <a role="button" accesskey="6" class="item-menu-accessibility " aria-label="Habilitar alto contraste." title="Habilitar alto contraste.">Alto Contraste</a>
+                <a role="button" accesskey="7" class="item-menu-accessibility " aria-label="Abrir as opções de acessibilidade." title="Abrir as opções de acessibilidade.">Acessibilidade</a>
             </div>
         </menu>
         <h1 class="hidden">Vigie seu deputado</h1>
         <img src="img/logo_mobile.png" class="logo-main mobile" alt="Desenho dos prédios do congresso nacional com o nome vigie seu deputado."/>
         <img src="img/logo.png" class="logo-main tablet" alt="Desenho dos prédios do congresso nacional com o nome vigie seu deputado."/>
-        <p class="text-home">
+        <p class="text-home" role="article">
             No Vigie seu deputado você pode acompanhar seu deputado fiscalizando seus gastos da cota parlamentar e sua frequência nas sessões da câmara legislativa federal. 
             Você também pode comparar os gastos dos parlamentares e gerar diversos relatórios, analisando-os por categoria e tendo total transparência dos mesmos.
             <br><br>
             Todos os dados são abertos e disponibilizados pelo site <a class="link-text" href="http://www.camara.leg.br/">Câmara dos Deputados</a>. 
         </p>
     </header>
-    <section class="box-list-congressmen content">
-           <div class="well well-lg">
-                <h2>Encontre seu deputado</h2>
-                <form role="search">
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" placeholder="Pesquise por seu deputado">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary " type="button"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
-                        </span>
-                    </div>
-                </form>
-            </div>  
-
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="thumbnail">
-                            <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
-                            <div class="caption info-list-congressmen">
-                                <h3>ABEL MESQUITA JR.</h3>
-                                <p class="text-info-list-congressmen">
-                                    <i class="fa fa-flag"></i> DEM - RR<br>
-                                    <i class="fa fa-envelope-o"></i> deputato@camara.leg.br
-                                </p>
-                                <a href="#" class="btn-view-congressman btn btn-small btn-success" role="button"><i class="fa fa-info-circle"></i> Ver Detalhes</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="thumbnail">
-                            <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
-                            <div class="caption info-list-congressmen">
-                                <h3>ABEL MESQUITA JR.</h3>
-                                <p class="text-info-list-congressmen">
-                                    <i class="fa fa-flag"></i> DEM - RR<br>
-                                    <i class="fa fa-envelope-o"></i> deputato@camara.leg.br
-                                </p>
-                                <a href="#" class="btn-view-congressman btn btn-small btn-success" role="button"><i class="fa fa-info-circle"></i> Ver Detalhes</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="thumbnail">
-                            <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
-                            <div class="caption info-list-congressmen">
-                                <h3>ABEL MESQUITA JR.</h3>
-                                <p class="text-info-list-congressmen">
-                                    <i class="fa fa-flag"></i> DEM - RR<br>
-                                    <i class="fa fa-envelope-o"></i> deputato@camara.leg.br
-                                </p>
-                                <a href="#" class="btn-view-congressman btn btn-small btn-success" role="button"><i class="fa fa-info-circle"></i> Ver Detalhes</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="thumbnail">
-                            <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
-                            <div class="caption info-list-congressmen">
-                                <h3>ABEL MESQUITA JR.</h3>
-                                <p class="text-info-list-congressmen">
-                                    <i class="fa fa-flag"></i> DEM - RR<br>
-                                    <i class="fa fa-envelope-o"></i> deputato@camara.leg.br
-                                </p>
-                                <a href="#" class="btn-view-congressman btn btn-small btn-success" role="button"><i class="fa fa-info-circle"></i> Ver Detalhes</a>
+    <section class="box-list-congressmen content" role="main">
+        <div class="well well-lg">
+            <h2>Encontre seu deputado</h2>
+            <form role="search" id="form-filter-congressmen" action="javascript:void(0)">
+                <div class="input-group input-group-lg">
+                    <input type="text" id="text-search" class="form-control" placeholder="Pesquise por seu deputado">
+                    <span class="input-group-btn">
+                        <button role="button" class="btn btn-primary " type="button"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
+                    </span>
+                </div>
+            </form>
+        </div>  
+        <div id="box-all-congressmen">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6" id="congressmen-1">
+                            <div class="thumbnail" itemscope itemtype="http://schema.org/Person">
+                                <img src="http://www.camara.leg.br/internet/deputado/bandep/178957.jpg" class="photo-list-congressmen" alt="Foto do deputado Abel Mesquita">
+                                <div class="caption info-list-congressmen">
+                                    <h3 itemprop="name">ABEL MESQUITA JR.</h3>
+                                    <p class="text-info-list-congressmen">
+                                        <span itemprop="affiliation"><i  aria-hidden="true" class="fa fa-flag"></i> DEM - RR</span><br>
+                                        <span itemprop="email"><i  aria-hidden="true" class="fa fa-envelope-o"></i> deputato@camara.leg.br</span>
+                                    </p>
+                                    <a href="#" itemprop="url" class="btn-view-congressman btn btn-small btn-success" ><i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -150,6 +112,9 @@
             </div>
         </div>
     </section>
+    <footer class="footer-main" role=”contentinfo”>
+        <p>Desenvolvido por: <a class="link-text" href="mailto:klismark@hotmail.com">Klismark Barbosa</a></p>
+    </footer>
     <script data-main="js/app" src="js/lib/require.js"></script>
 </body>
 </html>
