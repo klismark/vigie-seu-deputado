@@ -8,6 +8,10 @@ function ( $ ) {
          * @returns {undefined}
          */
         buildListAllCongressmen: function(congressmen,callback){
+            if(congressmen.length == 0){
+                this.buildAlertWarning("#box-all-congressmen","Nenhum deputado encontrado.");
+                return;
+            }
             var html = '<div class="panel panel-default"><div class="panel-body"><div class="row">';
             for(var i = 0,max = congressmen.length;i<max;i++){
                 html += '<div class="col-lg-4 col-md-6 col-sm-6" id="congressmen-'+congressmen[i].id+'">';
@@ -53,6 +57,18 @@ function ( $ ) {
                 msg = "Houve um erro inesperado, tente recarregar a página novamente.";
             }
             $(box).html('<p class="alert alert-danger text-center"><i class="fa fa-2x fa-times-circle"></i><br>'+msg+'</p>');
+        },
+        /**
+         * 
+         * @param {String} box
+         * @param {String} msg
+         * @returns {undefined}
+         */
+        buildAlertWarning: function(box,msg){
+            if(msg == "" || msg == undefined){
+                msg = "Houve um erro inesperado, tente recarregar a página novamente.";
+            }
+            $(box).html('<p class="alert alert-warning text-center"><i class="fa fa-2x fa-warning"></i><br>'+msg+'</p>');
         },
         /**
          * 
