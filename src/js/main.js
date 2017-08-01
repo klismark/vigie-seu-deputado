@@ -13,5 +13,9 @@ define(
         //Ação do link "Todos os Deputados
         $("#form-filter-congressmen").submit(actions.filterCongressmen);
         $("#text-search").keyup(actions.filterCongressmen);
+
+        //Acessibilidade
+        actions.verifySpeechRecognition();
+        
     }
 );

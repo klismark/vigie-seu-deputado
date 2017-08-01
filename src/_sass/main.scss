@@ -114,6 +114,17 @@ a{
     text-align: center;
     font-size: 0.8rem;
 }
+.box-status-speech-recognition{
+    display: none;
+}
+.box-status-speech-recognition.active{
+    background: #38a056;
+    color: #fff;
+    display: block;
+    padding: 4px 0;
+    width: 100%;
+    font-size: 0.8rem;
+}
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
@@ -136,6 +147,8 @@ a{
         display: inline;
         padding: 5px;
         color: #333;
+        background: #fff;
+        border: none;
     }
     .item-menu-accessibility:hover{
         background: $blueLigthLogo;

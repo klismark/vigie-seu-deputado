@@ -1,4 +1,4 @@
-define(["jquery","bootstrap","request","main"],
+define(["jquery","bootstrap","request","main","annyang"],
 function () {
     return {
         /**
@@ -48,6 +48,48 @@ function () {
 
             //Lista os deputados
             view.buildListAllCongressmen(congressmen);
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        enableSpeechRecognition:function(){
+            if (annyang) {
+                console.log("Comando de voz ativo");
+                annyang.start();
+                localStorage.setItem("speechRecognition",JSON.stringify(true));
+                $(".box-status-speech-recognition").addClass("active");
+                $("#btn-speech-recognition").html("1 - Desativar comando de voz");
+                $("#btn-speech-recognition").unbind("click");
+                $("#btn-speech-recognition").click(this.disableSpeechRecognition);
+            }
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        disableSpeechRecognition:function(){
+            if (annyang) {
+                console.log("Comando de voz desativado");
+                annyang.abort();
+                localStorage.setItem("speechRecognition",JSON.stringify(false));
+                $(".box-status-speech-recognition").removeClass("active");
+                $("#btn-speech-recognition").html("1 - Ativar comando de voz");
+                $("#btn-speech-recognition").unbind("click");
+                $("#btn-speech-recognition").click(this.enableSpeechRecognition);
+            }
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        verifySpeechRecognition:function(){
+            var speechRecognition = JSON.parse(localStorage.getItem("speechRecognition"));
+            if (speechRecognition) {
+                this.enableSpeechRecognition();
+            }else{
+                this.disableSpeechRecognition();
+            }
         }
     };
 });
