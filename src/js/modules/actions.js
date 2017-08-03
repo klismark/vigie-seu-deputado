@@ -53,30 +53,27 @@ function () {
          * 
          * @returns {undefined}
          */
-        enableSpeechRecognition:function(){
+        changeStatusSpeechRecognition:function(){
             if (annyang) {
-                console.log("Comando de voz ativo");
-                annyang.start();
-                localStorage.setItem("speechRecognition",JSON.stringify(true));
-                $(".box-status-speech-recognition").addClass("active");
-                $("#btn-speech-recognition").html("1 - Desativar comando de voz");
-                $("#btn-speech-recognition").unbind("click");
-                $("#btn-speech-recognition").click(this.disableSpeechRecognition);
-            }
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        disableSpeechRecognition:function(){
-            if (annyang) {
-                console.log("Comando de voz desativado");
-                annyang.abort();
+                var speechRecognition = JSON.parse(localStorage.getItem("speechRecognition"));
+                if(speechRecognition){
+                    console.log("Comando de voz desativado");
+                    annyang.abort();
+                    localStorage.setItem("speechRecognition",JSON.stringify(false));
+                    $(".box-status-speech-recognition").removeClass("active");
+                    $("#btn-speech-recognition").html("1 - Ativar comando de voz");
+                }else{
+                    console.log("Comando de voz ativo");
+                    annyang.start();
+                    localStorage.setItem("speechRecognition",JSON.stringify(true));
+                    $(".box-status-speech-recognition").addClass("active");
+                    $("#btn-speech-recognition").html("1 - Desativar comando de voz");
+                }
+            }else{
+                console.log("Comando de voz desativado (annyang desativado)");
                 localStorage.setItem("speechRecognition",JSON.stringify(false));
                 $(".box-status-speech-recognition").removeClass("active");
                 $("#btn-speech-recognition").html("1 - Ativar comando de voz");
-                $("#btn-speech-recognition").unbind("click");
-                $("#btn-speech-recognition").click(this.enableSpeechRecognition);
             }
         },
         /**
@@ -86,10 +83,49 @@ function () {
         verifySpeechRecognition:function(){
             var speechRecognition = JSON.parse(localStorage.getItem("speechRecognition"));
             if (speechRecognition) {
-                this.enableSpeechRecognition();
+                console.log("Comando de voz ativo");
+                annyang.start();
+                localStorage.setItem("speechRecognition",JSON.stringify(true));
+                $(".box-status-speech-recognition").addClass("active");
+                $("#btn-speech-recognition").html("1 - Desativar comando de voz");
             }else{
-                this.disableSpeechRecognition();
+                console.log("Comando de voz desativado");
+                annyang.abort();
+                localStorage.setItem("speechRecognition",JSON.stringify(false));
+                $(".box-status-speech-recognition").removeClass("active");
+                $("#btn-speech-recognition").html("1 - Ativar comando de voz");
             }
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        configAnnyangHome:function(){
+            if(annyang){
+                console.log("ok");
+                annyang.setLanguage("pt-BR");
+                var commands = {
+                    'ir para *tag': this.goingTo,
+                    'pesquisar *congressman': this.searchVoiceCongressmen,
+                    'encontre *congressman': this.searchVoiceCongressmen,
+                    'detalhar *congressman': this.searchVoiceCongressmen,
+                    'pesquisar deputado *congressman': this.searchVoiceCongressmen,
+                    'encontre deputado *congressman': this.searchVoiceCongressmen,
+                    'detalhar deputado *congressman': this.searchVoiceCongressmen,
+                };
+                annyang.addCommands(commands);
+            }
+        },
+        goingTo: function(text){
+            console.log(text);
+            if(text == "conteúdo"){
+                location.href="#conteudo";
+            }else if(text == "busca"){
+                location.href="#busca";
+            }
+        },
+        searchVoiceCongressmen: function(congressman){
+            $("#text-search").val(congressman);
         }
     };
 });

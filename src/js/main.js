@@ -15,7 +15,9 @@ define(
         $("#text-search").keyup(actions.filterCongressmen);
 
         //Acessibilidade
+        actions.configAnnyangHome();
         actions.verifySpeechRecognition();
+        $("#btn-speech-recognition").click(actions.changeStatusSpeechRecognition);
         
     }
 );
