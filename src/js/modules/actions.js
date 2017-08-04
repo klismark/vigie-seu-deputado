@@ -109,13 +109,19 @@ function () {
                     'pesquisar *congressman': this.searchVoiceCongressmen,
                     'encontre *congressman': this.searchVoiceCongressmen,
                     'detalhar *congressman': this.searchVoiceCongressmen,
-                    'pesquisar deputado *congressman': this.searchVoiceCongressmen,
-                    'encontre deputado *congressman': this.searchVoiceCongressmen,
-                    'detalhar deputado *congressman': this.searchVoiceCongressmen,
+                    'encontrar *congressman': this.searchVoiceCongressmen,
+                    'encontrar todos os deputados': this.searchVoiceCongressmen,
+                    'mostrar todos os deputados': this.searchVoiceCongressmen,
+                    'exibir todos os deputados': this.searchVoiceCongressmen,
+                    'desativar comando de voz': this.changeStatusSpeechRecognition
                 };
                 annyang.addCommands(commands);
             }
         },
+        /**
+         * 
+         * @returns {undefined}
+         */
         goingTo: function(text){
             console.log(text);
             if(text == "conteúdo"){
@@ -124,8 +130,16 @@ function () {
                 location.href="#busca";
             }
         },
+        /**
+         * 
+         * @returns {undefined}
+         */
         searchVoiceCongressmen: function(congressman){
+            console.log(congressman);
+            location.href="#busca";
             $("#text-search").val(congressman);
+            var actions = require('actions');
+            actions.filterCongressmen();
         }
     };
 });

@@ -15,6 +15,7 @@ define(
         $("#text-search").keyup(actions.filterCongressmen);
 
         //Acessibilidade
+        localStorage.setItem("fontSize",JSON.stringify(16));
         actions.configAnnyangHome();
         actions.verifySpeechRecognition();
         $("#btn-speech-recognition").click(actions.changeStatusSpeechRecognition);

@@ -90,6 +90,21 @@ function ( $ ) {
                 $("#menu-accessibility").attr("aria-hidden",false);
             }
             
+        },
+        upFontSize: function(){
+            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+            if(fontSize < 20){
+                fontSize++;
+                $(window).css({"font-size":fontSize+"px"});
+            }
+        },
+        lowFontSize: function(){
+            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+            if(fontSize > 16){
+                fontSize--;
+                $(window).css({"font-size":fontSize+"px"});
+            }
+            
         }
     };
 });
