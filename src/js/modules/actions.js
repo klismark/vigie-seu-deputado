@@ -81,19 +81,23 @@ function () {
          * @returns {undefined}
          */
         verifySpeechRecognition:function(){
-            var speechRecognition = JSON.parse(localStorage.getItem("speechRecognition"));
-            if (speechRecognition) {
-                console.log("Comando de voz ativo");
-                annyang.start();
-                localStorage.setItem("speechRecognition",JSON.stringify(true));
-                $(".box-status-speech-recognition").addClass("active");
-                $("#btn-speech-recognition").html("1 - Desativar comando de voz");
+            if(annyang){
+                var speechRecognition = JSON.parse(localStorage.getItem("speechRecognition"));
+                if (speechRecognition) {
+                    console.log("Comando de voz ativo");
+                    annyang.start();
+                    localStorage.setItem("speechRecognition",JSON.stringify(true));
+                    $(".box-status-speech-recognition").addClass("active");
+                    $("#btn-speech-recognition").html("1 - Desativar comando de voz");
+                }else{
+                    console.log("Comando de voz desativado");
+                    annyang.abort();
+                    localStorage.setItem("speechRecognition",JSON.stringify(false));
+                    $(".box-status-speech-recognition").removeClass("active");
+                    $("#btn-speech-recognition").html("1 - Ativar comando de voz");
+                }
             }else{
-                console.log("Comando de voz desativado");
-                annyang.abort();
-                localStorage.setItem("speechRecognition",JSON.stringify(false));
-                $(".box-status-speech-recognition").removeClass("active");
-                $("#btn-speech-recognition").html("1 - Ativar comando de voz");
+                $("#btn-speech-recognition").hide();
             }
         },
         /**

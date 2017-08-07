@@ -23,7 +23,7 @@ function ( $ ) {
                 html += '<span itemprop="affiliation"><i  aria-hidden="true" class="fa fa-flag"></i> '+congressmen[i].party+' - '+congressmen[i].uf+'</span><br>';
                 html += '<span itemprop="email"><i  aria-hidden="true" class="fa fa-envelope-o"></i> '+congressmen[i].email+'</span>';
                 html += '</p>';
-                html += '<a href="deputado/'+congressmen[i].reference+'" itemprop="url" class="btn-view-congressman btn btn-small btn-success" ><i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes</a>';
+                html += '<a href="congressman.html" itemprop="url" class="btn-view-congressman btn btn-small btn-success" ><i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
