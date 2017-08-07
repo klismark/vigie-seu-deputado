@@ -104,6 +104,8 @@ function () {
             if(annyang){
                 console.log("ok");
                 annyang.setLanguage("pt-BR");
+                var view = require('view');
+
                 var commands = {
                     'ir para *tag': this.goingTo,
                     'pesquisar *congressman': this.searchVoiceCongressmen,
@@ -113,7 +115,20 @@ function () {
                     'encontrar todos os deputados': this.searchVoiceCongressmen,
                     'mostrar todos os deputados': this.searchVoiceCongressmen,
                     'exibir todos os deputados': this.searchVoiceCongressmen,
-                    'desativar comando de voz': this.changeStatusSpeechRecognition
+                    'desativar comando de voz': this.changeStatusSpeechRecognition,
+                    'aumentar letra': view.upFontSize,
+                    'diminuir letra': view.lowFontSize,
+                    'aumentar fonte': view.upFontSize,
+                    'diminuir fonte': view.lowFontSize,
+                    'aumentar tamanho da fonte': view.upFontSize,
+                    'diminuir tamanho da fonte': view.lowFontSize,
+                    'aumentar tamanho da letra': view.upFontSize,
+                    'diminuir tamanho da letra': view.lowFontSize,
+                    'aumentar contraste': view.enableContrast,
+                    'diminuir contraste': view.disableContrast,
+                    'baixar contraste': view.disableContrast,
+                    'alto contraste': view.enableContrast,
+                    'baixo contraste': view.disableContrast
                 };
                 annyang.addCommands(commands);
             }
@@ -140,6 +155,19 @@ function () {
             $("#text-search").val(congressman);
             var actions = require('actions');
             actions.filterCongressmen();
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        changeStatusContrast:function(){
+            var contrast = JSON.parse(localStorage.getItem("contrast"));
+            var view = require('view');
+            if (contrast) {
+                view.disableContrast();
+            }else{
+                view.enableContrast();
+            }
         }
     };
 });

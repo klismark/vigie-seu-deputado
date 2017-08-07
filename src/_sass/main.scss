@@ -128,6 +128,9 @@ a{
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
+    .header-main{
+        height: 880px;
+    }
     .mobile.logo-main{
         display: none;
     }

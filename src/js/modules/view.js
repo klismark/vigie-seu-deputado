@@ -91,18 +91,57 @@ function ( $ ) {
             }
             
         },
+        checkFontSize: function(){
+            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+            if(fontSize){
+                $("html").css({"font-size":fontSize+"px"});
+            }else{
+                localStorage.setItem("fontSize",JSON.stringify(16));
+            }
+        },
         upFontSize: function(){
             var fontSize = JSON.parse(localStorage.getItem("fontSize"));
             if(fontSize < 20){
                 fontSize++;
-                $(window).css({"font-size":fontSize+"px"});
+                localStorage.setItem("fontSize",JSON.stringify(fontSize));
+                $("html").css({"font-size":fontSize+"px"});
             }
         },
         lowFontSize: function(){
             var fontSize = JSON.parse(localStorage.getItem("fontSize"));
             if(fontSize > 16){
                 fontSize--;
-                $(window).css({"font-size":fontSize+"px"});
+                localStorage.setItem("fontSize",JSON.stringify(fontSize));
+                $("html").css({"font-size":fontSize+"px"});
+            }
+            
+        },
+        checkContrast: function(){
+            var contrast = JSON.parse(localStorage.getItem("contrast"));
+            if(contrast){
+                this.enableContrast();
+            }else{
+                this.disableContrast();
+            }
+        },
+        enableContrast: function(){
+                console.log("ativar");
+            var contrast = JSON.parse(localStorage.getItem("contrast"));
+            if(!contrast){
+                localStorage.setItem("contrast",JSON.stringify(true));
+                $("#btn-contrast").html("Baixo Contraste");
+                //Home
+                $(".header-main").css({"background":"#000"});
+            }
+        },
+        disableContrast: function(){
+                console.log("desativar");
+            var contrast = JSON.parse(localStorage.getItem("contrast"));
+            if(contrast){
+                localStorage.setItem("contrast",JSON.stringify(false));
+                $("#btn-contrast").html("Alto Contraste");
+                //Home
+                $(".header-main").removeAttr("style");
             }
             
         }
