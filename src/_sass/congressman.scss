@@ -59,48 +59,10 @@ a{
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 768px;
-    text-align: center;
-}
-.logo-main{
-    margin-top: 10%;
-    display: inline-block;
-}
-.tablet.logo-main{
-    display: none;
-}
-.text-home{
-    display: block;
-    color: #fff;
-    width: 90%;
-    margin: 20% auto;
-    font-size: 1.3rem;
-    font-family: $fontLight;
+    height: 380px;
 }
 .link-text{
     color: $yellowLogo;
-}
-//LISTA DE DEPUTADOS
-.box-list-congressmen{
-    margin-top: 20px;
-}
-.photo-list-congressmen{
-    float: left;
-    margin-right: 5px !important;
-}
-.info-list-congressmen{
-    height: 152px;
-    display: block;
-    position: relative;
-}
-.info-list-congressmen h3{
-    font-size: 1rem;
-    margin: 0;
-}
-.text-info-list-congressmen{
-    margin-top: 10px;
-    color: $blueLigthLogo;
-    font-size: 0.85rem;
 }
 .footer-main{
     display: block;
@@ -121,18 +83,30 @@ a{
     width: 100%;
     font-size: 0.8rem;
 }
+.menu-main{
+    background: #f0f0f0;
+    padding: 10px;
+    text-align: left;
+}
+
+.name-congressman{
+    color: #fff;
+}
+.photo-congressman{
+    float: left;
+    margin-right: 10px;
+}
+.text-header-congressman{
+    color: #fff;
+    line-height: 25px;
+}
+
+.content-info-main-congressman{
+    min-height: 500px;
+}
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
-    .header-main{
-        height: 880px;
-    }
-    .mobile.logo-main{
-        display: none;
-    }
-    .tablet.logo-main{
-        display: inline-block;
-    }
     .menu-accessibility{
         display: block;
         position: relative;
@@ -159,11 +133,10 @@ a{
         float: right;
     }
 
-    .text-home{
-        margin: 10% auto;
-        font-size: 1.5rem;
+    .text-header-congressman{
+        line-height: 30px;
+        font-size: 1.1rem;
     }
-
   
 }
 
@@ -172,15 +145,8 @@ a{
     .content{
         width:94%;
     }
-    .logo-main{
-        margin-top: 5%;
-    }
     .item-menu-accessibility{
         font-size: 0.9rem;
-    }
-    .text-home{
-        margin: 5% auto;
-        font-size: 1.7rem;
     }
 }
 

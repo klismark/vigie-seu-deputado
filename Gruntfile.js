@@ -11,6 +11,7 @@ module.exports = function (grunt) {
                 options: {style: 'compressed'},
                 files: {
                     'public/css/main.min.css': 'src/_sass/main.scss',
+                    'public/css/congressman.min.css': 'src/_sass/congressman.scss',
                 }
             }
         },
@@ -32,7 +33,8 @@ module.exports = function (grunt) {
           },
           target: {
               files: {
-                'public/css/main.min.css': ['public/css/main.min.css']
+                'public/css/main.min.css': ['public/css/main.min.css'],
+                'public/css/congressman.min.css': ['public/css/congressman.min.css']
               }
           }
         },
