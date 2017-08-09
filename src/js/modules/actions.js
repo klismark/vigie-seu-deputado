@@ -1,4 +1,4 @@
-define(["jquery","bootstrap","request","main","annyang"],
+define(["jquery","request","main","annyang"],
 function () {
     return {
         /**

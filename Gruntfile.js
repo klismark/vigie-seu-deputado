@@ -78,6 +78,16 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'lib_frontend/chart.js/dist',
+                        src: [
+                            'Chart.min.js',
+                            'Chart.bundle..min.js'
+                        ],
+                        dest: 'public/js/lib/',
+                        dot: true
+                    },
+                    {
+                        expand: true,
                         cwd: 'lib_frontend/bootstrap/dist/js',
                         src: [
                             'bootstrap.min.js',

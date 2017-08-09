@@ -105,6 +105,11 @@ a{
     min-height: 500px;
 }
 
+#chart-main{
+    width: 100%;
+    height: 300px;
+}
+
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
     .menu-accessibility{

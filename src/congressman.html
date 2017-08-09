@@ -5,7 +5,7 @@
     <title>Vigie Seu Deputado</title>
 
     <!--BASE-->
-    <!--<base href="https://vigieseudeputado.herokuapp.com/public/"/>-->
+    <base href="https://vigieseudeputado.herokuapp.com/public/"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="VigieSeuDeputado é um projeto onde o usuário pode acompanhar todas as informações e gastos disponíveis dos deputados federais."/>
@@ -54,6 +54,7 @@
     <!--CSS-->
     <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>  
+    <link href="css/chartist.min.css" type="text/css" rel="stylesheet"/>  
     <link href="css/congressman.min.css" type="text/css" rel="stylesheet"/>  
 </head>
 <body>
@@ -86,7 +87,124 @@
         </div>
     </header>
     <section class="content content-info-main-congressman">
-        <h2>Cota Parlamentar</h2>
+        <form class="align-right">
+            <select class="form-control input-lg">
+                <option>Janeiro/2017</option>
+                <option>Fevereiro/2017</option>
+                <option>Março/2017</option>
+                <option>Abril/2017</option>
+                <option>Maio/2017</option>
+                <option>Junho/2017</option>
+                <option>Julho/2017</option>
+                <option>Agosto/2017</option>
+            </select>
+        </form>
+        <h2 >Cota Parlamentar</h2>
+        <hr>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="nav nav-tabs" role="tablist" id="tabs-congressman">
+                    <li role="presentation" >
+                        <a href="#details-data" aria-controls="details-data" role="tab" data-toggle="tab">
+                            <i class="fa fa-list" aria-hidden="true"></i> Gastos
+                        </a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="#details-charts" aria-controls="details-charts" role="tab" data-toggle="tab">
+                            <i class="fa fa-pie-chart" aria-hidden="true"></i> Gráficos
+                        </a>
+                    </li>
+                </ul>
+                <br>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="details-data">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-primary">COMBUSTÍVEIS E LUBRIFICANTES</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed table-hover">
+                                    <thead>
+                                        <th>Data</th>
+                                        <th>Nome do Fornecedor</th>
+                                        <th>CNPJ do Fornecedor</th>
+                                        <th>Valor</th>
+                                        <th>Documento</th>
+                                    </thead>
+                                    <tr>
+                                        <td>13/04/2011</td>
+                                        <td>POSTO IMPERIAL</td>
+                                        <td>10750039000180</td>
+                                        <td>R$ 147,01</td>
+                                        <td><span class="text-danger small">Não Disponível</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13/04/2011</td>
+                                        <td>POSTO IMPERIAL</td>
+                                        <td>10750039000180</td>
+                                        <td>R$ 147,01</td>
+                                        <td><span class="text-danger small">Não Disponível</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-primary">MANUTENÇÃO DE ESCRITÓRIO DE APOIO À ATIVIDADE PARLAMENTAR</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed table-hover">
+                                    <thead>
+                                        <th>Data</th>
+                                        <th>Nome do Fornecedor</th>
+                                        <th>CNPJ do Fornecedor</th>
+                                        <th>Valor</th>
+                                        <th>Documento</th>
+                                    </thead>
+                                    <tr>
+                                        <td>13/04/2011</td>
+                                        <td>POSTO IMPERIAL</td>
+                                        <td>10750039000180</td>
+                                        <td>R$ 147,01</td>
+                                        <td><span class="text-danger small">Não Disponível</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13/04/2011</td>
+                                        <td>POSTO IMPERIAL</td>
+                                        <td>10750039000180</td>
+                                        <td>R$ 147,01</td>
+                                        <td><span class="text-danger small">Não Disponível</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="details-charts">
+                        <div class="grid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="text-primary">Gastos por categoria</h3>
+                                    <canvas id="chart-by-category" ></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="text-primary"></h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="text-primary">Gastos dos últimos 6 meses</h3>
+                                    <canvas id="chart-main" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
     <footer class="footer-main" role=”contentinfo”>
         <p>Desenvolvido por: <a class="link-text" href="mailto:klismark@hotmail.com">Klismark Barbosa</a></p>

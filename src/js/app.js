@@ -4,6 +4,7 @@ requirejs.config({
         "jquery": "../lib/jquery.min",
         "bootstrap": "../lib/bootstrap.min",
         "annyang": "../lib/annyang.min",
+        "chartjs": "../lib/Chart.min",
         "main": "../main"
     }
 });

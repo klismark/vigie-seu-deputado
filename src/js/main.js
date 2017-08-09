@@ -23,6 +23,10 @@ define(
         $("#btn-contrast").click(actions.changeStatusContrast);
         $('#btn-up-font').click(view.upFontSize);
         $('#btn-low-font').click(view.lowFontSize);
+
+
+        //Gráficos
+        view.buildCharts();
         
     }
 );
