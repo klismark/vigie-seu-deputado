@@ -1,1 +1,1 @@
-define(function(){return{getAllCongressmen:function(a,b,c){$.ajax({url:"http://allsimple.com.br/deputados/congressmen.json",dataType:"json",type:"GET",beforeSend:function(){"function"==typeof b&&b()},success:function(b){"function"==typeof a&&a(b)},error:function(a,b){"function"==typeof c&&c(a)}})}}});
+define(function(){return{getAllCongressmen:function(a,b,c){$.ajax({url:"congressmen.json",dataType:"json",type:"GET",beforeSend:function(){"function"==typeof b&&b()},success:function(b){"function"==typeof a&&a(b)},error:function(a,b){"function"==typeof c&&c(a)}})}}});
