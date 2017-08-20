@@ -8,7 +8,7 @@ define(function () {
          */
         getAllCongressmen: function(onSuccess,onLoading,onError){
             $.ajax({
-                url: "congressmen.json",
+                url: "http://allsimple.com.br/deputados/congressmen.json",
                 dataType: 'json',
                 type: 'GET',
                 beforeSend:function(){
