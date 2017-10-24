@@ -107,6 +107,15 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
+                        cwd: 'lib_frontend/vue/dist/',
+                        src: [
+                            'vue.min.js'
+                        ],
+                        dest: 'public/js/lib/',
+                        dot: true
+                    },
+                    {
+                        expand: true,
                         cwd: 'src/',
                         src: [
                             'robots.txt',

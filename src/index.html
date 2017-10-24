@@ -82,20 +82,36 @@
     <section class="box-list-congressmen content" id="busca" role="main">
         <div class="well well-lg">
             <h2>Encontre seu deputado</h2>
-            <form role="search" id="form-filter-congressmen" action="javascript:void(0)">
+            <form v-on:submit="searchCongressman()" role="search" id="form-filter-congressmen" action="javascript:void(0)">
                 <div class="input-group input-group-lg">
-                    <input type="text" id="text-search" class="form-control" placeholder="Pesquise por seu deputado">
+                    <input type="text" id="text-search" v-on:keyup="searchCongressman()" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
                     <span class="input-group-btn">
-                        <button role="button" class="btn btn-primary " type="button"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
+                        <button role="button" class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
                     </span>
                 </div>
             </form>
         </div>  
-        <div id="box-all-congressmen">
+        <div id="box-all-congressmen" >
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6" v-for="congressman in congressmenFiltered" >
+                            <div class="thumbnail" itemscope="" itemtype="http://schema.org/Person">
+                                <img v-bind:src="congressman.urlFoto" class="photo-list-congressmen" height="152" width="114" v-bind:alt="'Foto do deputado '+congressman.nome">
+                                <div class="caption info-list-congressmen">
+                                    <h3 itemprop="name">{{congressman.nome}}</h3>
+                                    <p class="text-info-list-congressmen">
+                                        <span itemprop="affiliation"><i aria-hidden="true" class="fa fa-flag"></i> {{congressman.siglaPartido}} - {{congressman.siglaUf}}</span><br>
+                                    </p>
+                                    <a v-bind:href="'congressman.html#'+congressman.id" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <p id="alert-box-loading" v-if="loading" class="alert alert-info text-center"><i class="fa fa-2x fa-spin fa-cog"></i><br>Carregando deputados...</p>                    
+                    <p id="alert-box-loading" v-if="congressmenFiltered.length == 0 && !loading" class="alert alert-warning text-center"><i class="fa fa-2x fa-warning"></i><br>Nenhum deputado encontrado.</p>                                        
                 </div>
             </div>
         </div>

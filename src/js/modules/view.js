@@ -1,6 +1,6 @@
 define(["jquery","chartjs","bootstrap"],
 function ( $ ) {
-    return {
+    var module = {
         buildCharts: function(){
             $('#tabs-congressman a').click(function (e) {
                 e.preventDefault()
@@ -169,173 +169,390 @@ function ( $ ) {
                 }
             });
         },
-        /**
-         * 
-         * @param {[congressman]} congressmen
-         * @param {function} callback
-         * @returns {undefined}
-         */
-        buildListAllCongressmen: function(congressmen,callback){
-            if(congressmen.length == 0){
-                this.buildAlertWarning("#box-all-congressmen","Nenhum deputado encontrado.");
-                return;
-            }
-            var html = '<div class="panel panel-default"><div class="panel-body"><div class="row">';
-            for(var i = 0,max = congressmen.length;i<max;i++){
-                html += '<div class="col-lg-4 col-md-6 col-sm-6" id="congressmen-'+congressmen[i].id+'">';
-                html += '<div class="thumbnail" itemscope itemtype="http://schema.org/Person">';
-                html += '<img src="'+congressmen[i].photo+'" class="photo-list-congressmen" alt="Foto do deputado '+congressmen[i].name+'">';
-                html += '<div class="caption info-list-congressmen">';
-                html += '<h3 itemprop="name">'+congressmen[i].name+'</h3>';
-                html += '<p class="text-info-list-congressmen">';
-                html += '<span itemprop="affiliation"><i  aria-hidden="true" class="fa fa-flag"></i> '+congressmen[i].party+' - '+congressmen[i].uf+'</span><br>';
-                html += '<span itemprop="email"><i  aria-hidden="true" class="fa fa-envelope-o"></i> '+congressmen[i].email+'</span>';
-                html += '</p>';
-                html += '<a href="congressman.html" itemprop="url" class="btn-view-congressman btn btn-small btn-success" ><i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes</a>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-            }
-            html += '</div></div></div>';
-            $("#box-all-congressmen").html(html);
-            if(typeof callback === "function"){
-                callback();    
+        alert:{
+            /**
+             * 
+             * @param {String} box
+             * @param {String} msg
+             * @returns {undefined}
+             */
+            buildLoading: function(box,msg){
+                if(msg == "" || msg == undefined){
+                    msg = "Carregando dados...";
+                }
+                $(box).html('<p class="alert alert-info text-center"><i class="fa fa-2x fa-pulse fa-spin fa-spinner"></i><br>'+msg+'</p>');
+            },
+            /**
+             * 
+             * @param {String} box
+             * @param {String} msg
+             * @returns {undefined}
+             */
+            buildAlertDanger: function(box,msg){
+                if(msg == "" || msg == undefined){
+                    msg = "Houve um erro inesperado, tente recarregar a página novamente.";
+                }
+                $(box).html('<p class="alert alert-danger text-center"><i class="fa fa-2x fa-times-circle"></i><br>'+msg+'</p>');
+            },
+            /**
+             * 
+             * @param {String} box
+             * @param {String} msg
+             * @returns {undefined}
+             */
+            buildAlertWarning: function(box,msg){
+                if(msg == "" || msg == undefined){
+                    msg = "Houve um erro inesperado, tente recarregar a página novamente.";
+                }
+                $(box).html('<p class="alert alert-warning text-center"><i class="fa fa-2x fa-warning"></i><br>'+msg+'</p>');
             }
         },
-        /**
-         * 
-         * @param {String} box
-         * @param {String} msg
-         * @returns {undefined}
-         */
-        buildLoading: function(box,msg){
-            if(msg == "" || msg == undefined){
-                msg = "Carregando dados...";
-            }
-            $(box).html('<p class="alert alert-info text-center"><i class="fa fa-2x fa-pulse fa-spin fa-spinner"></i><br>'+msg+'</p>');
-        },
-        /**
-         * 
-         * @param {String} box
-         * @param {String} msg
-         * @returns {undefined}
-         */
-        buildAlertDanger: function(box,msg){
-            if(msg == "" || msg == undefined){
-                msg = "Houve um erro inesperado, tente recarregar a página novamente.";
-            }
-            $(box).html('<p class="alert alert-danger text-center"><i class="fa fa-2x fa-times-circle"></i><br>'+msg+'</p>');
-        },
-        /**
-         * 
-         * @param {String} box
-         * @param {String} msg
-         * @returns {undefined}
-         */
-        buildAlertWarning: function(box,msg){
-            if(msg == "" || msg == undefined){
-                msg = "Houve um erro inesperado, tente recarregar a página novamente.";
-            }
-            $(box).html('<p class="alert alert-warning text-center"><i class="fa fa-2x fa-warning"></i><br>'+msg+'</p>');
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        changeStatusWAIARIA: function(){
-            var w = $( window ).width();
-            
-            if(w < 768){//MOBILE
-                $("#menu-accessibility").attr("aria-hidden",true);
+        accessibility:{
+            /**
+             * 
+             * @returns {undefined}
+             */
+            changeStatusWAIARIA: function(){
+                var w = $( window ).width();
                 
-            }else if(w >= 768 && w < 992){//TABLET
-                $("#menu-accessibility").attr("aria-hidden",false);
+                if(w < 768){//MOBILE
+                    $("#menu-accessibility").attr("aria-hidden",true);
+                    
+                }else if(w >= 768 && w < 992){//TABLET
+                    $("#menu-accessibility").attr("aria-hidden",false);
+                    
+                }else if(w >= 992 && w < 1200){//LARGER
+                    $("#menu-accessibility").attr("aria-hidden",false);
+                    
+                }else if(w >= 1200){//X-LARGER
+                    $("#menu-accessibility").attr("aria-hidden",false);
+                }
                 
-            }else if(w >= 992 && w < 1200){//LARGER
-                $("#menu-accessibility").attr("aria-hidden",false);
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            checkFontSize: function(){
+                var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+                if(fontSize){
+                    $("html").css({"font-size":fontSize+"px"});
+                }else{
+                    localStorage.setItem("fontSize",JSON.stringify(16));
+                }
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            upFontSize: function(){
+                var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+                if(fontSize < 20){
+                    fontSize++;
+                    localStorage.setItem("fontSize",JSON.stringify(fontSize));
+                    $("html").css({"font-size":fontSize+"px"});
+                }
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            lowFontSize: function(){
+                var fontSize = JSON.parse(localStorage.getItem("fontSize"));
+                if(fontSize > 16){
+                    fontSize--;
+                    localStorage.setItem("fontSize",JSON.stringify(fontSize));
+                    $("html").css({"font-size":fontSize+"px"});
+                }
                 
-            }else if(w >= 1200){//X-LARGER
-                $("#menu-accessibility").attr("aria-hidden",false);
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            checkContrast: function(){
+                var contrast = JSON.parse(localStorage.getItem("contrast"));
+                if(contrast){
+                    this.enableContrast();
+                }else{
+                    this.disableContrast();
+                }
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            enableContrast: function(){
+                var contrast = JSON.parse(localStorage.getItem("contrast"));
+                if(!contrast){
+                    localStorage.setItem("contrast",JSON.stringify(true));
+                    $("#btn-contrast").html("Baixo Contraste");
+                    //Home
+                    $(".header-main").css({"background":"#000"});
+                }
+            },
+            /**
+             * 
+             * @returns {undefined}
+             */
+            disableContrast: function(){
+                var contrast = JSON.parse(localStorage.getItem("contrast"));
+                if(contrast){
+                    localStorage.setItem("contrast",JSON.stringify(false));
+                    $("#btn-contrast").html("Alto Contraste");
+                    //Home
+                    $(".header-main").removeAttr("style");
+                }
+                
             }
+
+        },
+        /**
+         * 
+         * @returns {undefined}
+         */
+        buildHome:function(){
+            var request = require('request');
+            var Vue = require("vue");  
+
+            var vue = new Vue({
+                el: '#busca',
+                data: {
+                    search: '',//Texto de pesquisa
+                    page:1,//Número da página
+                    loading:true,//Exibindo alert de carregamento
+                    scrollPos:0,//Posição do scroll
+                    finishList: false,//Flag se a lista foi totalmente carregada
+                    limitByPage:100,//Itens por página
+                    congressmen: [],//Lista completa de deputados,
+                    congressmenFiltered: [],//Lista completa de deputados,
+                    last:1,
+                    filtered:false
+                },
+                created:function(){this.loadCongressmen()},
+                destroyed: function() {
+                    window.removeEventListener('scroll', this.loadMore);
+                },
+                methods:{
+                    loadMore: function () { 
+                        if(this.finishList || this.loading){
+                            return;
+                        }
+                        if(this.search == ""){
+                            this.filtered = false;
+                        }
+                        var self = this;
+                        this.scrollPos = document.querySelector("html").scrollHeight - window.innerHeight - document.querySelector("html").scrollTop;  
+                        if (this.scrollPos == 0) {
+                            self.page++;
+                            request.loadCongressmen(
+                                {
+                                    "pagina":self.page,
+                                    "itens":self.limitByPage,
+                                    "ordenarPor":"nome",
+                                },
+                                function(data){
+                                    self.congressmen = self.congressmen.concat(data.dados);
+                                    if(self.filtered){
+                                        var textSearch = self.search;
+                                        self.congressmenFiltered = self.congressmen.filter(function(congressman){
+                                            if(congressman.nome.toLocaleLowerCase().includes(textSearch)){
+                                                return true;
+                                            }else if(congressman.siglaUf.toLocaleLowerCase() == textSearch){
+                                                return true;
+                                            }else if(congressman.siglaPartido.toLocaleLowerCase() == textSearch){
+                                                return true;
+                                            }
+                                            return false;
+                                        });
+                                        console.log(self.congressmenFiltered.length);
+                                        console.log(self.finishList);
+                                        if(self.congressmenFiltered.length == 0 && !self.finishList){
+                                            self.loading = false;
+                                            self.loadMore();
+                                        }
+                                    }else{
+                                        this.congressmenFiltered = this.congressmen;
+                                    }
+
+                                    if(self.page == self.last){
+                                        self.finishList = true;
+                                    }
+                                    //Delay de 2 segundos
+                                    setTimeout(function(){
+                                        self.loading = false;
+                                    },2000);
+                                },
+                                function(){
+                                    self.loading = true;
+                                },
+                                function(){
+                                    module.alert.buildAlertDanger("#alert-box-loading","Não foi possível carregar a lista completa de deputados, tente novamente.");
+                                }
+                            );
+                        }
+                    },
+                    loadCongressmen:function(){
+                        var self = this;
+                        request.loadCongressmen(
+                            {
+                                "pagina":self.page,
+                                "itens":self.limitByPage,
+                                "ordenarPor":"nome",
+                            },
+                            function(data){
+                                var linkLast = data.links[3].href;
+                                var last = linkLast.substring(linkLast.indexOf("?pagina=")+8,linkLast.indexOf("&itens"));
+                                self.last = last;
+                                self.congressmenFiltered = self.congressmen = data.dados;
+
+                                self.loading = false;
+                                window.addEventListener('scroll', self.loadMore);
+                            },
+                            function(){
+                                self.loading = true;
+                            },
+                            function(){
+                                module.alert.buildAlertDanger("#alert-box-loading","Não foi possível carregar a lista de deputados, tente novamente.");
+                            }
+                        );
+                    },
+                    searchCongressman:function(){       
+                        this.filtered = true;
+                        var textSearch = this.search;
+                        if(textSearch == ""){
+                            this.congressmenFiltered = this.congressmen;   
+                            this.filtered = false;
+                            return;
+                        }
+                        this.congressmenFiltered = this.congressmen.filter(function(congressman){
+                            if(congressman.nome.toLocaleLowerCase().includes(textSearch)){
+                                return true;
+                            }else if(congressman.siglaUf.toLocaleLowerCase() == textSearch){
+                                return true;
+                            }else if(congressman.siglaPartido.toLocaleLowerCase() == textSearch){
+                                return true;
+                            }
+                            return false;
+                        });
+
+                    }
+                }
+            });
+        },
+        buildCongressman:function(id){
+            var request = require('request');
+            var Vue = require("vue");  
             
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        checkFontSize: function(){
-            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
-            if(fontSize){
-                $("html").css({"font-size":fontSize+"px"});
-            }else{
-                localStorage.setItem("fontSize",JSON.stringify(16));
-            }
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        upFontSize: function(){
-            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
-            if(fontSize < 20){
-                fontSize++;
-                localStorage.setItem("fontSize",JSON.stringify(fontSize));
-                $("html").css({"font-size":fontSize+"px"});
-            }
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        lowFontSize: function(){
-            var fontSize = JSON.parse(localStorage.getItem("fontSize"));
-            if(fontSize > 16){
-                fontSize--;
-                localStorage.setItem("fontSize",JSON.stringify(fontSize));
-                $("html").css({"font-size":fontSize+"px"});
-            }
-            
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        checkContrast: function(){
-            var contrast = JSON.parse(localStorage.getItem("contrast"));
-            if(contrast){
-                this.enableContrast();
-            }else{
-                this.disableContrast();
-            }
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        enableContrast: function(){
-                console.log("ativar");
-            var contrast = JSON.parse(localStorage.getItem("contrast"));
-            if(!contrast){
-                localStorage.setItem("contrast",JSON.stringify(true));
-                $("#btn-contrast").html("Baixo Contraste");
-                //Home
-                $(".header-main").css({"background":"#000"});
-            }
-        },
-        /**
-         * 
-         * @returns {undefined}
-         */
-        disableContrast: function(){
-                console.log("desativar");
-            var contrast = JSON.parse(localStorage.getItem("contrast"));
-            if(contrast){
-                localStorage.setItem("contrast",JSON.stringify(false));
-                $("#btn-contrast").html("Alto Contraste");
-                //Home
-                $(".header-main").removeAttr("style");
-            }
-            
+            var vue = new Vue({
+                el: '#page-congressman',
+                data: {
+                    loading:false,
+                    yearOutgoing:2017,
+                    monthOutgoing:9,
+                    congressman:{
+                        id:id,
+                        nomeCivil:"",
+                        nomeEleitoral:"",
+                        siglaPartido:"",
+                        siglaUf:"",
+                        idLegislatura:"",
+                        urlFoto:"",
+                        telefone:"",
+                        email:"",
+                        dataNascimento:"",
+                        idade:"",
+                        condicaoEleitoral:"",
+                        escolaridade:"",
+                        municipioNascimento:"",
+                        ufNascimento:""
+                    },
+                    outgoings:[]
+                },
+                beforeCreate:function(){
+                    var self = this;
+                    request.loadCongressmanDetails(
+                        id,
+                        function(data){
+
+                            var birthday = new Date(data.dataNascimento);
+                            var today = new Date();
+                            var oldYear = Math.floor((((((today.getTime() - birthday.getTime())/1000)/60)/60)/24)/365);
+                            
+                            self.congressman.id = data.id;
+                            self.congressman.nomeCivil = data.nomeCivil;
+                            self.congressman.nomeEleitoral = data.ultimoStatus.nomeEleitoral;
+                            self.congressman.siglaPartido = data.ultimoStatus.siglaPartido;
+                            self.congressman.siglaUf = data.ultimoStatus.siglaUf;
+                            self.congressman.idLegislatura = data.ultimoStatus.idLegislatura;
+                            self.congressman.urlFoto = data.ultimoStatus.urlFoto;
+                            self.congressman.telefone = data.ultimoStatus.gabinete.telefone;
+                            self.congressman.email = data.ultimoStatus.gabinete.email;
+                            self.congressman.condicaoEleitoral = data.ultimoStatus.condicaoEleitoral;
+                            self.congressman.dataNascimento = data.dataNascimento.split("-").reverse().join("/");
+                            self.congressman.idade = oldYear;
+                            self.congressman.escolaridade = data.escolaridade;
+                            self.congressman.municipioNascimento = data.municipioNascimento;
+                            self.congressman.ufNascimento = data.ufNascimento;
+
+                            document.title = data.ultimoStatus.nomeEleitoral+" | Vigie Seu Deputado";
+                            self.loadOutgoing();
+                        },
+                        function(){
+                            self.loading = true;
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    );
+                },
+                methods:{
+                    loadOutgoing:function(){
+                        var self = this;
+                        request.loadCongressmanOutgoing(
+                            id,
+                            {
+                                mes:self.monthOutgoing,
+                                ano:self.yearOutgoing,
+                                itens:100
+                            },
+                            function(data){
+                                /*var out = {
+                                    ano: data.ano,
+                                    cnpjCpfFornecedor: data.cnpjCpfFornecedor,
+                                    dataDocumento: data.dataDocumento,
+                                    idDocumento: data.idDocumento,
+                                    idLote: data.idLote,
+                                    idTipoDocumento: data.idTipoDocumento,
+                                    mes: data.mes,
+                                    nomeFornecedor: data.nomeFornecedor,
+                                    numDocumento: data.numDocumento,
+                                    numRessarcimento: data.numRessarcimento,
+                                    parcela: data.parcela,
+                                    tipoDespesa: data.tipoDespesa,
+                                    tipoDocumento: data.tipoDocumento,
+                                    urlDocumento: data.urlDocumento,
+                                    valorDocumento: data.valorDocumento,
+                                    valorGlosa: data.valorGlosa,
+                                    valorLiquido: data.valorLiquido
+                                };*/
+                                self.outgoing = data;
+                                console.log(data);
+                            },
+                            function(){
+                                self.loading = true;
+                            },
+                            function(error){
+                                console.log(error);
+                            }
+                        );
+                    },
+                    buildSelectDate:function(){
+                        
+                    }
+                }
+            });
         }
     };
+    return module;
 });
