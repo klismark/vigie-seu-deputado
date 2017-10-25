@@ -365,8 +365,6 @@ function ( $ ) {
                                             }
                                             return false;
                                         });
-                                        console.log(self.congressmenFiltered.length);
-                                        console.log(self.finishList);
                                         if(self.congressmenFiltered.length == 0 && !self.finishList){
                                             self.loading = false;
                                             self.loadMore();
@@ -436,6 +434,10 @@ function ( $ ) {
                             return false;
                         });
 
+                        if(this.congressmenFiltered.length == 0){
+                            window.scrollTo(0,document.body.scrollHeight);
+                        }
+
                     }
                 }
             });
@@ -448,6 +450,7 @@ function ( $ ) {
                 el: '#page-congressman',
                 data: {
                     loading:false,
+                    total:0,
                     yearOutgoing:2017,
                     monthOutgoing:9,
                     congressman:{
@@ -467,7 +470,7 @@ function ( $ ) {
                         municipioNascimento:"",
                         ufNascimento:""
                     },
-                    outgoings:[]
+                    outgoing:[]
                 },
                 beforeCreate:function(){
                     var self = this;
@@ -496,6 +499,10 @@ function ( $ ) {
                             self.congressman.ufNascimento = data.ufNascimento;
 
                             document.title = data.ultimoStatus.nomeEleitoral+" | Vigie Seu Deputado";
+                            self.buildSelectDate();
+                            var d = new Date();
+                            self.yearOutgoing = d.getFullYear();
+                            self.monthOutgoing = d.getMonth()+1;
                             self.loadOutgoing();
                         },
                         function(){
@@ -517,27 +524,29 @@ function ( $ ) {
                                 itens:100
                             },
                             function(data){
-                                /*var out = {
-                                    ano: data.ano,
-                                    cnpjCpfFornecedor: data.cnpjCpfFornecedor,
-                                    dataDocumento: data.dataDocumento,
-                                    idDocumento: data.idDocumento,
-                                    idLote: data.idLote,
-                                    idTipoDocumento: data.idTipoDocumento,
-                                    mes: data.mes,
-                                    nomeFornecedor: data.nomeFornecedor,
-                                    numDocumento: data.numDocumento,
-                                    numRessarcimento: data.numRessarcimento,
-                                    parcela: data.parcela,
-                                    tipoDespesa: data.tipoDespesa,
-                                    tipoDocumento: data.tipoDocumento,
-                                    urlDocumento: data.urlDocumento,
-                                    valorDocumento: data.valorDocumento,
-                                    valorGlosa: data.valorGlosa,
-                                    valorLiquido: data.valorLiquido
-                                };*/
-                                self.outgoing = data;
-                                console.log(data);
+                                self.outgoing = [];
+                                self.total = 0;
+                                if(data.length == 0){
+                                    self.loading = false;
+                                    return;
+                                }
+                                var out = {
+                                    tipoDespesa:data[0].tipoDespesa,
+                                    expenses:[]
+                                };
+                                for(var i = 0,max = data.length;i<max;i++){
+                                    self.total += parseFloat(data[i].valorDocumento);
+                                    if(data[i].tipoDespesa == out.tipoDespesa){
+                                        out.expenses.push(data[i]);
+                                    }else{
+                                        self.outgoing.push(out);
+                                        out = {
+                                            tipoDespesa:data[i].tipoDespesa,
+                                            expenses:[data[i]]
+                                        };
+                                    }
+                                }
+                                self.loading = false;
                             },
                             function(){
                                 self.loading = true;
@@ -547,8 +556,76 @@ function ( $ ) {
                             }
                         );
                     },
+                    selectMonth:function(){
+                        var dt = $("#select-month option:selected").val().split("/");
+                        this.monthOutgoing = dt[0];
+                        this.yearOutgoing = dt[1];
+                        this.loadOutgoing();
+                    },
                     buildSelectDate:function(){
-                        
+                        var d = new Date();
+                        var i = 1;
+                        var options = [];
+                        var values = [];
+                        var year = 2015;
+                        var select = '';
+                        while(i<=12){
+                            values.push(i+"/"+year);
+                            switch (i-1) {
+                                case 0:
+                                    v = "Janeiro/"+year;
+                                    break;
+                                case 1:
+                                    v = "Fevereiro/"+year;
+                                    break;
+                                case 2:
+                                    v = "Março/"+year;
+                                    break;
+                                case 3:
+                                    v = "Abril/"+year;
+                                    break;
+                                case 4:
+                                    v = "Maio/"+year;
+                                    break;
+                                case 5:
+                                    v = "Junho/"+year;
+                                    break;
+                                case 6:
+                                    v = "Julho/"+year;
+                                    break;
+                                case 7:
+                                    v = "Agosto/"+year;
+                                    break;
+                                case 8:
+                                    v = "Setembro/"+year;
+                                    break;
+                                case 9:
+                                    v = "Outubro/"+year;
+                                    break;
+                                case 10:
+                                    v = "Novembro/"+year;
+                                    break;
+                                default:
+                                    v = "Dezembro/"+year;
+                            }
+                            
+
+                            if(d.getMonth() == (i-1) && d.getFullYear() == year){
+                                select += '<option selected value="'+(i+"/"+year)+'">'+v+'</option>';
+                                break;
+                            }else{
+                                select += '<option value="'+(i+"/"+year)+'">'+v+'</option>'; 
+                            }
+                            if(i==12){
+                                year++;
+                                i = 0;
+                            }
+                            i++;
+                        }
+                        $("#select-month").html(select);
+                    },
+                    formatMoney:function(money){
+                        return money.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})
                     }
                 }
             });

@@ -109,8 +109,6 @@ function () {
             console.log(congressman);
             location.href="#busca";
             $("#text-search").val(congressman);
-            var actions = require('actions');
-            actions.filterCongressmen();
         },
         /**
          * 

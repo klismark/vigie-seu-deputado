@@ -102,6 +102,7 @@ define(function () {
             $.ajax({
                 url: "https://dadosabertos.camara.leg.br/api/v2/deputados/"+id+"/despesas",
                 dataType: 'json',
+                data:param?jQuery.param(param):"",
                 type: 'GET',
                 beforeSend:function(){
                     if(typeof onLoading === "function"){
