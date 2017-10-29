@@ -89,18 +89,57 @@
 
             </div>
         </header>
+        <br>
         <section class="content content-info-main-congressman">
-            <form class="align-right">
-                <select v-on:change="selectMonth()" class="form-control input-lg" id="select-month">
-                </select>
-            </form>
+            
             <h2 >Cota Parlamentar</h2>
             <hr>
-            <p id="alert-box-loading" v-if="outgoing.length > 0" class="alert alert-success text-right">Gasto Total {{ total.toFixed(2).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) }}</p>                                
+            <div class="row">
+                <p id="alert-box-loading" v-if="outgoing.length > 0" class="text-primary lead col-lg-4 col-md-6 col-sm-6">Gasto Total de {{ formatMonth() +": "+ parseFloat(total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) }}</p>                                                                    
+                <form class="align-right col-lg-4 col-md-6 col-sm-6">
+                    <select v-on:change="selectMonth()" class="form-control input-lg " id="select-month">
+                    </select>
+                </form>
+            </div>
+            <hr>
+            <div class="row" v-if="outgoing.length > 0">
+                <div class=" col-lg-8 col-md-8 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="chart-by-category"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p class="lead text-center">
+                                <span class="number-ranking">{{congressman.despesas.posicaoMandato55+"º"}}</span><br>
+                                <small class="text-info">Que mais gastou neste mandato</small>
+                            </p>
+                            <hr>
+                            <p class="lead text-center">
+                                <span class="number-ranking">{{congressman.despesas[2015].posicao+"º"}}</span><br>
+                                <small class="text-info">Que mais gastou em 2015</small>
+                            </p>
+                            <hr>
+                            <p class="lead text-center">
+                                <span class="number-ranking">{{congressman.despesas[2016].posicao+"º"}}</span><br>
+                                <small class="text-info">Que mais gastou em 2016</small>
+                            </p>
+                            <hr>
+                            <p class="lead text-center">
+                                <span class="number-ranking">{{congressman.despesas[2017].posicao+"º"}}</span><br>
+                                <small class="text-info">Que mais gastou em 2017</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="panel panel-default">
                 <div class="panel-body">
-
-                    <div class="panel panel-success" v-for="out in outgoing" v-if="!loading">
+                    <div class="panel panel-default" v-for="out in outgoing" v-if="!loading">
                         <div class="panel-heading">
                             <h3 class="panel-title text-primary">{{out.tipoDespesa}}</h3>
                         </div>
@@ -109,16 +148,16 @@
                                 <thead>
                                     <th>Data</th>
                                     <th>Nome do Fornecedor</th>
-                                    <th>CNPJ do Fornecedor</th>
-                                    <th>Valor</th>
+                                    <th class="text-right">Valor da despesa</th>
+                                    <th class="text-right">Glosa(<small>Valor Devolvido</small>)</th>
                                     <th>Documento</th>
                                 </thead>
                                 <tr v-for="expense in out.expenses">
-                                    <td>{{ expense.dataDocumento != null ? expense.dataDocumento.split("-").reverse().join("/") : 'Não Informado'}}</td>
+                                    <td>{{ expense.dataDocumento != null ? expense.dataDocumento.split("-").reverse().join("/") : "Não Informado"}}</td>
                                     <td>{{expense.nomeFornecedor}}</td>
-                                    <td>{{expense.cnpjCpfFornecedor}}</td>
-                                    <td>{{expense.valorDocumento != null ? parseFloat(expense.valorDocumento).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
-                                    <td v-if="expense.urlDocumento == ''"><span  class="text-danger small">Não Disponível</span></td>
+                                    <td class="text-right">{{expense.valorDocumento != null ? parseFloat(expense.valorDocumento).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
+                                    <td class="text-right">{{expense.valorGlosa != null ? parseFloat(expense.valorGlosa).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
+                                    <td v-if="expense.urlDocumento == ''"><small  class="text-danger">Não Disponível</small></td>
                                     <td v-if="expense.urlDocumento != ''"><a v-bind:href="expense.urlDocumento">{{expense.numDocumento}}</a></td>
                                 </tr>
                             </table>

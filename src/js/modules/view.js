@@ -1,172 +1,61 @@
-define(["jquery","chartjs","bootstrap"],
+define(["jquery","highcharts","bootstrap"],
 function ( $ ) {
     var module = {
-        buildCharts: function(){
-            $('#tabs-congressman a').click(function (e) {
-                e.preventDefault()
-                $(this).tab('show');
-            });
-
-            //Gráfico principal
-            var lbls = ["Março/2017", "Abril/2017", "Maio/2017", "Junho/2017", "Julho/2017", "Agosto/2017"];
-            var vals = [900.00, 20000.00, 3000.00, 5000.00, 25476.00, 35432.90];
-            this.buildChartMain(lbls,vals);
-
-            //Gastos por categoria
-            var lbls = ["Material de esctiório", "Serviços Postais", "Telefonia", "Combustíveis", "Passagens Aéreas", "Divulgação"];
-            var vals = [900.00, 20000.00, 3000.00, 5000.00, 25476.00, 35432.90];
-            this.buildChartByCategory(lbls,vals);
-        },
-        buildChartMain: function(labels,values){
-            var ctx = document.getElementById("chart-main");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Gastos da cota parlamentar nos últimos 6 meses',
-                        data: values,
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.3)'
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
+        buildChartByCategory: function(labels,values,legend){
+            Highcharts.chart('chart-by-category', {
+                chart: {
+                    type: 'bar'
                 },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                callback: function(value, index, values) {
-                                    return value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"});
-                                }
-                            }
-                        }]
-                    },
-                    tooltips: {
-                        callbacks: {
-                            title: function() {
-                                return '';
-                            },
-                            label: function(tooltipItem, data) {
-                                var dataLabel = data.labels[tooltipItem.index];
-                                var value = parseFloat(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
-
-                                return dataLabel+ " : " + value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"});
-                            }
-                        }
-                    }
-                }
-            });
-        },
-        buildChartByCategory: function(labels,values){
-            Chart.pluginService.register({
-                beforeRender: function (chart) {
-                    if (chart.config.options.showAllTooltips) {
-                        // create an array of tooltips
-                        // we can't use the chart tooltip because there is only one tooltip per chart
-                        chart.pluginTooltips = [];
-                        chart.config.data.datasets.forEach(function (dataset, i) {
-                            chart.getDatasetMeta(i).data.forEach(function (sector, j) {
-                                chart.pluginTooltips.push(new Chart.Tooltip({
-                                    _chart: chart.chart,
-                                    _chartInstance: chart,
-                                    _data: chart.data,
-                                    _options: chart.options,
-                                    _active: [sector]
-                                }, chart));
-                            });
-                        });
-
-                        // turn off normal tooltips
-                        chart.options.tooltips.enabled = false;
+                title: {
+                    text: 'Gastos por categoria'
+                },
+                subtitle: {
+                    text: 'Fonte: <a href="http://camara.gov.br">Câmara dos Deputados</a>'
+                },
+                xAxis: {
+                    categories: labels,
+                    title: {
+                        text: null
                     }
                 },
-                afterDraw: function (chart, easing) {
-                    if (chart.config.options.showAllTooltips) {
-                        // we don't want the permanent tooltips to animate, so don't do anything till the animation runs atleast once
-                        if (!chart.allTooltipsOnce) {
-                            if (easing !== 1)
-                                return;
-                            chart.allTooltipsOnce = true;
-                        }
-
-                        // turn on tooltips
-                        chart.options.tooltips.enabled = true;
-                        Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
-                            tooltip.initialize();
-                            tooltip.update();
-                            // we don't actually need this since we are not animating tooltips
-                            tooltip.pivot();
-                            tooltip.transition(easing).draw();
-                        });
-                        chart.options.tooltips.enabled = false;
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Reais (R$)',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
                     }
-                }
-            });
-            var ctx = document.getElementById("chart-by-category");
-            var chart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Gastos por categoria',
-                        data: values,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
                 },
-                options: {
-                    showAllTooltips: true,
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                callback: function(value, index, values) {
-                                    return value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"});
-                                }
-                            }
-                        }]
-                    },
-                    tooltips: {
-                        callbacks: {
-                            mode: 'y',
-                            title: function() {
-                                return '';
-                            },
-                            label: function(tooltipItem, data) {
-                                var dataLabel = data.labels[tooltipItem.index];
-                                var value = parseFloat(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
-
-                                return dataLabel+ " : " + value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"});
-                            }
+                tooltip: {
+                    valueSuffix: ' millions'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
                         }
                     }
-                }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [ {
+                    name: legend,
+                    data: values
+                }]
             });
         },
         alert:{
@@ -320,127 +209,50 @@ function ( $ ) {
                 data: {
                     search: '',//Texto de pesquisa
                     page:1,//Número da página
+                    token: this.token,//Token da sessão do usuário
                     loading:true,//Exibindo alert de carregamento
+                    itemsActive:true,//Exibindo transportadoras ativadas
                     scrollPos:0,//Posição do scroll
                     finishList: false,//Flag se a lista foi totalmente carregada
-                    limitByPage:100,//Itens por página
+                    limitByPage:50,//Itens por página
                     congressmen: [],//Lista completa de deputados,
-                    congressmenFiltered: [],//Lista completa de deputados,
-                    last:1,
-                    filtered:false
+                    congressmenFiltered: []//Lista completa de deputados,
                 },
-                created:function(){this.loadCongressmen()},
-                destroyed: function() {
-                    window.removeEventListener('scroll', this.loadMore);
+                created:function(){
+                    var self = this;
+                    request.loadAllCongressmen(
+                        function(data){
+                            self.congressmen = self.congressmenFiltered = data;
+                            self.loading = false;
+                        },
+                        function(){
+                            self.loading = true;
+                    });
                 },
                 methods:{
-                    loadMore: function () { 
-                        if(this.finishList || this.loading){
-                            return;
-                        }
-                        if(this.search == ""){
-                            this.filtered = false;
-                        }
-                        var self = this;
-                        this.scrollPos = document.querySelector("html").scrollHeight - window.innerHeight - document.querySelector("html").scrollTop;  
-                        if (this.scrollPos == 0) {
-                            self.page++;
-                            request.loadCongressmen(
-                                {
-                                    "pagina":self.page,
-                                    "itens":self.limitByPage,
-                                    "ordenarPor":"nome",
-                                },
-                                function(data){
-                                    self.congressmen = self.congressmen.concat(data.dados);
-                                    if(self.filtered){
-                                        var textSearch = self.search;
-                                        self.congressmenFiltered = self.congressmen.filter(function(congressman){
-                                            if(congressman.nome.toLocaleLowerCase().includes(textSearch)){
-                                                return true;
-                                            }else if(congressman.siglaUf.toLocaleLowerCase() == textSearch){
-                                                return true;
-                                            }else if(congressman.siglaPartido.toLocaleLowerCase() == textSearch){
-                                                return true;
-                                            }
-                                            return false;
-                                        });
-                                        if(self.congressmenFiltered.length == 0 && !self.finishList){
-                                            self.loading = false;
-                                            self.loadMore();
-                                        }
-                                    }else{
-                                        this.congressmenFiltered = this.congressmen;
-                                    }
-
-                                    if(self.page == self.last){
-                                        self.finishList = true;
-                                    }
-                                    //Delay de 2 segundos
-                                    setTimeout(function(){
-                                        self.loading = false;
-                                    },2000);
-                                },
-                                function(){
-                                    self.loading = true;
-                                },
-                                function(){
-                                    module.alert.buildAlertDanger("#alert-box-loading","Não foi possível carregar a lista completa de deputados, tente novamente.");
-                                }
-                            );
+                    searchItem:function(item){
+                        var textSearch = this.search.trim().toLowerCase();
+                        if(item.nomeCivil.toLowerCase().indexOf(textSearch) !== -1 || item.ultimoStatus.nomeEleitoral.toString().toLowerCase().indexOf(textSearch) !== -1){
+                            return true;
                         }
                     },
-                    loadCongressmen:function(){
-                        var self = this;
-                        request.loadCongressmen(
-                            {
-                                "pagina":self.page,
-                                "itens":self.limitByPage,
-                                "ordenarPor":"nome",
-                            },
-                            function(data){
-                                var linkLast = data.links[3].href;
-                                var last = linkLast.substring(linkLast.indexOf("?pagina=")+8,linkLast.indexOf("&itens"));
-                                self.last = last;
-                                self.congressmenFiltered = self.congressmen = data.dados;
-
-                                self.loading = false;
-                                window.addEventListener('scroll', self.loadMore);
-                            },
-                            function(){
-                                self.loading = true;
-                            },
-                            function(){
-                                module.alert.buildAlertDanger("#alert-box-loading","Não foi possível carregar a lista de deputados, tente novamente.");
-                            }
-                        );
-                    },
-                    searchCongressman:function(){       
-                        this.filtered = true;
-                        var textSearch = this.search;
-                        if(textSearch == ""){
-                            this.congressmenFiltered = this.congressmen;   
-                            this.filtered = false;
+                    filter:function(){ 
+                        if(this.congressmen.length == 0){
                             return;
                         }
-                        this.congressmenFiltered = this.congressmen.filter(function(congressman){
-                            if(congressman.nome.toLocaleLowerCase().includes(textSearch)){
-                                return true;
-                            }else if(congressman.siglaUf.toLocaleLowerCase() == textSearch){
-                                return true;
-                            }else if(congressman.siglaPartido.toLocaleLowerCase() == textSearch){
-                                return true;
-                            }
-                            return false;
-                        });
-
+                        this.loading = true;
+                        this.congressmenFiltered = this.congressmen.filter(this.searchItem);
+                        
                         if(this.congressmenFiltered.length == 0){
-                            window.scrollTo(0,document.body.scrollHeight);
+                            this.loading = false;
+                            return;
                         }
-
+                        this.loading = false;
                     }
                 }
             });
+            
+
         },
         buildCongressman:function(id){
             var request = require('request');
@@ -468,7 +280,14 @@ function ( $ ) {
                         condicaoEleitoral:"",
                         escolaridade:"",
                         municipioNascimento:"",
-                        ufNascimento:""
+                        ufNascimento:"",
+                        despesas:{
+                            2015:{posicao:0,total:0},
+                            2016:{posicao:0,total:0},
+                            2017:{posicao:0,total:0},
+                            posicaoMandato55:0,
+                            total:0
+                        }
                     },
                     outgoing:[]
                 },
@@ -497,6 +316,7 @@ function ( $ ) {
                             self.congressman.escolaridade = data.escolaridade;
                             self.congressman.municipioNascimento = data.municipioNascimento;
                             self.congressman.ufNascimento = data.ufNascimento;
+                            self.congressman.despesas = data.despesas;
 
                             document.title = data.ultimoStatus.nomeEleitoral+" | Vigie Seu Deputado";
                             self.buildSelectDate();
@@ -520,12 +340,11 @@ function ( $ ) {
                             id,
                             {
                                 mes:self.monthOutgoing,
-                                ano:self.yearOutgoing,
-                                itens:100
+                                ano:self.yearOutgoing
                             },
                             function(data){
-                                self.outgoing = [];
                                 self.total = 0;
+                                self.outgoing = [];
                                 if(data.length == 0){
                                     self.loading = false;
                                     return;
@@ -534,8 +353,12 @@ function ( $ ) {
                                     tipoDespesa:data[0].tipoDespesa,
                                     expenses:[]
                                 };
+                                var j = 0;
+                                var typeExpense = [data[0].tipoDespesa];
+                                var totalExpenses = [0];
+                                
                                 for(var i = 0,max = data.length;i<max;i++){
-                                    self.total += parseFloat(data[i].valorDocumento);
+                                    self.total += (parseFloat(data[i].valorDocumento) - parseFloat(data[i].valorGlosa));
                                     if(data[i].tipoDespesa == out.tipoDespesa){
                                         out.expenses.push(data[i]);
                                     }else{
@@ -544,9 +367,17 @@ function ( $ ) {
                                             tipoDespesa:data[i].tipoDespesa,
                                             expenses:[data[i]]
                                         };
+                                        j++;
+                                        typeExpense.push(data[i].tipoDespesa);
+                                        totalExpenses.push(0);
                                     }
+                                    totalExpenses[j] += (parseFloat(data[i].valorDocumento) - parseFloat(data[i].valorGlosa));
                                 }
+                                self.outgoing.push(out);
                                 self.loading = false;
+                                setTimeout(function(){
+                                    self.buildChartByCategory(typeExpense,totalExpenses);
+                                },1000)
                             },
                             function(){
                                 self.loading = true;
@@ -555,6 +386,66 @@ function ( $ ) {
                                 console.log(error);
                             }
                         );
+                    },
+                    buildChartByCategory:function(labels,values){
+                        Highcharts.chart('chart-by-category', {
+                            chart: {
+                                type: 'bar'
+                            },
+                            title: {
+                                text: 'Gastos por categoria'
+                            },
+                            subtitle: {
+                                text: 'Fonte: <a href="http://camara.gov.br">Câmara dos Deputados</a>'
+                            },
+                            xAxis: {
+                                categories: labels,
+                                title: {
+                                    text: null
+                                }
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'Reais (R$)',
+                                    align: 'high'
+                                },
+                                labels: {
+                                    overflow: 'justify'
+                                }
+                            },
+                            tooltip: {
+                                enabled:false
+                            },
+                            plotOptions: {
+                                bar: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        formatter: function () {
+                                            return parseFloat(this.y.toFixed(2)).toLocaleString("pt-BR", {style: "currency",currency: "BRL"});
+                                        }
+                                    }
+                                }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'top',
+                                x: 0,
+                                y: 40,
+                                floating: true,
+                                borderWidth: 1,
+                                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                                shadow: true
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [ {
+                                name: $("#select-month option:selected").html(),
+                                data: values
+                            }]
+                        });
                     },
                     selectMonth:function(){
                         var dt = $("#select-month option:selected").val().split("/");
@@ -571,45 +462,7 @@ function ( $ ) {
                         var select = '';
                         while(i<=12){
                             values.push(i+"/"+year);
-                            switch (i-1) {
-                                case 0:
-                                    v = "Janeiro/"+year;
-                                    break;
-                                case 1:
-                                    v = "Fevereiro/"+year;
-                                    break;
-                                case 2:
-                                    v = "Março/"+year;
-                                    break;
-                                case 3:
-                                    v = "Abril/"+year;
-                                    break;
-                                case 4:
-                                    v = "Maio/"+year;
-                                    break;
-                                case 5:
-                                    v = "Junho/"+year;
-                                    break;
-                                case 6:
-                                    v = "Julho/"+year;
-                                    break;
-                                case 7:
-                                    v = "Agosto/"+year;
-                                    break;
-                                case 8:
-                                    v = "Setembro/"+year;
-                                    break;
-                                case 9:
-                                    v = "Outubro/"+year;
-                                    break;
-                                case 10:
-                                    v = "Novembro/"+year;
-                                    break;
-                                default:
-                                    v = "Dezembro/"+year;
-                            }
-                            
-
+                            v = this.formatMonth(i-1)+"/"+year;
                             if(d.getMonth() == (i-1) && d.getFullYear() == year){
                                 select += '<option selected value="'+(i+"/"+year)+'">'+v+'</option>';
                                 break;
@@ -626,6 +479,38 @@ function ( $ ) {
                     },
                     formatMoney:function(money){
                         return money.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})
+                    },
+                    formatMonth:function(number){
+                        if(typeof number == "undefined"){
+                            var dt = $("#select-month option:selected").val().split("/");
+                            number = dt[0]-1;
+                        }
+                        switch (number) {
+                            case 0:
+                                return "Janeiro";
+                            case 1:
+                                return "Fevereiro";
+                            case 2:
+                                return "Março";
+                            case 3:
+                                return "Abril";
+                            case 4:
+                                return "Maio";
+                            case 5:
+                                return "Junho";
+                            case 6:
+                                return "Julho";
+                            case 7:
+                                return "Agosto";
+                            case 8:
+                                return "Setembro";
+                            case 9:
+                                return "Outubro";
+                            case 10:
+                                return "Novembro";
+                            default:
+                                return "Dezembro";
+                        }
                     }
                 }
             });

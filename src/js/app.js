@@ -5,8 +5,14 @@ requirejs.config({
         "bootstrap": "../lib/bootstrap.min",
         "annyang": "../lib/annyang.min",
         "vue": "../lib/vue.min",
-        "chartjs": "../lib/Chart.min",
+        "firebase": "../lib/firebase",
+        "highcharts": "../lib/highcharts",
         "main": "../main"
+    },
+    shim: {
+        "bootstrap": {
+            deps: ["jquery"]
+        }
     }
 });
  

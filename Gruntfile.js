@@ -78,10 +78,9 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'lib_frontend/chart.js/dist',
+                        cwd: 'lib_frontend/highcharts',
                         src: [
-                            'Chart.min.js',
-                            'Chart.bundle..min.js'
+                            'highcharts.js'
                         ],
                         dest: 'public/js/lib/',
                         dot: true
@@ -110,6 +109,15 @@ module.exports = function (grunt) {
                         cwd: 'lib_frontend/vue/dist/',
                         src: [
                             'vue.min.js'
+                        ],
+                        dest: 'public/js/lib/',
+                        dot: true
+                    },
+                    {
+                        expand: true,
+                        cwd: 'lib_frontend/firebase/',
+                        src: [
+                            'firebase.js'
                         ],
                         dest: 'public/js/lib/',
                         dot: true

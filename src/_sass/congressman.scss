@@ -106,10 +106,10 @@ a{
 .content-info-main-congressman{
     min-height: 500px;
 }
-
-#chart-main{
-    width: 100%;
-    height: 300px;
+.number-ranking{
+    margin: 0;
+    font-size: 1.4rem;
+    color: #333;
 }
 
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
@@ -144,7 +144,7 @@ a{
         line-height: 30px;
         font-size: 1.1rem;
     }
-  
+    
 }
 
 /*Com uma largura mínima de 992 pixels. Monitores por exemplo.*/

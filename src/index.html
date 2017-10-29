@@ -84,7 +84,7 @@
             <h2>Encontre seu deputado</h2>
             <form v-on:submit="searchCongressman()" role="search" id="form-filter-congressmen" action="javascript:void(0)">
                 <div class="input-group input-group-lg">
-                    <input type="text" id="text-search" v-on:keyup="searchCongressman()" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
+                    <input type="text" id="text-search" v-on:keyup="filter()" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
                     <span class="input-group-btn">
                         <button role="button" class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
                     </span>
@@ -97,11 +97,11 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6" v-for="congressman in congressmenFiltered" >
                             <div class="thumbnail" itemscope="" itemtype="http://schema.org/Person">
-                                <img v-bind:src="congressman.urlFoto" class="photo-list-congressmen" height="152" width="114" v-bind:alt="'Foto do deputado '+congressman.nome">
+                                <img v-bind:src="congressman.ultimoStatus.urlFoto" class="photo-list-congressmen" height="152" width="114" v-bind:alt="'Foto do deputado '+congressman.ultimoStatus.nomeEleitoral">
                                 <div class="caption info-list-congressmen">
-                                    <h3 itemprop="name">{{congressman.nome}}</h3>
+                                    <h3 itemprop="name">{{congressman.ultimoStatus.nomeEleitoral}}</h3>
                                     <p class="text-info-list-congressmen">
-                                        <span itemprop="affiliation"><i aria-hidden="true" class="fa fa-flag"></i> {{congressman.siglaPartido}} - {{congressman.siglaUf}}</span><br>
+                                        <span itemprop="affiliation"><i aria-hidden="true" class="fa fa-flag"></i> {{congressman.ultimoStatus.siglaPartido}} - {{congressman.ultimoStatus.siglaUf}}</span><br>
                                     </p>
                                     <a v-bind:href="'congressman.html#'+congressman.id" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes

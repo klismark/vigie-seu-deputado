@@ -1,61 +1,25 @@
-define(function () {
-    return {
+define(["firebase"],
+function () {
+    var module = {
         /**
          * 
          * @param {function} onSuccess
          * @param {function} onError
          * @returns {undefined}
          */
-        getAllCongressmen: function(onSuccess,onLoading,onError){
-            $.ajax({
-                url: "congressmen.json",
-                dataType: 'json',
-                type: 'GET',
-                beforeSend:function(){
-                    if(typeof onLoading === "function"){
-                        onLoading();    
-                    }
-                },
-                success: function (data){               
-                    if(typeof onSuccess === "function"){
-                        onSuccess(data);    
-                    }
-                },
-                error: function (xhr, er) {
-                    if(typeof onError === "function"){
-                        onError(xhr);    
-                    }
-                }
-            });
-        },
-        /**
-         * 
-         * @param {string} param
-         * @param {function} onSuccess
-         * @param {function} onLoading
-         * @param {function} onError
-         * @returns {undefined}
-         */
-        loadCongressmen:function(param,onSuccess,onLoading,onError){
-            $.ajax({
-                url: "https://dadosabertos.camara.leg.br/api/v2/deputados",
-                dataType: 'json',
-                data:param?jQuery.param(param):"",
-                type: 'GET',
-                beforeSend:function(){
-                    if(typeof onLoading === "function"){
-                        onLoading();    
-                    }
-                },
-                success: function (data,textStatus){               
-                    if(typeof onSuccess === "function"){
-                        onSuccess(data);    
-                    }
-                },
-                error: function (xhr, er) {
-                    if(typeof onError === "function"){
-                        onError(xhr);    
-                    }
+        loadAllCongressmen: function(onSuccess,onLoading,onError){
+            if(typeof onLoading === "function"){
+                onLoading();    
+            }
+            firebase.database().ref('deputados').orderByChild("ultimoStatus/nomeEleitoral").once('value', function(snapshot) {
+                var congressmen = [];
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;      
+                    var childData = childSnapshot.val();
+                    congressmen.push(childData);
+                });
+                if(typeof onSuccess === "function"){
+                    onSuccess(congressmen);    
                 }
             });
         },
@@ -68,24 +32,13 @@ define(function () {
          * @returns {undefined}
          */
         loadCongressmanDetails:function(id,onSuccess,onLoading,onError){
-            $.ajax({
-                url: "https://dadosabertos.camara.leg.br/api/v2/deputados/"+id,
-                dataType: 'json',
-                type: 'GET',
-                beforeSend:function(){
-                    if(typeof onLoading === "function"){
-                        onLoading();    
-                    }
-                },
-                success: function (data,textStatus){               
-                    if(typeof onSuccess === "function"){
-                        onSuccess(data.dados);    
-                    }
-                },
-                error: function (xhr, er) {
-                    if(typeof onError === "function"){
-                        onError(xhr);    
-                    }
+            if(typeof onLoading === "function"){
+                onLoading();    
+            }
+            firebase.database().ref('deputados/'+id).once('value').then(function(snapshot) {
+                var congressman = snapshot.val();
+                if(typeof onSuccess === "function"){
+                    onSuccess(congressman);    
                 }
             });
         },
@@ -99,27 +52,21 @@ define(function () {
          * @returns {undefined}
          */
         loadCongressmanOutgoing:function(id,param,onSuccess,onLoading,onError){
-            $.ajax({
-                url: "https://dadosabertos.camara.leg.br/api/v2/deputados/"+id+"/despesas",
-                dataType: 'json',
-                data:param?jQuery.param(param):"",
-                type: 'GET',
-                beforeSend:function(){
-                    if(typeof onLoading === "function"){
-                        onLoading();    
-                    }
-                },
-                success: function (data,textStatus){               
-                    if(typeof onSuccess === "function"){
-                        onSuccess(data.dados);    
-                    }
-                },
-                error: function (xhr, er) {
-                    if(typeof onError === "function"){
-                        onError(xhr);    
-                    }
+            if(typeof onLoading === "function"){
+                onLoading();    
+            }
+            firebase.database().ref('despesas/'+id+'/'+param.ano).orderByChild("mes").equalTo(param.mes).once('value', function(snapshot) {
+                var expenses = [];
+                snapshot.forEach(function(childSnapshot) {
+                  var childKey = childSnapshot.key;      
+                    var childData = childSnapshot.val();
+                    expenses.push(childData);
+                });
+                if(typeof onSuccess === "function"){
+                    onSuccess(expenses);    
                 }
             });
         }
     };
+    return module;
 });

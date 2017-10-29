@@ -16,12 +16,13 @@
   "homepage": "index.html",
   "dependencies": {
     "jquery": "^2.2.1",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "firebase": "^4.6.0"
   },
   "devDependencies": {
     "font-awesome": "fontawesome#^4.7.0",
     "annyang": "^2.6.0",
     "bootstrap": "^3.3.7",
-    "chart.js": "^2.6.0"
+    "highcharts": "^6.0.2"
   }
 }
