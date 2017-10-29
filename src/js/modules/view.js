@@ -205,7 +205,7 @@ function ( $ ) {
             var Vue = require("vue");  
 
             var vue = new Vue({
-                el: '#busca',
+                el: '#data-congressmen',
                 data: {
                     search: '',//Texto de pesquisa
                     page:1,//Número da página
@@ -216,13 +216,18 @@ function ( $ ) {
                     finishList: false,//Flag se a lista foi totalmente carregada
                     limitByPage:50,//Itens por página
                     congressmen: [],//Lista completa de deputados,
-                    congressmenFiltered: []//Lista completa de deputados,
+                    congressmenFiltered: [],//Lista completa de deputados,
+                    total:0
                 },
                 created:function(){
                     var self = this;
                     request.loadAllCongressmen(
                         function(data){
                             self.congressmen = self.congressmenFiltered = data;
+                            self.total = 0;
+                            for(var i = 0;i<self.congressmen.length;i++){
+                                self.total += parseFloat(self.congressmen[i].despesas.total);
+                            }
                             self.loading = false;
                         },
                         function(){

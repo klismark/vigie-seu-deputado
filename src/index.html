@@ -5,7 +5,7 @@
     <title>Vigie Seu Deputado</title>
 
     <!--BASE-->
-    <base href="https://vigieseudeputado.herokuapp.com/public/"/>
+    <!--<base href="https://vigieseudeputado.herokuapp.com/public/"/>-->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="VigieSeuDeputado é um projeto onde o usuário pode acompanhar todas as informações e gastos disponíveis dos deputados federais."/>
@@ -79,6 +79,13 @@
             Todos os dados são abertos e disponibilizados pelo site <a class="link-text" href="http://www.camara.leg.br/">Câmara dos Deputados</a>. 
         </p>
     </header>
+    <div id="data-congressmen">
+        <hr>
+    <section class="content">
+        <div class="alert bg-success">
+            <p class="text-center lead">Todos os deputados gastaram <span class="value-total bold text-danger">{{parseFloat(total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"})}}</span> neste mandato em cotas parlamentar.</p>
+        </div>
+    </section>
     <section class="box-list-congressmen content" id="busca" role="main">
         <div class="well well-lg">
             <h2>Encontre seu deputado</h2>
@@ -103,7 +110,7 @@
                                     <p class="text-info-list-congressmen">
                                         <span itemprop="affiliation"><i aria-hidden="true" class="fa fa-flag"></i> {{congressman.ultimoStatus.siglaPartido}} - {{congressman.ultimoStatus.siglaUf}}</span><br>
                                     </p>
-                                    <a v-bind:href="'https://vigieseudeputado.herokuapp.com/congressman.html#'+congressman.id" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
+                                    <a v-bind:href="'congressman.html#'+congressman.id" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
                                     </a>
                                 </div>
@@ -116,6 +123,7 @@
             </div>
         </div>
     </section>
+</div>
     <footer class="footer-main" role=”contentinfo”>
         <p>Desenvolvido por: <a class="link-text" href="mailto:klismark@hotmail.com">Klismark Barbosa</a></p>
     </footer>

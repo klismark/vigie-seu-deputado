@@ -123,6 +123,10 @@ a{
     text-align: center;
 }
 
+.value-total{
+    font-size: 1.5rem;   
+}
+
 /*Pra dispositivos que tem uma largura mínima de 768 pixels. Tablets, por exemplo.*/
 @media screen and (min-width: 768px) {
     .header-main{
