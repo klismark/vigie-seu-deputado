@@ -95,7 +95,7 @@
             <h2 >Cota Parlamentar</h2>
             <hr>
             <div class="row">
-                <p id="alert-box-loading" v-if="outgoing.length > 0" class="text-primary lead col-lg-4 col-md-6 col-sm-6">Gasto Total de {{ formatMonth() +": "+ parseFloat(total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) }}</p>                                                                    
+                                                                                  
                 <form class="align-right col-lg-4 col-md-6 col-sm-6">
                     <select v-on:change="selectMonth()" class="form-control input-lg " id="select-month">
                     </select>
@@ -113,24 +113,29 @@
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <p id="alert-box-loading" v-if="outgoing.length > 0" class="bg-info lead text-center">
+                                <span class="number-ranking bold">{{  parseFloat(total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) }}</span><br>
+                                <small class="text-muted">Gastos em {{formatMonth()}}</small>
+                            </p> 
+                            <hr> 
                             <p class="lead text-center">
                                 <span class="number-ranking">{{congressman.despesas.posicaoMandato55+"º"}}</span><br>
-                                <small class="text-info">Que mais gastou neste mandato</small>
+                                <small class="text-muted">Que mais gastou neste mandato</small>
                             </p>
                             <hr>
                             <p class="lead text-center">
                                 <span class="number-ranking">{{congressman.despesas[2015].posicao+"º"}}</span><br>
-                                <small class="text-info">Que mais gastou em 2015</small>
+                                <small class="text-muted">Que mais gastou em 2015</small>
                             </p>
                             <hr>
                             <p class="lead text-center">
                                 <span class="number-ranking">{{congressman.despesas[2016].posicao+"º"}}</span><br>
-                                <small class="text-info">Que mais gastou em 2016</small>
+                                <small class="text-muted">Que mais gastou em 2016</small>
                             </p>
                             <hr>
                             <p class="lead text-center">
                                 <span class="number-ranking">{{congressman.despesas[2017].posicao+"º"}}</span><br>
-                                <small class="text-info">Que mais gastou em 2017</small>
+                                <small class="text-muted">Que mais gastou em 2017</small>
                             </p>
                         </div>
                     </div>
