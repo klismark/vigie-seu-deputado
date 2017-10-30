@@ -1,11 +1,5 @@
 module.exports = function (grunt) {
     grunt.initConfig({
-        /*concat: {
-            dist: {
-                src: "src/js/*.js",
-                dest: "public/js/main.min.js"
-            }
-        },*/
         sass: {
             dist: {
                 options: {style: 'compressed'},
@@ -25,18 +19,6 @@ module.exports = function (grunt) {
                     cwd: 'src/js'
                 }]
             }
-        },
-        cssmin: {
-          options: {
-              shorthandCompacting: false,
-              roundingPrecision: -1
-          },
-          target: {
-              files: {
-                'public/css/main.min.css': ['public/css/main.min.css'],
-                'public/css/congressman.min.css': ['public/css/congressman.min.css']
-              }
-          }
         },
         copy: {
             main: {
@@ -144,6 +126,26 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        concat: {
+            basic_and_extras: {
+                files: {
+                  'public/css/home.css': ['public/css/font-awesome.min.css','public/css/bootstrap.min.css','public/css/main.min.css'],
+                  'public/css/congressman.css': ['public/css/font-awesome.min.css','public/css/bootstrap.min.css','public/css/congressman.min.css'],
+                },
+              }
+        },
+        cssmin: {
+          options: {
+              shorthandCompacting: false,
+              roundingPrecision: -1
+          },
+          target: {
+              files: {
+                'public/css/home.css': ['public/css/home.css'],
+                'public/css/congressman.css': ['public/css/congressman.css']
+              }
+          }
+        },
         htmlmin: {
             dist: {
                 options: {
@@ -180,15 +182,15 @@ module.exports = function (grunt) {
         }
     });
 
-    //grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     
 
-    grunt.registerTask('default', ['sass', 'uglify','cssmin','copy','htmlmin','rename', 'imagemin']);
+    grunt.registerTask('default', ['sass', 'uglify','copy','concat','cssmin','htmlmin','rename', 'imagemin']);
 };
