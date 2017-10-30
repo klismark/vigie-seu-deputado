@@ -172,27 +172,36 @@ function ( $ ) {
              * @returns {undefined}
              */
             enableContrast: function(){
-                var contrast = JSON.parse(localStorage.getItem("contrast"));
-                if(!contrast){
+                //var contrast = JSON.parse(localStorage.getItem("contrast"));
+                //if(!contrast){
                     localStorage.setItem("contrast",JSON.stringify(true));
                     $("#btn-contrast").html("Baixo Contraste");
-                    //Home
+                    //Home & Detalhes do deputado
                     $(".header-main").css({"background":"#000"});
-                }
+                    //Home
+                    $(".btn-success").css({"background-color":"#000"});
+                    $(".btn-primary").css({"background-color":"#000"});
+                    $(".text-info-list-congressmen").css({"color":"#000"});
+                    $(".value-total").css({"color":"#000"});
+                //}
             },
             /**
              * 
              * @returns {undefined}
              */
             disableContrast: function(){
-                var contrast = JSON.parse(localStorage.getItem("contrast"));
-                if(contrast){
+                //var contrast = JSON.parse(localStorage.getItem("contrast"));
+                //if(contrast){
                     localStorage.setItem("contrast",JSON.stringify(false));
                     $("#btn-contrast").html("Alto Contraste");
-                    //Home
+                    //Home & Detalhes do deputado
                     $(".header-main").removeAttr("style");
-                }
-                
+                    //Home
+                    $(".btn-success").removeAttr("style");
+                    $(".btn-primary").removeAttr("style");
+                    $(".text-info-list-congressmen").removeAttr("style");
+                    $(".value-total").removeAttr("style");
+               // }
             }
 
         },
@@ -234,6 +243,11 @@ function ( $ ) {
                             self.loading = true;
                     });
                 },
+                watch:{
+                    search:function(text){
+                        this.filter();
+                    }
+                },
                 methods:{
                     searchItem:function(item){
                         var textSearch = this.search.trim().toLowerCase();
@@ -242,6 +256,7 @@ function ( $ ) {
                         }
                     },
                     filter:function(){ 
+                        this.search = $("#text-search").val();
                         if(this.congressmen.length == 0){
                             return;
                         }

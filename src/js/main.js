@@ -9,10 +9,6 @@ define(
         view.accessibility.changeStatusWAIARIA();
 
         //Acessibilidade
-        //Configura os comandos gerais do Annyang
-        actions.configAnnyangHome();
-        //Verifica se o comando de voz está ativado
-        actions.verifySpeechRecognition();
         //Verifica o tamanho da fonte
         view.accessibility.checkFontSize();
         //Verifica o contraste
@@ -32,17 +28,24 @@ define(
 
         $("#btn-speech-recognition").click(actions.changeStatusSpeechRecognition);
         $("#btn-contrast").click(actions.changeStatusContrast);
-        $('#btn-up-font').click(view.upFontSize);
-        $('#btn-low-font').click(view.lowFontSize);
+        $('#btn-up-font').click(view.accessibility.upFontSize);
+        $('#btn-low-font').click(view.accessibility.lowFontSize);
 
 
-        if(document.querySelector("#home")){       
+        if(document.querySelector("#home")){  
+            
+            //Acessibilidade
+            //Configura os comandos gerais do Annyang
+            actions.configAnnyangHome();
+
             view.buildHome();
         }else{
             var hash = location.hash.substring(1,location.hash.length);
             view.buildCongressman(hash);
         }
         
+        //Verifica se o comando de voz está ativado
+        actions.verifySpeechRecognition();
         
     }
 );

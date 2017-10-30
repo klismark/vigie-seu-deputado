@@ -72,19 +72,19 @@ function () {
                     'mostrar todos os deputados': this.searchVoiceCongressmen,
                     'exibir todos os deputados': this.searchVoiceCongressmen,
                     'desativar comando de voz': this.changeStatusSpeechRecognition,
-                    'aumentar letra': view.upFontSize,
-                    'diminuir letra': view.lowFontSize,
-                    'aumentar fonte': view.upFontSize,
-                    'diminuir fonte': view.lowFontSize,
-                    'aumentar tamanho da fonte': view.upFontSize,
-                    'diminuir tamanho da fonte': view.lowFontSize,
-                    'aumentar tamanho da letra': view.upFontSize,
-                    'diminuir tamanho da letra': view.lowFontSize,
-                    'aumentar contraste': view.enableContrast,
-                    'diminuir contraste': view.disableContrast,
-                    'baixar contraste': view.disableContrast,
-                    'alto contraste': view.enableContrast,
-                    'baixo contraste': view.disableContrast
+                    'aumentar letra': view.accessibility.upFontSize,
+                    'diminuir letra': view.accessibility.lowFontSize,
+                    'aumentar fonte': view.accessibility.upFontSize,
+                    'diminuir fonte': view.accessibility.lowFontSize,
+                    'aumentar tamanho da fonte': view.accessibility.upFontSize,
+                    'diminuir tamanho da fonte': view.accessibility.lowFontSize,
+                    'aumentar tamanho da letra': view.accessibility.upFontSize,
+                    'diminuir tamanho da letra': view.accessibility.lowFontSize,
+                    'aumentar contraste': view.accessibility.enableContrast,
+                    'diminuir contraste': view.accessibility.disableContrast,
+                    'baixar contraste': view.accessibility.disableContrast,
+                    'alto contraste': view.accessibility.enableContrast,
+                    'baixo contraste': view.accessibility.disableContrast
                 };
                 annyang.addCommands(commands);
             }
@@ -109,6 +109,8 @@ function () {
             console.log(congressman);
             location.href="#busca";
             $("#text-search").val(congressman);
+            
+            $("#btn-search").trigger('click');
         },
         /**
          * 
@@ -117,10 +119,11 @@ function () {
         changeStatusContrast:function(){
             var contrast = JSON.parse(localStorage.getItem("contrast"));
             var view = require('view');
+            console.log(contrast);
             if (contrast) {
-                view.disableContrast();
+                view.accessibility.disableContrast();
             }else{
-                view.enableContrast();
+                view.accessibility.enableContrast();
             }
         }
     };

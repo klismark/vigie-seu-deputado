@@ -5,7 +5,7 @@
     <title>Vigie Seu Deputado</title>
 
     <!--BASE-->
-    <base href="https://vigieseudeputado.herokuapp.com/public/"/>
+    <!--<base href="https://vigieseudeputado.herokuapp.com/public/"/>-->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="VigieSeuDeputado é um projeto onde o usuário pode acompanhar todas as informações e gastos disponíveis dos deputados federais."/>
@@ -89,11 +89,11 @@
     <section class="box-list-congressmen content" id="busca" role="main">
         <div class="well well-lg">
             <h2>Encontre seu deputado</h2>
-            <form v-on:submit="searchCongressman()" role="search" id="form-filter-congressmen" action="javascript:void(0)">
+            <form v-on:submit="filter()" role="search" id="form-filter-congressmen" action="javascript:void(0)">
                 <div class="input-group input-group-lg">
-                    <input type="text" id="text-search" v-on:keyup="filter()" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
+                    <input type="text" id="text-search" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
                     <span class="input-group-btn">
-                        <button role="button" class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
+                        <button role="button" id="btn-search" class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
                     </span>
                 </div>
             </form>
