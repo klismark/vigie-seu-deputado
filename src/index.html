@@ -69,7 +69,7 @@
         <span class="box-status-speech-recognition"><i class="fa fa-microphone"></i> Comando de voz ativado</span>
         <h1 class="hidden">Vigie seu deputado</h1>
         <img src="img/logo_mobile.png" class="logo-main mobile" alt="Desenho dos prédios do congresso nacional com o nome vigie seu deputado."/>
-        <img src="img/logo.png" class="logo-main tablet" alt="Desenho dos prédios do congresso nacional com o nome vigie seu deputado."/>
+        <img src="img/logo.png" class="logo-main tablet" alt="Desenho dos prédios do congresso nacional com o nome vigie seu deputado ao lado."/>
         <p class="text-home" id="conteudo" role="article">
             No Vigie seu deputado você pode acompanhar seu deputado fiscalizando seus gastos da cota parlamentar e sua frequência nas sessões da câmara legislativa federal. 
             Você também pode comparar os gastos dos parlamentares e gerar diversos relatórios, analisando-os por categoria e tendo total transparência dos mesmos.
@@ -86,10 +86,10 @@
     </section>
     <section class="box-list-congressmen content" id="busca" role="main">
         <div class="well well-lg">
-            <h2>Encontre seu deputado</h2>
+            <h2 id="title-search">Encontre seu deputado</h2>
             <form v-on:submit="filter()" role="search" id="form-filter-congressmen" action="javascript:void(0)">
                 <div class="input-group input-group-lg">
-                    <input type="text" id="text-search" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
+                    <input aria-labelledby="title-search" type="text" id="text-search" v-model="search" class="form-control" placeholder="Pesquise por seu deputado">
                     <span class="input-group-btn">
                         <button id="btn-search" class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
                     </span>
