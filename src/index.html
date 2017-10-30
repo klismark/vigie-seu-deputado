@@ -108,7 +108,7 @@
                                     <p class="text-info-list-congressmen">
                                         <span itemprop="affiliation"><i aria-hidden="true" class="fa fa-flag"></i> {{congressman.ultimoStatus.siglaPartido}} - {{congressman.ultimoStatus.siglaUf}}</span><br>
                                     </p>
-                                    <a v-bind:href="'congressman.html#'+congressman.id" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
+                                    <a v-on:click="openCongressman(congressman.id)" href="congressman.html" itemprop="url" class="btn-view-congressman btn btn-small btn-success">
                                         <i class="fa fa-info-circle" aria-hidden="true"></i> Ver Detalhes
                                     </a>
                                 </div>

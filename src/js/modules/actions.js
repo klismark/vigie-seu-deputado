@@ -58,7 +58,7 @@ function () {
          */
         configAnnyangHome:function(){
             if(annyang){
-                console.log("ok");
+                console.log("annyang ok");
                 annyang.setLanguage("pt-BR");
                 var view = require('view');
 
@@ -117,6 +117,7 @@ function () {
          * @returns {undefined}
          */
         changeStatusContrast:function(){
+            console.log('asdad');
             var contrast = JSON.parse(localStorage.getItem("contrast"));
             var view = require('view');
             console.log(contrast);

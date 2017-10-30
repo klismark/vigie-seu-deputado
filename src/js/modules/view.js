@@ -249,6 +249,9 @@ function ( $ ) {
                     }
                 },
                 methods:{
+                    openCongressman:function(id){
+                        localStorage.setItem("congressman",JSON.stringify(id));
+                    },
                     searchItem:function(item){
                         var textSearch = this.search.trim().toLowerCase();
                         if(item.nomeCivil.toLowerCase().indexOf(textSearch) !== -1 || item.ultimoStatus.nomeEleitoral.toString().toLowerCase().indexOf(textSearch) !== -1){
@@ -352,6 +355,14 @@ function ( $ ) {
                             console.log(error);
                         }
                     );
+                },
+                mounted:function(){
+                    var actions = require('actions');
+                    var view = require('view');
+                    $("#btn-speech-recognition").click(actions.changeStatusSpeechRecognition);
+                    $("#btn-contrast").click(actions.changeStatusContrast);
+                    $('#btn-up-font').click(view.accessibility.upFontSize);
+                    $('#btn-low-font').click(view.accessibility.lowFontSize);
                 },
                 methods:{
                     loadOutgoing:function(){
