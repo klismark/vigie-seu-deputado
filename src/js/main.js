@@ -41,6 +41,7 @@ define(
             view.buildHome();
         }else{
             //var hash = location.hash.substring(1,location.hash.length);
+            actions.configAnnyangCongressman();
             var id = JSON.parse(localStorage.getItem("congressman"));
             view.buildCongressman(id);
         }

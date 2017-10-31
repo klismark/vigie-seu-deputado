@@ -101,8 +101,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6" v-for="congressman in congressmenFiltered" >
-                            <div class="thumbnail" itemscope="" itemtype="http://schema.org/Person">
-                                <img v-bind:src="congressman.ultimoStatus.urlFoto" class="photo-list-congressmen" height="152" width="114" v-bind:alt="'Foto do deputado '+congressman.ultimoStatus.nomeEleitoral">
+                            <div class="thumbnail" itemscope itemtype="http://schema.org/Person">
+                                <img itemprop="image" v-bind:src="congressman.ultimoStatus.urlFoto" class="photo-list-congressmen" height="152" width="114" v-bind:alt="'Foto do deputado '+congressman.ultimoStatus.nomeEleitoral">
                                 <div class="caption info-list-congressmen">
                                     <h3 itemprop="name">{{congressman.ultimoStatus.nomeEleitoral}}</h3>
                                     <p class="text-info-list-congressmen">

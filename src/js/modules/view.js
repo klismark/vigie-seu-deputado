@@ -1,6 +1,7 @@
 define(["jquery","highcharts","bootstrap"],
 function ( $ ) {
     var module = {
+        vue:null,
         buildChartByCategory: function(labels,values,legend){
             Highcharts.chart('chart-by-category', {
                 chart: {
@@ -213,7 +214,7 @@ function ( $ ) {
             var request = require('request');
             var Vue = require("vue");  
 
-            var vue = new Vue({
+            this.vue = new Vue({
                 el: '#data-congressmen',
                 data: {
                     search: '',//Texto de pesquisa
@@ -281,7 +282,7 @@ function ( $ ) {
             var request = require('request');
             var Vue = require("vue");  
             
-            var vue = new Vue({
+            this.vue = new Vue({
                 el: '#page-congressman',
                 data: {
                     loading:false,
