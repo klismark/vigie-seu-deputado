@@ -39,11 +39,13 @@ define(
             actions.configAnnyangHome();
 
             view.buildHome();
-        }else{
+        }else if(document.querySelector("#congressman")){
             //var hash = location.hash.substring(1,location.hash.length);
             actions.configAnnyangCongressman();
             var id = JSON.parse(localStorage.getItem("congressman"));
             view.buildCongressman(id);
+        }else{
+            actions.configAnnyangAccessibility();
         }
         
         //Verifica se o comando de voz está ativado

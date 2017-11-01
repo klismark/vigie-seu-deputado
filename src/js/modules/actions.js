@@ -119,7 +119,44 @@ function () {
                     'diminuir contraste': view.accessibility.disableContrast,
                     'baixar contraste': view.accessibility.disableContrast,
                     'alto contraste': view.accessibility.enableContrast,
-                    'baixo contraste': view.accessibility.disableContrast
+                    'baixo contraste': view.accessibility.disableContrast,
+                    'voltar': function(){window.history.go(-1)}
+                };
+                annyang.addCommands(commands);
+            }
+        },
+        configAnnyangAccessibility:function(){
+            if(annyang){
+                console.log("annyang ok");
+                annyang.setLanguage("pt-BR");
+                var view = require('view');
+
+                var commands = {
+                    'ir para *tag': this.goingTo,
+                    'mostrar *periodo': this.searchVoiceExpenses,
+                    'gastos *periodo': this.searchVoiceExpenses,
+                    'pesquisar *periodo': this.searchVoiceExpenses,
+                    'detalhar *periodo': this.searchVoiceExpenses,
+                    'encontrar *periodo': this.searchVoiceExpenses,
+                    'mostrar gastos de *periodo': this.searchVoiceExpenses,
+                    'pesquisar gastos de *periodo': this.searchVoiceExpenses,
+                    'detalhar gastos de *periodo': this.searchVoiceExpenses,
+                    'encontrar gastos de *periodo': this.searchVoiceExpenses,
+                    'desativar comando de voz': this.changeStatusSpeechRecognition,
+                    'aumentar letra': view.accessibility.upFontSize,
+                    'diminuir letra': view.accessibility.lowFontSize,
+                    'aumentar fonte': view.accessibility.upFontSize,
+                    'diminuir fonte': view.accessibility.lowFontSize,
+                    'aumentar tamanho da fonte': view.accessibility.upFontSize,
+                    'diminuir tamanho da fonte': view.accessibility.lowFontSize,
+                    'aumentar tamanho da letra': view.accessibility.upFontSize,
+                    'diminuir tamanho da letra': view.accessibility.lowFontSize,
+                    'aumentar contraste': view.accessibility.enableContrast,
+                    'diminuir contraste': view.accessibility.disableContrast,
+                    'baixar contraste': view.accessibility.disableContrast,
+                    'alto contraste': view.accessibility.enableContrast,
+                    'baixo contraste': view.accessibility.disableContrast,
+                    'voltar':function(){window.history.go(-1)}
                 };
                 annyang.addCommands(commands);
             }

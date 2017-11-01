@@ -6,6 +6,7 @@ module.exports = function (grunt) {
                 files: {
                     'public/css/main.min.css': 'src/_sass/main.scss',
                     'public/css/congressman.min.css': 'src/_sass/congressman.scss',
+                    'public/css/accessibility.min.css': 'src/_sass/accessibility.scss',
                 }
             }
         },
@@ -131,6 +132,7 @@ module.exports = function (grunt) {
                 files: {
                   'public/css/home.css': ['public/css/font-awesome.min.css','public/css/bootstrap.min.css','public/css/main.min.css'],
                   'public/css/congressman.css': ['public/css/font-awesome.min.css','public/css/bootstrap.min.css','public/css/congressman.min.css'],
+                  'public/css/accessibility.css': ['public/css/font-awesome.min.css','public/css/bootstrap.min.css','public/css/accessibility.min.css'],
                 },
               }
         },
@@ -142,7 +144,8 @@ module.exports = function (grunt) {
           target: {
               files: {
                 'public/css/home.css': ['public/css/home.css'],
-                'public/css/congressman.css': ['public/css/congressman.css']
+                'public/css/congressman.css': ['public/css/congressman.css'],
+                'public/css/accessibility.css': ['public/css/accessibility.css']
               }
           }
         },
