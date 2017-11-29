@@ -19,7 +19,6 @@ firebase.database().ref('deputados').once('value', function(snapshot) {
 });
 
 function insert(deputado){
-    console.log(deputado);
     firebase.database().ref('deputados/' + deputado.id).set(deputado);
 }
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Congressmen Details</title>
+</head>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+        var lastPage = 1;
+        var page = 1;
+        var congressmen = [];
+        var config = {
+            apiKey: "AIzaSyAkQi903UKoLi5jriQrkO8EwSZdfD8bfd4",
+            authDomain: "vigieseudeputado.firebaseapp.com",
+            databaseURL: "https://vigieseudeputado.firebaseio.com",
+            projectId: "vigieseudeputado",
+            storageBucket: "vigieseudeputado.appspot.com",
+            messagingSenderId: "221200913136"
+        };
+        var idLegislatura = 55;
+        var lastPage = 1;
+        var congressmen = [];
+        firebase.initializeApp(config);
+
+        function getCongressmen(pag,onSuccess,onError){
+            $.ajax({
+                url: "https://dadosabertos.camara.leg.br/api/v2/deputados",
+                dataType: 'json',
+                data: "pagina="+pag+"&itens=100&idLegislatura="+idLegislatura,
+                type: 'GET',
+                success: function (data){               
+                    result(pag,data);  
+                },
+                error: function (xhr, er) {
+                    if(typeof onError === "function"){
+                        onError(xhr);
+                    }
+                }
+            });
+        }
+
+        var result = function(page,data){
+            if(page == 1){
+                var linkLast = data.links[3].href;
+                lastPage = linkLast.substring(linkLast.indexOf("&pagina=")+8,linkLast.indexOf("&itens"));
+            }
+            console.log(page+" - "+lastPage);
+            congressmen = congressmen.concat(data.dados);
+            
+            if(page < lastPage){
+                setTimeout(function(){
+                    getCongressmen((++page),result);
+                },200);
+            }
+
+            if(page == lastPage){
+                //console.log(congressmen);
+                requestDetailsCongressmen(0);
+            }
+        };
+
+        var requestDetailsCongressmen = function(index){
+            $.ajax({
+                url: "https://dadosabertos.camara.leg.br/api/v2/deputados/"+congressmen[index].id,
+                dataType: 'json',
+                type: 'GET',
+                success: function (data){               
+                    congressmen[index] = data.dados;
+                    console.log(index);
+                    index++;
+                    if(index < congressmen.length){
+                        requestDetailsCongressmen(index);
+                    }else{
+                        document.write("Total: "+congressmen.length+" Deputados");
+                    }  
+                }
+            });
+        }
+        getCongressmen(1);
+
+    </script>
+</body>
+</html>
