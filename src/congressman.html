@@ -158,7 +158,7 @@
                                 <tr v-for="expense in out.expenses">
                                     <td>{{ expense.dataDocumento != null ? expense.dataDocumento.split("-").reverse().join("/") : "Não Informado"}}</td>
                                     <td>{{expense.nomeFornecedor}}</td>
-                                    <td class="text-right">{{expense.valorDocumento != null ? parseFloat(expense.valorDocumento).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
+                                    <td class="text-right">{{expense.valorLiquido != null ? parseFloat(expense.valorLiquido).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
                                     <td class="text-right">{{expense.valorGlosa != null ? parseFloat(expense.valorGlosa).toLocaleString("pt-BR", {style: "currency",currency: "BRL"}) : 'R$0,00' }}</td>
                                     <td ><small v-if="expense.urlDocumento == ''" class="text-danger">Não Disponível</small><a v-if="expense.urlDocumento != ''" v-bind:href="expense.urlDocumento">{{expense.numDocumento}}</a></td>
                                 </tr>
