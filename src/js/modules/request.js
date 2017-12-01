@@ -11,7 +11,7 @@ function () {
             if(typeof onLoading === "function"){
                 onLoading();    
             }
-            firebase.database().ref('deputados').orderByChild("ultimoStatus/nomeEleitoral").once('value', function(snapshot) {
+            firebase.database().ref('deputados/55').orderByChild("ultimoStatus/nomeEleitoral").once('value', function(snapshot) {
                 var congressmen = [];
                 snapshot.forEach(function(childSnapshot) {
                   var childKey = childSnapshot.key;      
@@ -35,7 +35,7 @@ function () {
             if(typeof onLoading === "function"){
                 onLoading();    
             }
-            firebase.database().ref('deputados/'+id).once('value').then(function(snapshot) {
+            firebase.database().ref('deputados/55/'+id).once('value').then(function(snapshot) {
                 var congressman = snapshot.val();
                 if(typeof onSuccess === "function"){
                     onSuccess(congressman);    
@@ -55,7 +55,7 @@ function () {
             if(typeof onLoading === "function"){
                 onLoading();    
             }
-            firebase.database().ref('despesas/'+id+'/'+param.ano).orderByChild("mes").equalTo(param.mes+"").once('value', function(snapshot) {
+            firebase.database().ref('despesas/55/'+id+'/'+param.ano).orderByChild("mes").equalTo(param.mes+"").once('value', function(snapshot) {
                 var expenses = [];
                 snapshot.forEach(function(childSnapshot) {
                   var childKey = childSnapshot.key;      
