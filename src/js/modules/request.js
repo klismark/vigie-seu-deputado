@@ -60,7 +60,9 @@ function () {
                 snapshot.forEach(function(childSnapshot) {
                   var childKey = childSnapshot.key;      
                     var childData = childSnapshot.val();
-                    expenses.push(childData);
+                    if(childData.valorLiquido != 0){
+                        expenses.push(childData);
+                    }
                 });
                 if(typeof onSuccess === "function"){
                     onSuccess(expenses);    
