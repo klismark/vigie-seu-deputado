@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ public/index.html [QSA,L]
+#RewriteRule ^ public/index.html [QSA,L]
 
 
 AddDefaultCharset utf-8
