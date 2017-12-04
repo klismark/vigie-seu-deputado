@@ -1,10 +1,25 @@
 <?php
+//pullExpenses.php?page=1&ano=2017&leg=55 -- 44 Páginas
 ini_set('max_execution_time', 0);
 
 $page = $_GET["page"];
 $idLegislatura = $_GET["leg"];
-$ano = $_GET["ano"];
-$itemsByPage = 20;
+$year = $_GET["ano"];
+$mounth = $_GET["mes"];
+$itemsByPage = 12;
+
+function getCongressmen($page,$idLegislatura){
+    $ch = curl_init("https://dadosabertos.camara.leg.br/api/v2/deputados?pagina=".$page."&itens=100&idLegislatura=".$idLegislatura);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    $data = json_decode(curl_exec($ch));
+    curl_close($ch);
+    $IDs = array();
+    foreach((array) $data->dados as $cong){
+        $IDs[] = $cong->id;
+    }
+    return $IDs;
+}
 
 function getCongressmenBase(){
     $ch = curl_init("https://vigieseudeputado.firebaseio.com/deputados/".$_GET["leg"].".json");
@@ -15,18 +30,47 @@ function getCongressmenBase(){
     return array_keys((array) $data) ;
 }
 
-function getExpenses($page,$ano,$idCongressman,$expenses,$lastPage){
-    $ch = curl_init("https://dadosabertos.camara.leg.br/api/v2/deputados/".$idCongressman."/despesas?pagina=".$page."&itens=100&ano=".$ano);
+function getExpensesBase($leg,$year,$congressman){
+    $ch = curl_init("https://vigieseudeputado.firebaseio.com/despesas/".$leg."/".$congressman."/".$year.".json");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     $data = json_decode(curl_exec($ch));
     curl_close($ch);
-    return resultExpenses($page,$data,$ano,$idCongressman,$expenses,$lastPage);
+    return $data;
 }
 
-function resultExpenses($page,$data,$ano,$idCongressman,$expenses,$lastPage){
+function compareObject($obj1,$obj2){
+    $ob1 = (array) $obj1;
+    $ob2 = (array) $obj2;
+    $keys = array_keys($ob1);
+    foreach($keys as $k){
+        if (array_key_exists($k,$ob2)) {
+            if($ob1[$k] != $ob2[$k]){
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    return true;
+}
+
+function getExpenses($page,$year,$mounth,$idCongressman,$expenses,$lastPage){
+    $ch = curl_init("https://dadosabertos.camara.leg.br/api/v2/deputados/".$idCongressman."/despesas?pagina=".$page."&itens=100&ano=".$year."&mes=".$mounth);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    $data = json_decode(curl_exec($ch));
+    curl_close($ch);
+    if(count($data->dados) == 0){
+        return $expenses;
+    }
+    return resultExpenses($page,$data,$year,$mounth,$idCongressman,$expenses,$lastPage);
+}
+
+function resultExpenses($page,$data,$year,$mounth,$idCongressman,$expenses,$lastPage){
     if($page == 1){
-        $linkLast = $data->links[3]->href;
+        $linkLast = is_null($data->links[3]->href)?$data->links[2]->href:$data->links[3]->href;
+
         $pos1 = (strpos($linkLast,"&pagina=")+8);
         $pos2 = (strpos($linkLast,"&itens")-11) - $pos1;
         $lastPage = substr($linkLast,$pos1,$pos2);
@@ -34,7 +78,7 @@ function resultExpenses($page,$data,$ano,$idCongressman,$expenses,$lastPage){
     $exp = array_merge($data->dados,$expenses);
     if($page < $lastPage){
         $page++;
-        return getExpenses($page,$ano,$idCongressman,$exp,$lastPage);
+        return getExpenses($page,$year,$mounth,$idCongressman,$exp,$lastPage);
     }
 
     if($page == $lastPage){
@@ -42,22 +86,40 @@ function resultExpenses($page,$data,$ano,$idCongressman,$expenses,$lastPage){
     }
 }
 
-//Lista dos IDs dos deputados
-$congressmen = getCongressmenBase();
+function updateExpenses($leg,$congressman,$expenses,$year){
+    $expenses = json_encode($expenses);
+    $ch = curl_init("https://vigieseudeputado.firebaseio.com/despesas/".$leg."/".$congressman."/".$year.".json");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$expenses);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    $data = json_decode(curl_exec($ch));
+    curl_close($ch);
+}
 
-$limit = $page * $itemsByPage - $itemsByPage;
-$max = ($limit+$itemsByPage)-1;
-if($limit >  count($congressmen)){
-    die("Captação Finalizada");
-}else if(count($congressmen) < $max){
-    $max = count($congressmen);
+
+
+//$congressmen = getCongressmenBase();
+$congressmen = getCongressmen($page,$idLegislatura);
+$updates = array();
+for($i=0;$i<count($congressmen);$i++){
+    $updates = $expBase = getExpensesBase($idLegislatura,$year,$congressmen[$i]);
+    $expNew = getExpenses(1,$year,$mounth,$congressmen[$i],array(),1);
+
+    foreach($expNew as $expN){
+        $find = false;
+        foreach($expBase as $k=>$expB){
+            if(compareObject($expB,$expN)){
+                $updates[$k] = $expN;
+                $find = true;
+                break;
+            }
+        }
+        if(!$find){
+            $updates[] = $expN;
+        }
+    }
+    updateExpenses($idLegislatura,$congressmen[$i],$updates,$year);
 }
-$expenses = array();
-$total = 0;
-for($i = $limit;$i<=$max;$i++){
-    echo $congressmen[$i]."<br>";
-    $expenses = getExpenses(1,$ano,$congressmen[$i],array(),1);
-    $total += count($expenses);
-}
-echo "Captação de ".$total." despesas de ".$max." Deputados";
+echo "Atualizada as despesas de ".$mounth."/".$year." de ".count($congressmen)." Deputados - Página ".$page;
 

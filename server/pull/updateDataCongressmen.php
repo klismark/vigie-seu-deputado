@@ -1,6 +1,9 @@
 <?php
+//updateDataCongressmen.php?page=1&leg=55 --- até 7 Páginas
 ini_set('max_execution_time', 0);
 //header('Content-Type: application/json');
+
+
 
 $page = $_GET["page"];
 $idLegislatura = $_GET["leg"];
