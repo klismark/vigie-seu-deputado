@@ -1,12 +1,22 @@
 <?php
-//pullExpenses.php?page=1&ano=2017&leg=55 -- 44 Páginas
+//Atualiza as despesas dos últimos 3 meses
+//pullExpenses.php?page=1&ano=2017&leg=55 -- 7 Páginas
 ini_set('max_execution_time', 0);
 
 $page = $_GET["page"];
 $idLegislatura = $_GET["leg"];
-$year = $_GET["ano"];
-$mounth = $_GET["mes"];
+$year = operationWithDaysYear(Date("Y-m-d"),$_GET["mes"]);
+$month = operationWithDays(Date("Y-m-d"),$_GET["mes"]);
 $itemsByPage = 12;
+
+function operationWithDaysYear($date, $num) {
+    return date("Y", strtotime("-" . $num . " month", strtotime(str_replace("/", "-", $date))));
+}
+
+function operationWithDays($date, $num) {
+    return date("m", strtotime("-" . $num . " month", strtotime(str_replace("/", "-", $date))));
+}
+
 
 function getCongressmen($page,$idLegislatura){
     $ch = curl_init("https://dadosabertos.camara.leg.br/api/v2/deputados?pagina=".$page."&itens=100&idLegislatura=".$idLegislatura);
@@ -21,14 +31,6 @@ function getCongressmen($page,$idLegislatura){
     return $IDs;
 }
 
-function getCongressmenBase(){
-    $ch = curl_init("https://vigieseudeputado.firebaseio.com/deputados/".$_GET["leg"].".json");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    $data = json_decode(curl_exec($ch));
-    curl_close($ch);
-    return array_keys((array) $data) ;
-}
 
 function getExpensesBase($leg,$year,$congressman){
     $ch = curl_init("https://vigieseudeputado.firebaseio.com/despesas/".$leg."/".$congressman."/".$year.".json");
