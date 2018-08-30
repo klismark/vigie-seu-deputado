@@ -55,7 +55,7 @@ function () {
             if(typeof onLoading === "function"){
                 onLoading();    
             }
-            firebase.database().ref('despesas/55/'+id+'/'+param.ano).orderByChild("mes").equalTo(param.mes+"").once('value', function(snapshot) {
+            firebase.database().ref('despesas/55/'+id+'/'+param.ano).orderByChild("mes").equalTo(parseInt(param.mes)).once('value', function(snapshot) {
                 var expenses = [];
                 snapshot.forEach(function(childSnapshot) {
                   var childKey = childSnapshot.key;      

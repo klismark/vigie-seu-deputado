@@ -102,14 +102,26 @@ function updateExpenses($leg,$congressman,$expenses,$year){
 
 
 //$congressmen = getCongressmenBase();
+//Pega a primeira página de deputados direto da câmara
 $congressmen = getCongressmen($page,$idLegislatura);
 $updates = array();
 for($i=0;$i<count($congressmen);$i++){
+    //Pega os gastos de cada deputado já cadastrado
     $updates = $expBase = getExpensesBase($idLegislatura,$year,$congressmen[$i]);
-    $expNew = getExpenses(1,$year,$mounth,$congressmen[$i],array(),1);
-
+    //Pega os gastos de cada deputado direto da câmara
+    $expNew = getExpenses(1,$year,$month,$congressmen[$i],array(),1);
+    if (!is_array($expNew)) {
+        continue;
+    }
+    //Compara se houve alterações nos gastos
     foreach($expNew as $expN){
         $find = false;
+        if (!is_array($expBase)) {
+            if(!$find){
+                $updates[] = $expN;
+            }
+            continue;
+        }
         foreach($expBase as $k=>$expB){
             if(compareObject($expB,$expN)){
                 $updates[$k] = $expN;
@@ -117,11 +129,9 @@ for($i=0;$i<count($congressmen);$i++){
                 break;
             }
         }
-        if(!$find){
-            $updates[] = $expN;
-        }
     }
+    //Atualiza as depesas
     updateExpenses($idLegislatura,$congressmen[$i],$updates,$year);
 }
-echo "Atualizada as despesas de ".$mounth."/".$year." de ".count($congressmen)." Deputados - Página ".$page;
+echo "Atualizada as despesas de ".$month."/".$year." de ".count($congressmen)." Deputados - Página ".$page;
 

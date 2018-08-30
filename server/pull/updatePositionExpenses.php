@@ -55,6 +55,14 @@ function sortExpenses2017($a, $b){
     }
     return 1;
 }
+function sortExpenses2018($a, $b){
+    $aa = (array) $a->despesas;
+    $bb = (array) $b->despesas;
+    if($aa[2018]->total > $bb[2018]->total){
+        return -1;
+    }
+    return 1;
+}
 
 usort($congressmen, "sortExpensesTotal");
 for($i = 0; $i < count($congressmen);$i++){
@@ -62,32 +70,44 @@ for($i = 0; $i < count($congressmen);$i++){
 }
 
 usort($congressmen, "sortExpenses2015");
-for($i = 0; $i < count($congressmen);$i++){
-    foreach ($congressmen[$i]->despesas as $name => $value) {
+for($j = 0; $j < count($congressmen);$j++){
+    foreach ($congressmen[$j]->despesas as $name => $value) {
         if($name == "2015"){
-            $value->posicao = $i;
+            $value->posicao = $j;
         }
     }
+    //updateCongressman($congressmen[$j]->id,$congressmen[$j]->despesas);
 }
 
 usort($congressmen, "sortExpenses2016");
-for($i = 0; $i < count($congressmen);$i++){
-    foreach ($congressmen[$i]->despesas as $name => $value) {
+for($k = 0; $k < count($congressmen);$k++){
+    foreach ($congressmen[$k]->despesas as $name => $value) {
         if($name == "2016"){
-            $value->posicao = $i;
+            $value->posicao = $k;
         }
     }
+    //updateCongressman($congressmen[$k]->id,$congressmen[$k]->despesas);
 }
 
 usort($congressmen, "sortExpenses2017");
-for($i = 0; $i < count($congressmen);$i++){
-    foreach ($congressmen[$i]->despesas as $name => $value) {
+for($l = 0; $l < count($congressmen);$l++){
+    foreach ($congressmen[$l]->despesas as $name => $value) {
         if($name == "2017"){
-            $value->posicao = $i;
+            $value->posicao = $l;
         }
     }
     
-    updateCongressman($congressmen[$i]->id,$congressmen[$i]->despesas);
+    //updateCongressman($congressmen[$l]->id,$congressmen[$l]->despesas);
 }
 
+usort($congressmen, "sortExpenses2018");
+for($m = 0; $m < count($congressmen);$m++){
+    foreach ($congressmen[$m]->despesas as $name => $value) {
+        if($name == "2018"){
+            $value->posicao = $m;
+        }
+    }
+    
+    updateCongressman($congressmen[$m]->id,$congressmen[$m]->despesas);
+}
 echo "Posicionamento atualizado com sucesso.";

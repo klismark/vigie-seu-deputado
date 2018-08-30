@@ -5,7 +5,8 @@
     <title>Dados do Deputado | Vigie Seu Deputado</title>
 
     <!--BASE-->
-    <base href="https://vigieseudeputado.herokuapp.com/public/"/>
+    <!--<base href="https://vigieseudeputado.herokuapp.com/public/"/>-->
+    <base href="http://localhost:8080"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="VigieSeuDeputado é um projeto onde o usuário pode acompanhar todas as informações e gastos disponíveis dos deputados federais."/>
@@ -127,8 +128,8 @@
                             </p>
                             <hr>
                             <p class="lead text-center">
+                                <span class="number-ranking">{{parseFloat(congressman.despesas[2016].total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"})}}</span><br>                                    
                                 <span class="number-ranking">{{congressman.despesas[2016].posicao+"º"}}</span><br>
-                                <span class="number-ranking">{{parseFloat(congressman.despesas[2016].total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"})}}</span><br>
                                 <small class="text-muted">Que mais gastou em 2016</small>
                             </p>
                             <hr>
@@ -136,6 +137,12 @@
                                 <span class="number-ranking">{{congressman.despesas[2017].posicao+"º"}}</span><br>
                                 <span class="number-ranking">{{parseFloat(congressman.despesas[2017].total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"})}}</span><br>
                                 <small class="text-muted">Que mais gastou em 2017</small>
+                            </p>
+                            <hr>
+                            <p class="lead text-center">
+                                <span class="number-ranking">{{congressman.despesas[2018].posicao+"º"}}</span><br>
+                                <span class="number-ranking">{{parseFloat(congressman.despesas[2018].total).toLocaleString("pt-BR", {style: "currency",currency: "BRL"})}}</span><br>
+                                <small class="text-muted">Que mais gastou em 2018</small>
                             </p>
                         </div>
                     </div>

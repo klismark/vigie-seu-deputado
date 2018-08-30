@@ -309,6 +309,7 @@ function ( $ ) {
                             2015:{posicao:0,total:0},
                             2016:{posicao:0,total:0},
                             2017:{posicao:0,total:0},
+                            2018:{posicao:0,total:0},
                             posicaoMandato55:0,
                             total:0
                         }

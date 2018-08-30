@@ -47,6 +47,10 @@ function insertCongressman($congressman){
             "posicao"=> 0,
             "total"=> 0
         ],
+        "2018"=> [
+            "posicao"=> 0,
+            "total"=> 0
+        ],
         "posicao"=>0,
         "posicaoMandato55"=> 0,
         "total"=> 0]
